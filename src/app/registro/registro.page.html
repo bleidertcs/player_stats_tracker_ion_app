@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Registro</ion-title>
+    <ion-title>App</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,23 +15,74 @@
     <ion-card-content>
       <form [formGroup]="formularioRegistro" (keyup.enter)="guardar()">
 
-        <ion-item>
-          <ion-label position="floating">Nombre</ion-label>
-          <ion-input formControlName="nombre"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input formControlName="password" type="password"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Confirmar contraseña</ion-label>
-          <ion-input formControlName="confirmacionPassword" type="password"></ion-input>
-        </ion-item>
+        <ion-list>
+          <ion-item counter="true">
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input (input)="checkFirstName()" (keypress)="validateName($event)" formControlName="firstName"
+              maxlength="30"></ion-input>
+            <ion-note
+              *ngIf="formularioRegistro.controls['firstName'].hasError('required') && formularioRegistro.get('firstName')?.touched"
+              slot="error">
+              Nombre es requerido
+            </ion-note>
+          </ion-item>
+
+          <ion-item counter="true">
+            <ion-label position="floating">Apellido</ion-label>
+            <ion-input (input)="checkLastName()" (keypress)="validateName($event)" formControlName="lastName"
+              maxlength="30"></ion-input>
+            <ion-note
+              *ngIf="formularioRegistro.controls['lastName'].hasError('required') && formularioRegistro.get('lastName')?.touched"
+              slot="error">
+              Apellido es requerido
+            </ion-note>
+          </ion-item>
+
+          <ion-item counter="true">
+            <ion-label position="floating">Correo Electrónico</ion-label>
+            <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
+              maxlength="50"></ion-input>
+            <ion-note *ngIf="formularioRegistro.controls['email'].hasError('pattern')" slot="error">
+              Correo Electrónico inválido
+            </ion-note>
+            <ion-note
+              *ngIf="formularioRegistro.controls['email'].hasError('required') && formularioRegistro.get('email')?.touched"
+              slot="error">
+              Correo Electrónico es requerido
+            </ion-note>
+          </ion-item>
+
+          <ion-item counter="true">
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input (keypress)="validatePassword($event)" (input)="checkPassword()" formControlName="password"
+              [type]="passwordVisibility ? 'password' : 'text'" maxlength="20">
+            </ion-input>
+            <ion-button slot="end" fill="clear" (click)="showPassword()">
+              <ion-icon *ngIf="passwordVisibility == false" name="eye-outline" class="iconEye"></ion-icon>
+              <ion-icon *ngIf="passwordVisibility == true" name="eye-off-outline" class="iconEye"></ion-icon>
+            </ion-button>
+            <ion-note *ngIf="formularioRegistro.controls['password'].hasError('pattern')" slot="error">
+              Contraseña inválido
+            </ion-note>
+            <ion-note
+              *ngIf="formularioRegistro.controls['password'].hasError('required') && formularioRegistro.get('password')?.touched"
+              slot="error">
+              Contraseña es requerido
+            </ion-note>
+            <ion-note *ngIf="formularioRegistro.controls['password'].hasError('minLength')" slot="error">
+              Contraseña deben tener mínimo 5 carácteres
+            </ion-note>
+            <ion-note *ngIf="formularioRegistro.controls['password'].hasError('maxLength')" slot="error">
+              Contraseña deben tener máximo 20 carácteres
+            </ion-note>
+          </ion-item>
+        </ion-list>
 
         <br>
 
-        <ion-button (click)="guardar()">Registrarse</ion-button>
-        <ion-button (click)="test()">FAKIU</ion-button>
+        <ion-button [disabled]="formularioRegistro.invalid" (click)="guardar()"
+          class="registerButton">Registrarte</ion-button>
+        <!-- <ion-button (click)="test()">Test Registro</ion-button> -->
 
       </form>
     </ion-card-content>

@@ -15,6 +15,10 @@ export class AuthService {
 
   call(data: any, route: any, method: any, status: boolean): Observable<any> {
     this.headers = new HttpHeaders().set('Content-Type', 'application/json');
+    if (route.startsWith('squad') || route.startsWith('player')) {
+      this.headers = this.headers.set('x-rapidapi-host', 'v3.football.api-sports.io');
+      this.headers = this.headers.set('x-rapidapi-key', '2a6ba7f0f274a12f31b69e85b7a28db3');
+    }
     switch (method.toUpperCase()) {
       case 'GET':
         if (status === true) {

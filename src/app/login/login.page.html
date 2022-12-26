@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-toolbar color="primary">
-    <ion-title>Login</ion-title>
+    <ion-title>App</ion-title>
   </ion-toolbar>
 
 </ion-header>
@@ -16,23 +16,54 @@
     <ion-card-content>
       <form [formGroup]="formularioLogin">
 
-        <ion-item>
-          <ion-label position="floating">Nombre</ion-label>
-          <ion-input formControlName="nombre"></ion-input>
-        </ion-item>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Correo Electrónico</ion-label>
+            <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
+              maxlength="50"></ion-input>
+            <ion-note *ngIf="formularioLogin.controls['email'].hasError('pattern')" slot="error">
+              Correo Electrónico inválido
+            </ion-note>
+            <ion-note
+              *ngIf="formularioLogin.controls['email'].hasError('required') && formularioLogin.get('email')?.touched"
+              slot="error">
+              Correo Electrónico es requerido
+            </ion-note>
+          </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input formControlName="password" type="password"></ion-input>
-        </ion-item>
-
+          <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input (keypress)="validatePassword($event)" (input)="checkPassword()" formControlName="password"
+              [type]="passwordVisibility ? 'password' : 'text'" maxlength="20">
+            </ion-input>
+            <ion-button slot="end" fill="clear" (click)="showPassword()">
+              <ion-icon *ngIf="passwordVisibility == false" name="eye-outline" class="iconEye"></ion-icon>
+              <ion-icon *ngIf="passwordVisibility == true" name="eye-off-outline" class="iconEye"></ion-icon>
+            </ion-button>
+            <ion-note *ngIf="formularioLogin.controls['password'].hasError('pattern')" slot="error">
+              Contraseña inválido
+            </ion-note>
+            <ion-note
+              *ngIf="formularioLogin.controls['password'].hasError('required') && formularioLogin.get('password')?.touched"
+              slot="error">
+              Contraseña es requerido
+            </ion-note>
+            <ion-note *ngIf="formularioLogin.controls['password'].hasError('minLength')" slot="error">
+              Contraseña deben tener mínimo 5 carácteres
+            </ion-note>
+            <ion-note *ngIf="formularioLogin.controls['password'].hasError('maxLength')" slot="error">
+              Contraseña deben tener máximo 20 carácteres
+            </ion-note>
+          </ion-item>
+        </ion-list>
       </form>
-
 
       <br>
 
-      <ion-button (click)="ingresar()">ingresar</ion-button>
-      <ion-button (click)="test()">test</ion-button>
+      <ion-button [disabled]="formularioLogin.invalid" (click)="ingresar()" class="loginButton">Iniciar
+        Sesión</ion-button>
+      <!-- <ion-button (click)="testSquad()">Squad</ion-button>
+      <ion-button (click)="testPlayer()">Player</ion-button> -->
 
     </ion-card-content>
   </ion-card>
@@ -43,7 +74,7 @@
 <ion-footer>
   <ion-toolbar color="primary">
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/registro']">Registrarse</ion-button>
+      <ion-button [routerLink]="['/registro']">Regístrate</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

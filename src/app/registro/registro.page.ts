@@ -7,7 +7,8 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { loadingSpinner } from '../loading/loading.component';
 import { AuthService } from '../services/auth.service';
 
 
@@ -18,22 +19,74 @@ import { AuthService } from '../services/auth.service';
 })
 export class RegistroPage implements OnInit {
 
+  namePattern = /^[a-zA-ZñÑáÁéÉíÍóÓúÚ ]+$/;
+  passwordPattern = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{5,20}$/;
+  emailPattern = /^(([a-zA-Z0-9]([\.\-\_]){1})|([a-zA-Z0-9]))+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4}|[a-zA-Z]{1,3}\.[a-zA-Z]{1,3})$/;
+
   formularioRegistro: FormGroup;
+  passwordVisibility: boolean = true;
 
   constructor(
     public fb: FormBuilder,
     public alertController: AlertController,
-    private auth: AuthService
+    private auth: AuthService,
+    public loadingCtrl: LoadingController,
   ) {
     this.formularioRegistro = this.fb.group({
-      'nombre': new FormControl("", Validators.required),
-      'password': new FormControl("", Validators.required),
-      'confirmacionPassword': new FormControl("", Validators.required)
+      firstName: new FormControl("", [Validators.required, Validators.pattern(this.namePattern)]),
+      lastName: new FormControl("", [Validators.required, Validators.pattern(this.namePattern)]),
+      email: new FormControl("", [Validators.required, Validators.pattern(this.emailPattern)]),
+      password: new FormControl("", [Validators.required, Validators.pattern(this.passwordPattern)]),
+      // confirmacionPassword: new FormControl("", Validators.required)
     });
   }
 
-
   ngOnInit() { }
+
+  validateName(event: KeyboardEvent) {
+    let regex = RegExp(this.namePattern);
+    return regex.test(event.key);
+  }
+
+  checkFirstName() {
+    if (this.formularioRegistro.controls['firstName'].value[0] === ' ') {
+      this.formularioRegistro.controls['firstName'].reset();
+    }
+  }
+
+  checkLastName() {
+    if (this.formularioRegistro.controls['lastName'].value[0] === ' ') {
+      this.formularioRegistro.controls['lastName'].reset();
+    }
+  }
+
+  validateEmail(event: KeyboardEvent) {
+    return !(event.key === ' ');
+  }
+
+  checkEmail() {
+    if (this.formularioRegistro.controls['email'].value[0] === ' ') {
+      this.formularioRegistro.controls['email'].reset();
+    }
+  }
+
+  validatePassword(event: KeyboardEvent) {
+    return !(event.key === ' ');
+  }
+
+  checkPassword() {
+    if (this.formularioRegistro.controls['password'].value[0] === ' ') {
+      this.formularioRegistro.controls['password'].reset();
+    }
+  }
+
+  showPassword() {
+    if (this.passwordVisibility === true) {
+      this.passwordVisibility = false;
+    } else {
+      this.passwordVisibility = true;
+    }
+  }
 
   async guardar() {
 
@@ -59,6 +112,8 @@ export class RegistroPage implements OnInit {
   }
 
   test() {
+    loadingSpinner(this.loadingCtrl);
+
     let data = {
       firstName: "Rubius",
       lastName: "Doblas",
@@ -66,8 +121,20 @@ export class RegistroPage implements OnInit {
       password: "1234"
     }
 
-    this.auth.call(data, 'register', 'POST', false).subscribe(response => {
-      console.log(response);
+    this.auth.call(data, 'register', 'POST', false).subscribe({
+      next: (response) => {
+        if (response.status === 'SUCCESS') {
+          console.log(response);
+          this.loadingCtrl.dismiss();
+        } else {
+          console.log(response);
+          this.loadingCtrl.dismiss();
+        }
+      },
+      error: (error) => {
+        console.log(error);
+        this.loadingCtrl.dismiss();
+      }
     })
   }
 
