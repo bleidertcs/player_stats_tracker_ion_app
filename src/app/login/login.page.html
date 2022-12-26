@@ -17,7 +17,7 @@
       <form [formGroup]="formularioLogin">
 
         <ion-list>
-          <ion-item>
+          <ion-item fill="solid" class="loginForm">
             <ion-label position="floating">Correo Electrónico</ion-label>
             <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
               maxlength="50"></ion-input>
@@ -31,7 +31,7 @@
             </ion-note>
           </ion-item>
 
-          <ion-item>
+          <ion-item fill="solid" class="loginForm">
             <ion-label position="floating">Contraseña</ion-label>
             <ion-input (keypress)="validatePassword($event)" (input)="checkPassword()" formControlName="password"
               [type]="passwordVisibility ? 'password' : 'text'" maxlength="20">
@@ -57,8 +57,6 @@
           </ion-item>
         </ion-list>
       </form>
-
-      <br>
 
       <ion-button [disabled]="formularioLogin.invalid" (click)="ingresar()" class="loginButton">Iniciar
         Sesión</ion-button>
