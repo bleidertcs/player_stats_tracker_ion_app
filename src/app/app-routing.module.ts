@@ -13,17 +13,17 @@ const routes: Routes = [
 
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule),
+    loadChildren: () => import('./components/login/login.module').then(m => m.LoginPageModule),
     canActivate: [NoIngresadoGuard]
   },
   {
     path: 'registro',
-    loadChildren: () => import('./registro/registro.module').then(m => m.RegistroPageModule),
+    loadChildren: () => import('./components/registro/registro.module').then(m => m.RegistroPageModule),
     canActivate: [NoIngresadoGuard]
   },
   {
     path: 'inicio',
-    loadChildren: () => import('./inicio/inicio.module').then(m => m.InicioPageModule),
+    loadChildren: () => import('./components/inicio/inicio.module').then(m => m.InicioPageModule),
     canActivate: [IngresadoGuard]
   }
 

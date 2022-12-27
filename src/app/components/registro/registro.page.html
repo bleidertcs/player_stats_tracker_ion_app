@@ -13,10 +13,10 @@
       <ion-card-title>Registro</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="formularioRegistro" (keyup.enter)="guardar()">
+      <form [formGroup]="formularioRegistro">
 
         <ion-list>
-          <ion-item counter="true">
+          <ion-item counter="true" fill="solid" class="registerForm">
             <ion-label position="floating">Nombre</ion-label>
             <ion-input (input)="checkFirstName()" (keypress)="validateName($event)" formControlName="firstName"
               maxlength="30"></ion-input>
@@ -27,7 +27,7 @@
             </ion-note>
           </ion-item>
 
-          <ion-item counter="true">
+          <ion-item counter="true" fill="solid" class="registerForm">
             <ion-label position="floating">Apellido</ion-label>
             <ion-input (input)="checkLastName()" (keypress)="validateName($event)" formControlName="lastName"
               maxlength="30"></ion-input>
@@ -38,7 +38,7 @@
             </ion-note>
           </ion-item>
 
-          <ion-item counter="true">
+          <ion-item counter="true" fill="solid" class="registerForm">
             <ion-label position="floating">Correo Electrónico</ion-label>
             <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
               maxlength="50"></ion-input>
@@ -52,7 +52,7 @@
             </ion-note>
           </ion-item>
 
-          <ion-item counter="true">
+          <ion-item counter="true" fill="solid" class="registerForm">
             <ion-label position="floating">Contraseña</ion-label>
             <ion-input (keypress)="validatePassword($event)" (input)="checkPassword()" formControlName="password"
               [type]="passwordVisibility ? 'password' : 'text'" maxlength="20">
@@ -78,10 +78,9 @@
           </ion-item>
         </ion-list>
 
-        <br>
-
-        <ion-button [disabled]="formularioRegistro.invalid" (click)="guardar()"
-          class="registerButton">Registrarte</ion-button>
+        <ion-button [disabled]="formularioRegistro.invalid" (click)="register(formularioRegistro.value)"
+          class="registerButton">Registrarte
+        </ion-button>
         <!-- <ion-button (click)="test()">Test Registro</ion-button> -->
 
       </form>

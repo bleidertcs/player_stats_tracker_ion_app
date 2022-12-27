@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
-import { loadingSpinner } from '../loading/loading.component';
-import { AuthService } from '../services/auth.service';
+import { loadingSpinner } from '../../shared/loading/loading.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',

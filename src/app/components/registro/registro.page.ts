@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
-import { loadingSpinner } from '../loading/loading.component';
-import { AuthService } from '../services/auth.service';
+import { loadingSpinner } from '../../shared/loading/loading.component';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -82,40 +82,40 @@ export class RegistroPage implements OnInit {
     }
   }
 
-  async guardar() {
+  // async guardar() {
 
-    var f = this.formularioRegistro.value;
+  //   var f = this.formularioRegistro.value;
 
-    if (this.formularioRegistro.invalid) {
-      const alert = await this.alertController.create({
-        header: 'Datos incompletos',
-        message: 'Tienes que llenar todos los datos',
-        buttons: ['Aceptar']
-      });
+  //   if (this.formularioRegistro.invalid) {
+  //     const alert = await this.alertController.create({
+  //       header: 'Datos incompletos',
+  //       message: 'Tienes que llenar todos los datos',
+  //       buttons: ['Aceptar']
+  //     });
 
-      await alert.present();
-      return;
-    }
+  //     await alert.present();
+  //     return;
+  //   }
 
-    var usuario = {
-      nombre: f.nombre,
-      password: f.password
-    }
+  //   var usuario = {
+  //     nombre: f.nombre,
+  //     password: f.password
+  //   }
 
-    localStorage.setItem('usuario', JSON.stringify(usuario));
+  //   localStorage.setItem('usuario', JSON.stringify(usuario));
 
-    localStorage.setItem('ingresado', 'true');
-    this.navCtrl.navigateRoot('inicio');
-  }
+  //   localStorage.setItem('ingresado', 'true');
+  //   this.navCtrl.navigateRoot('inicio');
+  // }
 
-  test() {
+  register(registerForm: any) {
     loadingSpinner(this.loadingCtrl);
 
     let data = {
-      firstName: "Rubius",
-      lastName: "Doblas",
-      email: "doblas@gmail.com",
-      password: "1234"
+      firstName: registerForm.firstName,
+      lastName: registerForm.lastName,
+      email: registerForm.email,
+      password: registerForm.password
     }
 
     this.auth.call(data, 'register', 'POST', false).subscribe({
@@ -123,6 +123,7 @@ export class RegistroPage implements OnInit {
         if (response.status === 'SUCCESS') {
           console.log(response);
           this.loadingCtrl.dismiss();
+          this.navCtrl.navigateRoot('login');
         } else {
           console.log(response);
           this.loadingCtrl.dismiss();
