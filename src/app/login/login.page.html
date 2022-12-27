@@ -58,8 +58,9 @@
         </ion-list>
       </form>
 
-      <ion-button [disabled]="formularioLogin.invalid" (click)="ingresar()" class="loginButton">Iniciar
-        Sesión</ion-button>
+      <ion-button [disabled]="formularioLogin.invalid" (click)="login(formularioLogin.value)"
+        class="loginButton">Iniciar Sesión
+      </ion-button>
       <!-- <ion-button (click)="testSquad()">Squad</ion-button>
       <ion-button (click)="testPlayer()">Player</ion-button> -->
 

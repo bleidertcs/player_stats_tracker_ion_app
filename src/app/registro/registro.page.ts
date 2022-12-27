@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from '@angular/forms';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { loadingSpinner } from '../loading/loading.component';
 import { AuthService } from '../services/auth.service';
 
@@ -31,6 +24,7 @@ export class RegistroPage implements OnInit {
     public alertController: AlertController,
     private auth: AuthService,
     public loadingCtrl: LoadingController,
+    public navCtrl: NavController
   ) {
     this.formularioRegistro = this.fb.group({
       firstName: new FormControl("", [Validators.required, Validators.pattern(this.namePattern)]),
@@ -109,6 +103,9 @@ export class RegistroPage implements OnInit {
     }
 
     localStorage.setItem('usuario', JSON.stringify(usuario));
+
+    localStorage.setItem('ingresado', 'true');
+    this.navCtrl.navigateRoot('inicio');
   }
 
   test() {

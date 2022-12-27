@@ -20,5 +20,5 @@ export async function loadingSpinner(loadingCtrl: LoadingController) {
     spinner: 'crescent',
   });
 
-  return loading.present()
+  return await loading.present()
 }

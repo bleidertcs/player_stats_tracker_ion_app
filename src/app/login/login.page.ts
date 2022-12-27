@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { loadingSpinner } from '../loading/loading.component';
 import { AuthService } from '../services/auth.service';
 
@@ -20,8 +20,9 @@ export class LoginPage implements OnInit {
   constructor(
     public fb: FormBuilder,
     public alertController: AlertController,
-    private auth: AuthService,
+    private authService: AuthService,
     public loadingCtrl: LoadingController,
+    public navCtrl: NavController
   ) {
 
     this.formularioLogin = this.fb.group({
@@ -37,6 +38,8 @@ export class LoginPage implements OnInit {
   validateEmail(event: KeyboardEvent) {
     return !(event.key === ' ');
   }
+
+
 
   checkEmail() {
     if (this.formularioLogin.controls['email'].value[0] === ' ') {
@@ -62,32 +65,56 @@ export class LoginPage implements OnInit {
     }
   }
 
-  async ingresar() {
+  login(loginForm: any) {
     loadingSpinner(this.loadingCtrl)
 
-    let f = this.formularioLogin.value;
-
-    let usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
-
-
-    if (f.email != undefined && f.password != undefined) {
-      const alert = await this.alertController.create({
-        header: 'Datos correctos',
-        buttons: ['Aceptar']
-      });
-
-      await alert.present();
-      this.loadingCtrl.dismiss();
-    } else {
-      const alert = await this.alertController.create({
-        header: 'Datos incorrectos',
-        message: 'Los datos que ingresaste son incorrectos.',
-        buttons: ['Aceptar']
-      });
-
-      await alert.present();
-      this.loadingCtrl.dismiss();
+    let data = {
+      email: loginForm.email,
+      password: loginForm.password
     }
+
+    this.authService.call(data, 'login', 'POST', false).subscribe({
+      next: (response) => {
+        if (response.status === 'SUCCESS') {
+          console.log(response);
+          this.authService.setToken(response.data);
+          this.authService.setIdUser(response.id);
+          this.authService.setProfile(response.profile);
+          this.authService.setEmail(response.email);
+          this.authService.setModelSesionInSession(this.authService.modelSession);
+
+          this.navCtrl.navigateRoot('inicio');
+          this.loadingCtrl.dismiss();
+        } else {
+          console.log(response);
+          this.loadingCtrl.dismiss();
+        }
+      },
+      error: (error) => {
+        console.log(error);
+        this.loadingCtrl.dismiss();
+      }
+    })
+
+    // let f = this.formularioLogin.value;
+
+    // let usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+
+
+    // if (f.email != undefined && f.password != undefined) {
+    //   // localStorage.setItem('ingresado', 'true');
+    //   this.loadingCtrl.dismiss();
+    //   this.navCtrl.navigateRoot('inicio');
+    // } else {
+    //   const alert = await this.alertController.create({
+    //     header: 'Datos incorrectos',
+    //     message: 'Los datos que ingresaste son incorrectos.',
+    //     buttons: ['Aceptar']
+    //   });
+
+    //   await alert.present();
+    //   this.loadingCtrl.dismiss();
+    // }
   }
 
   testSquad() {
@@ -95,7 +122,7 @@ export class LoginPage implements OnInit {
 
     let team = 2808
 
-    this.auth.call(null, `squad/${team}`, 'GET', false).subscribe({
+    this.authService.call(null, `squad/${team}`, 'GET', false).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
           console.log(response);
@@ -119,7 +146,7 @@ export class LoginPage implements OnInit {
     let season = 2022;
     let league = 299;
 
-    this.auth.call(null, `player/${id}/${season}/${league}`, 'GET', false).subscribe({
+    this.authService.call(null, `player/${id}/${season}/${league}`, 'GET', false).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
           console.log(response);

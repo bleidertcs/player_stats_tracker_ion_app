@@ -2,11 +2,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Session } from '../models/login.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  public modelSession: Session = {
+    token: this.getToken(),
+    idUser: this.getIdUser(),
+    profile: this.getProfile(),
+    email: this.getEmail(),
+  };
 
   private headers = new HttpHeaders();
   private json: any;
@@ -48,4 +56,22 @@ export class AuthService {
 
     return this.httpClient.post(environment.apiUrl + route, this.json, { headers: this.headers });
   }
+
+  setModelSesionInSession(modelSession: Session) {
+    sessionStorage.setItem('modelSession', JSON.stringify(modelSession));
+  }
+
+  getModelSesion() {
+    return sessionStorage.getItem('modelSession') === null ? null : JSON.parse(sessionStorage.getItem('modelSession') || '')
+  }
+
+  setToken(token: string) { this.modelSession.token = token }
+  setIdUser(idUser: number) { this.modelSession.idUser = idUser }
+  setProfile(profile: any) { this.modelSession.profile = profile }
+  setEmail(email: string) { this.modelSession.email = email }
+
+  getToken() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().token }
+  getIdUser() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().idUser }
+  getProfile() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().profile }
+  getEmail() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().email }
 }
