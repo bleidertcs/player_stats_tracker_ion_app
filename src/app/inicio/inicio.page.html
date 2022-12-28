@@ -1,6 +1,57 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Inicio</ion-title>
+    <ion-title class="ion-text-center" >Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<ion-content>
+
+
+ <ion-card>
+  <ion-card-title  class="ion-text-center"  >Jugador 1</ion-card-title>
+<ion-card-content>
+
+<p></p>
+
+<ion-textarea rows="1"></ion-textarea>
+
+</ion-card-content>
+
+<ion-button expand="block">Guardar</ion-button>
+
+ </ion-card> 
+
+ <ion-card>
+  <ion-card-title  class="ion-text-center"  >Jugador 2</ion-card-title>
+<ion-card-content>
+
+<p></p>
+
+<ion-textarea rows="1"></ion-textarea>
+
+</ion-card-content>
+
+<ion-button expand="block">Guardar</ion-button>
+
+ </ion-card> 
+
+
+
+</ion-content>
+
+
+
+<!--   
+<ion-content>
+  <ion-card *ngIf="entradaActual">
+    <ion-card-content>
+      <p id="fechaTexto">{{entradaActual.fechaTexto}}</p>
+      <ion-textarea rows="15" [(ngModel)] = "entradaActual.texto">
+        
+      </ion-textarea>
+    </ion-card-content>
+    <ion-button expand="block" (click)="guardar(entradaActual)">
+      Guardar
+    </ion-button>
+  </ion-card>
+</ion-content>-->

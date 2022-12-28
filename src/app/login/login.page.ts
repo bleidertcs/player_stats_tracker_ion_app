@@ -7,6 +7,7 @@ import {
   FormBuilder
 } from '@angular/forms';
 import { AlertController, NavController } from '@ionic/angular';
+import { min } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -21,13 +22,18 @@ export class LoginPage implements OnInit {
 
     this.formularioLogin = this.fb.group({
       'nombre': new FormControl("",Validators.required),
-      'password': new FormControl("",Validators.required)
+      'password': new FormControl("",Validators.required),
+      
+
+
     })
 
+
+    
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+
 
   async ingresar(){
 

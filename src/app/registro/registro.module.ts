@@ -8,6 +8,7 @@ import { RegistroPageRoutingModule } from './registro-routing.module';
 
 import { RegistroPage } from './registro.page';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -19,3 +20,4 @@ import { RegistroPage } from './registro.page';
   declarations: [RegistroPage]
 })
 export class RegistroPageModule {}
+
