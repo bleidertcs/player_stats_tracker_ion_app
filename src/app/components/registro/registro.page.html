@@ -69,12 +69,6 @@
               slot="error">
               Contraseña es requerido
             </ion-note>
-            <ion-note *ngIf="formularioRegistro.controls['password'].hasError('minLength')" slot="error">
-              Contraseña deben tener mínimo 5 carácteres
-            </ion-note>
-            <ion-note *ngIf="formularioRegistro.controls['password'].hasError('maxLength')" slot="error">
-              Contraseña deben tener máximo 20 carácteres
-            </ion-note>
           </ion-item>
         </ion-list>
 

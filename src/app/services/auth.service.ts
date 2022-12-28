@@ -65,7 +65,7 @@ export class AuthService {
     return sessionStorage.getItem('modelSession') === null ? null : JSON.parse(sessionStorage.getItem('modelSession') || '')
   }
 
-  setToken(token: string) { this.modelSession.token = token }
+  setToken(token: any) { this.modelSession.token = token }
   setIdUser(idUser: number) { this.modelSession.idUser = idUser }
   setProfile(profile: any) { this.modelSession.profile = profile }
   setEmail(email: string) { this.modelSession.email = email }
