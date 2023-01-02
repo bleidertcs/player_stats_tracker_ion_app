@@ -3,21 +3,21 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>SIFApp</ion-title>
+    <ion-title>App</ion-title>
 
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card >
+  <ion-card>
     <ion-card-header>
       <ion-card-title class="ion-text-center" color="dark">REGISTRO</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <form [formGroup]="formularioRegistro">
 
-        <ion-list >
-          <ion-item counter="true" fill="solid"  class="registerForm"> 
+        <ion-list>
+          <ion-item counter="true" fill="solid" class="registerForm">
             <ion-label position="floating">Nombre</ion-label>
             <ion-input (input)="checkFirstName()" (keypress)="validateName($event)" formControlName="firstName"
               maxlength="30"></ion-input>
