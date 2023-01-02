@@ -4,3 +4,143 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-content>
+  <div>
+
+    <form [formGroup]="formTeams">
+
+      <ion-card color="secondary">
+        <div style="text-align: center; margin-top: 10px;">Equipo</div>
+        <ion-row>
+          <ion-col col-6>
+            <ion-item fill="outline">
+              <ion-select interface="popover" placeholder="Seleccionar equipo" formControlName="idTeams1">
+                <ion-select-option *ngFor="let team of teams1"
+                  [value]="team.value">{{team.viewValue}}</ion-select-option>
+              </ion-select>
+              <!-- <ion-note *ngIf="formTeams.controls['idTeams'].hasError('required') && formTeams.get('idTeams')?.touched"
+                      slot="error">
+                      Equipo es requerido
+                    </ion-note> -->
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-6>
+            <ion-item fill="outline">
+              <ion-select interface="popover" placeholder="Seleccionar equipo" formControlName="idTeams2">
+                <ion-select-option *ngFor="let team of teams2"
+                  [value]="team.value">{{team.viewValue}}</ion-select-option>
+              </ion-select>
+              <!-- <ion-note *ngIf="formTeams.controls['idTeams'].hasError('required') && formTeams.get('idTeams')?.touched"
+                      slot="error">
+                      Equipo es requerido
+                    </ion-note> -->
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+
+
+      <ion-card color="secondary">
+        <div *ngIf="squads1.length != 0" style="text-align: center; margin-top: 10px;">Jugador</div>
+        <ion-row *ngIf="squads1.length != 0">
+          <ion-col col-6>
+            <ion-item fill="outline">
+              <ion-select interface="popover" placeholder="Seleccionar jugador" formControlName="idSquad1">
+                <ion-select-option *ngFor="let squad of squads1"
+                  [value]="squad.value">{{squad.viewValue}}</ion-select-option>
+              </ion-select>
+              <!-- <ion-note *ngIf="formTeams.controls['idSquad'].hasError('required') && formTeams.get('idSquad')?.touched"
+                      slot="error">
+                      Equipo es requerido
+                    </ion-note> -->
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-6>
+            <ion-item fill="outline">
+              <ion-select interface="popover" placeholder="Seleccionar jugador" formControlName="idSquad2">
+                <ion-select-option *ngFor="let squad of squads2"
+                  [value]="squad.value">{{squad.viewValue}}</ion-select-option>
+              </ion-select>
+              <!-- <ion-note *ngIf="formTeams.controls['idSquad'].hasError('required') && formTeams.get('idSquad')?.touched"
+                      slot="error">
+                      Equipo es requerido
+                    </ion-note> -->
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+
+
+      <ion-card *ngFor="let player of players1" color="secondary">
+        <ion-card-header>
+          <ion-card-title>{{ player.viewValue }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div>Edad: {{ player.age }}</div>
+          <div>Altura: {{ player.height }}</div>
+          <div>Peso: {{ player.weight }}</div>
+          <div>Liga: {{ player.league }}</div>
+          <div>Position: {{ player.position }}</div>
+          <div>Tiros: {{ player.shots.total === null ? 0 : player.shots.total }} - {{ player.shots.on === null ? 0 :
+            player.shots.on }} </div>
+          <div>Goles: {{ player.goals.total === null ? 0 : player.goals.total }} - {{ player.goals.assists === null ? 0
+            : player.goals.assists }} </div>
+          <div>Pases: {{ player.passes.total === null ? 0 : player.passes.total }} - {{ player.passes.key === null ? 0 :
+            player.passes.key }} - {{ player.passes.accuracy === null ? 0 : player.passes.accuracy }} </div>
+          <div>Derribo: {{ player.tackles.total === null ? 0 : player.tackles.total }} - {{ player.tackles.blocks ===
+            null ? 0 : player.tackles.blocks }} - {{ player.tackles.interceptions === null ? 0 :
+            player.tackles.interceptions }} </div>
+          <div>Dribles: {{ player.dribbles.attempts === null ? 0 : player.dribbles.attempts }} - {{
+            player.dribbles.success === null ? 0 : player.dribbles.success }} - {{ player.dribbles.past === null ? 0 :
+            player.dribbles.past }} </div>
+          <div>Fouls: {{ player.fouls.drawn === null ? 0 : player.fouls.drawn }} - {{ player.fouls.committed === null ?
+            0 : player.fouls.committed }}</div>
+          <div>Cartas (Amarillo - Suspención - Rojo): {{ player.cards.yellow === null ? 0 : player.cards.yellow }} - {{
+            player.cards.yellowred === null ? 0 : player.cards.yellowred }} - {{ player.cards.red === null ? 0 :
+            player.cards.red }}</div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngFor="let player of players2" color="secondary">
+        <ion-card-header>
+          <ion-card-title>{{ player.viewValue }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div>Edad: {{ player.age }}</div>
+          <div>Altura: {{ player.height }}</div>
+          <div>Peso: {{ player.weight }}</div>
+          <div>Liga: {{ player.league }}</div>
+          <div>Position: {{ player.position }}</div>
+          <div>Tiros: {{ player.shots.total === null ? 0 : player.shots.total }} - {{ player.shots.on === null ? 0 :
+            player.shots.on }} </div>
+          <div>Goles: {{ player.goals.total === null ? 0 : player.goals.total }} - {{ player.goals.assists === null ? 0
+            : player.goals.assists }} </div>
+          <div>Pases: {{ player.passes.total === null ? 0 : player.passes.total }} - {{ player.passes.key === null ? 0 :
+            player.passes.key }} - {{ player.passes.accuracy === null ? 0 : player.passes.accuracy }} </div>
+          <div>Derribo: {{ player.tackles.total === null ? 0 : player.tackles.total }} - {{ player.tackles.blocks ===
+            null ? 0 : player.tackles.blocks }} - {{ player.tackles.interceptions === null ? 0 :
+            player.tackles.interceptions }} </div>
+          <div>Dribles: {{ player.dribbles.attempts === null ? 0 : player.dribbles.attempts }} - {{
+            player.dribbles.success === null ? 0 : player.dribbles.success }} - {{ player.dribbles.past === null ? 0 :
+            player.dribbles.past }} </div>
+          <div>Fouls: {{ player.fouls.drawn === null ? 0 : player.fouls.drawn }} - {{ player.fouls.committed === null ?
+            0 : player.fouls.committed }}</div>
+          <div>Cartas (Amarillo - Suspención - Rojo): {{ player.cards.yellow === null ? 0 : player.cards.yellow }} - {{
+            player.cards.yellowred === null ? 0 : player.cards.yellowred }} - {{ player.cards.red === null ? 0 :
+            player.cards.red }}</div>
+        </ion-card-content>
+      </ion-card>
+    </form>
+
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">Cerrar Sesión</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
