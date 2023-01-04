@@ -9,7 +9,7 @@
 
     <form [formGroup]="formTeams">
 
-      <ion-card>
+      <ion-card color="primary">
 
       
         <div>Equipo</div>
@@ -43,12 +43,14 @@
       </ion-card>
 
 
-      <ion-card>
+      <ion-card color="primary" *ngIf="squads1.length != 0">
 
       
-        <div *ngIf="squads1.length != 0" >Jugador</div>
+        <div >Jugador</div>
 
         <ion-row *ngIf="squads1.length != 0">
+
+          
           <ion-col col-6>
             <ion-item fill="outline">
               <ion-select interface="popover" placeholder="Seleccionar jugador" formControlName="idSquad1">
@@ -78,7 +80,7 @@
       </ion-card>
 
 
-      <ion-card *ngFor="let player of players1">
+      <ion-card *ngFor="let player of players1" color="primary">
         <ion-card-header>
           <ion-card-title>{{ player.viewValue }}</ion-card-title>
         </ion-card-header>
