@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { loadingSpinner } from '../../shared/loading/loading.component';
 import { AuthService } from '../../services/auth.service';
+import { alert } from 'src/app/shared/alert/alert.component';
 
 @Component({
   selector: 'app-login',
@@ -74,7 +75,7 @@ export class LoginPage implements OnInit {
     }
 
     this.authService.call(data, 'login', 'POST', false).subscribe({
-      next: (response) => {
+      next: async (response) => {
         if (response.status === 'SUCCESS') {
           console.log(response);
           this.authService.setToken(response.data);
@@ -85,9 +86,16 @@ export class LoginPage implements OnInit {
 
           this.navCtrl.navigateRoot('inicio');
           this.loadingCtrl.dismiss();
-        } else {
+        } else if (response.status === 'Error') {
           console.log(response);
           this.loadingCtrl.dismiss();
+
+          alert({
+            title: response.status,
+            text: response.data,
+            button: ['Cerrar'],
+            alertController: this.alertController
+          })
         }
       },
       error: (error) => {
