@@ -66,8 +66,8 @@ export class LoginPage implements OnInit {
     }
   }
 
-  login(loginForm: any) {
-    loadingSpinner(this.loadingCtrl)
+  async login(loginForm: any) {
+    await loadingSpinner(this.loadingCtrl)
 
     let data = {
       email: loginForm.email,
@@ -101,6 +101,13 @@ export class LoginPage implements OnInit {
       error: (error) => {
         console.log(error);
         this.loadingCtrl.dismiss();
+
+        alert({
+          title: 'Error',
+          text: 'Falla en el servidor',
+          button: ['Cerrar'],
+          alertController: this.alertController
+        })
       }
     })
 
@@ -123,51 +130,5 @@ export class LoginPage implements OnInit {
     //   await alert.present();
     //   this.loadingCtrl.dismiss();
     // }
-  }
-
-  testSquad() {
-    loadingSpinner(this.loadingCtrl)
-
-    let team = 2808
-
-    this.authService.call(null, `squad/${team}`, 'GET', false).subscribe({
-      next: (response) => {
-        if (response.status === 'SUCCESS') {
-          console.log(response);
-          this.loadingCtrl.dismiss();
-        } else {
-          console.log(response);
-          this.loadingCtrl.dismiss();
-        }
-      },
-      error: (error) => {
-        console.log(error);
-        this.loadingCtrl.dismiss();
-      }
-    })
-  }
-
-  testPlayer() {
-    loadingSpinner(this.loadingCtrl)
-
-    let id = 52561;
-    let season = 2022;
-    let league = 299;
-
-    this.authService.call(null, `player/${id}/${season}/${league}`, 'GET', false).subscribe({
-      next: (response) => {
-        if (response.status === 'SUCCESS') {
-          console.log(response);
-          this.loadingCtrl.dismiss();
-        } else {
-          console.log(response);
-          this.loadingCtrl.dismiss();
-        }
-      },
-      error: (error) => {
-        console.log(error);
-        this.loadingCtrl.dismiss();
-      }
-    })
   }
 }

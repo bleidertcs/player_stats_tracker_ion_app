@@ -187,7 +187,7 @@ export class InicioPage implements OnInit {
       data: {
         labels: ['Shots', 'Goals', 'Passes', 'Tackles', 'Dribbles'],
         datasets: [{
-          label: '# of Votes',
+          // label: '# of Votes',
           data: [
             this.players1.map(e => e.shots.total === null ? 0 : e.shots.total),
             this.players1.map(e => e.goals.total === null ? 0 : e.goals.total),
@@ -198,13 +198,19 @@ export class InicioPage implements OnInit {
           borderWidth: 1
         }]
       },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
+      // options: {
+      //   scales: {
+      //     y: {
+      //       beginAtZero: true
+      //     }
+      //   },
+      //   plugins: {
+      //       subtitle: {
+      //           display: true,
+      //           text: 'Custom Chart Subtitle'
+      //       }
+      //   }
+      // }
     });
   }
 
@@ -216,7 +222,7 @@ export class InicioPage implements OnInit {
       data: {
         labels: ['Shots', 'Goals', 'Passes', 'Tackles', 'Dribbles'],
         datasets: [{
-          label: '# of Votes',
+          // label: '# of Votes',
           data: [
             this.players1.map(e => e.shots.total === null ? 0 : e.shots.total),
             this.players1.map(e => e.goals.total === null ? 0 : e.goals.total),
@@ -227,13 +233,13 @@ export class InicioPage implements OnInit {
           borderWidth: 2
         }]
       },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
+      // options: {
+      //   scales: {
+      //     y: {
+      //       beginAtZero: true
+      //     }
+      //   }
+      // }
     });
 
   }
