@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { loadingSpinner } from '../../shared/loading/loading.component';
 import { AuthService } from '../../services/auth.service';
-
+import { alert } from 'src/app/shared/alert/alert.component';
 
 @Component({
   selector: 'app-registro',
@@ -108,8 +108,8 @@ export class RegistroPage implements OnInit {
   //   this.navCtrl.navigateRoot('inicio');
   // }
 
-  register(registerForm: any) {
-    loadingSpinner(this.loadingCtrl);
+  async register(registerForm: any) {
+    await loadingSpinner(this.loadingCtrl);
 
     let data = {
       firstName: registerForm.firstName,
@@ -127,11 +127,25 @@ export class RegistroPage implements OnInit {
         } else {
           console.log(response);
           this.loadingCtrl.dismiss();
+
+          alert({
+            title: response.status,
+            text: response.data,
+            button: ['Cerrar'],
+            alertController: this.alertController
+          })
         }
       },
       error: (error) => {
         console.log(error);
         this.loadingCtrl.dismiss();
+
+        alert({
+          title: 'Error',
+          text: 'Falla en el servidor',
+          button: ['Cerrar'],
+          alertController: this.alertController
+        })
       }
     })
   }
