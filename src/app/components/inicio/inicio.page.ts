@@ -1,10 +1,10 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { LoadingController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Chart, ChartItem } from 'chart.js/auto';
 import { AuthService } from 'src/app/services/auth.service';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
-
+import { alert } from 'src/app/shared/alert/alert.component';
 
 interface selectTeam1 {
   value: number;
@@ -131,7 +131,8 @@ export class InicioPage implements OnInit {
     public loadingCtrl: LoadingController,
     public navCtrl: NavController,
     public form: FormBuilder,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    public alertController: AlertController,
   ) {
     this.formTeams = this.form.group({
       idTeams1: new FormControl('', [Validators.required, e => this.loadSquads1(e)]),
@@ -139,6 +140,11 @@ export class InicioPage implements OnInit {
       idSquad1: new FormControl('', [Validators.required, e => this.loadPlayers1(e)]),
       idSquad2: new FormControl('', [Validators.required, e => this.loadPlayers2(e)]),
     });
+  }
+
+  ngOnInit() {
+    this.footballTeams1();
+    this.footballTeams2();
   }
 
   loadSquads1(control: AbstractControl) {
@@ -182,19 +188,23 @@ export class InicioPage implements OnInit {
   generateChartPlayer1() {
     const ctx = document.getElementById('chart1') as ChartItem;
 
+    let dataChart = [
+      this.players1.map(e => e.shots.total === null ? 0 : e.shots.total),
+      this.players1.map(e => e.goals.total === null ? 0 : e.goals.total),
+      this.players1.map(e => e.passes.total === null ? 0 : e.passes.total),
+      this.players1.map(e => e.tackles.total === null ? 0 : e.tackles.total),
+      this.players1.map(e => e.dribbles.success === null ? 0 : e.dribbles.success)
+    ]
+
+    console.log(dataChart)
+
     this.chart1 = new Chart(ctx, {
       type: 'doughnut',
       data: {
         labels: ['Shots', 'Goals', 'Passes', 'Tackles', 'Dribbles'],
         datasets: [{
           // label: '# of Votes',
-          data: [
-            this.players1.map(e => e.shots.total === null ? 0 : e.shots.total),
-            this.players1.map(e => e.goals.total === null ? 0 : e.goals.total),
-            this.players1.map(e => e.passes.total === null ? 0 : e.passes.total),
-            this.players1.map(e => e.tackles.total === null ? 0 : e.tackles.total),
-            this.players1.map(e => e.dribbles.success === null ? 0 : e.dribbles.success)
-          ],
+          data: dataChart,
           borderWidth: 1
         }]
       },
@@ -217,20 +227,22 @@ export class InicioPage implements OnInit {
   generateChartPlayer2() {
     const ctx = document.getElementById('chart2') as ChartItem;
 
+    let dataChart2 = [
+      this.players2.map(e => e.shots.total === null ? 0 : e.shots.total),
+      this.players2.map(e => e.goals.total === null ? 0 : e.goals.total),
+      this.players2.map(e => e.passes.total === null ? 0 : e.passes.total),
+      this.players2.map(e => e.tackles.total === null ? 0 : e.tackles.total),
+      this.players2.map(e => e.dribbles.success === null ? 0 : e.dribbles.success)
+    ]
+
     this.chart2 = new Chart(ctx, {
       type: 'doughnut',
       data: {
         labels: ['Shots', 'Goals', 'Passes', 'Tackles', 'Dribbles'],
         datasets: [{
           // label: '# of Votes',
-          data: [
-            this.players1.map(e => e.shots.total === null ? 0 : e.shots.total),
-            this.players1.map(e => e.goals.total === null ? 0 : e.goals.total),
-            this.players1.map(e => e.passes.total === null ? 0 : e.passes.total),
-            this.players1.map(e => e.tackles.total === null ? 0 : e.tackles.total),
-            this.players1.map(e => e.dribbles.success === null ? 0 : e.dribbles.success)
-          ],
-          borderWidth: 2
+          data: dataChart2,
+          borderWidth: 1
         }]
       },
       // options: {
@@ -242,11 +254,6 @@ export class InicioPage implements OnInit {
       // }
     });
 
-  }
-
-  ngOnInit() {
-    this.footballTeams1();
-    this.footballTeams2();
   }
 
   logout() {
@@ -288,6 +295,13 @@ export class InicioPage implements OnInit {
       },
       error: (error) => {
         console.log(error)
+
+        alert({
+          title: 'Error',
+          text: 'Falla en el servidor',
+          button: ['Cerrar'],
+          alertController: this.alertController
+        })
       }
     })
   }
@@ -308,12 +322,19 @@ export class InicioPage implements OnInit {
       },
       error: (error) => {
         console.log(error)
+
+        alert({
+          title: 'Error',
+          text: 'Falla en el servidor',
+          button: ['Cerrar'],
+          alertController: this.alertController
+        })
       }
     })
   }
 
-  squad1(teamID: any) {
-    loadingSpinner(this.loadingCtrl)
+  async squad1(teamID: any) {
+    await loadingSpinner(this.loadingCtrl)
 
     this.authService.call(null, `squad/${teamID}`, 'GET', false).subscribe({
       next: (response) => {
@@ -333,12 +354,19 @@ export class InicioPage implements OnInit {
       error: (error) => {
         console.log(error)
         this.loadingCtrl.dismiss();
+
+        alert({
+          title: 'Error',
+          text: 'Falla en el servidor',
+          button: ['Cerrar'],
+          alertController: this.alertController
+        })
       }
     })
   }
 
-  squad2(teamID: any) {
-    loadingSpinner(this.loadingCtrl)
+  async squad2(teamID: any) {
+    await loadingSpinner(this.loadingCtrl)
 
     this.authService.call(null, `squad/${teamID}`, 'GET', false).subscribe({
       next: (response) => {
@@ -358,12 +386,19 @@ export class InicioPage implements OnInit {
       error: (error) => {
         console.log(error)
         this.loadingCtrl.dismiss();
+
+        alert({
+          title: 'Error',
+          text: 'Falla en el servidor',
+          button: ['Cerrar'],
+          alertController: this.alertController
+        })
       }
     })
   }
 
-  player1(playerId: any) {
-    loadingSpinner(this.loadingCtrl);
+  async player1(playerId: any) {
+    await loadingSpinner(this.loadingCtrl);
 
     this.authService.call(null, `player/${playerId}/2022/299`, 'GET', false).subscribe({
       next: (response) => {
@@ -434,12 +469,19 @@ export class InicioPage implements OnInit {
       error: (error) => {
         console.log(error);
         this.loadingCtrl.dismiss()
+
+        alert({
+          title: 'Error',
+          text: 'Falla en el servidor',
+          button: ['Cerrar'],
+          alertController: this.alertController
+        })
       }
     })
   }
 
-  player2(playerId: any) {
-    loadingSpinner(this.loadingCtrl);
+  async player2(playerId: any) {
+    await loadingSpinner(this.loadingCtrl);
 
     this.authService.call(null, `player/${playerId}/2022/299`, 'GET', false).subscribe({
       next: (response) => {
@@ -510,6 +552,13 @@ export class InicioPage implements OnInit {
       error: (error) => {
         console.log(error);
         this.loadingCtrl.dismiss()
+
+        alert({
+          title: 'Error',
+          text: 'Falla en el servidor',
+          button: ['Cerrar'],
+          alertController: this.alertController
+        })
       }
     })
   }

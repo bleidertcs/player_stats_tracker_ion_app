@@ -98,9 +98,13 @@
             player.dribbles.past }} </div>
           <div>Fouls: {{ player.fouls.drawn === null ? 0 : player.fouls.drawn }} - {{ player.fouls.committed === null ?
             0 : player.fouls.committed }}</div>
-          <div>Cartas (Amarillo - Suspención - Rojo): {{ player.cards.yellow === null ? 0 : player.cards.yellow }} - {{
+          <div>Cartas (A - S - R): {{ player.cards.yellow === null ? 0 : player.cards.yellow }} - {{
             player.cards.yellowred === null ? 0 : player.cards.yellowred }} - {{ player.cards.red === null ? 0 :
             player.cards.red }}</div>
+
+          <div style="position: relative; margin: auto; height: 300;">
+            <canvas id="chart1" *ngIf="players1.length != 0"></canvas>
+          </div>
         </ion-card-content>
       </ion-card>
 
@@ -128,13 +132,17 @@
             player.dribbles.past }} </div>
           <div>Fouls: {{ player.fouls.drawn === null ? 0 : player.fouls.drawn }} - {{ player.fouls.committed === null ?
             0 : player.fouls.committed }}</div>
-          <div>Cartas (Amarillo - Suspención - Rojo): {{ player.cards.yellow === null ? 0 : player.cards.yellow }} - {{
+          <div>Cartas (A - S - R): {{ player.cards.yellow === null ? 0 : player.cards.yellow }} - {{
             player.cards.yellowred === null ? 0 : player.cards.yellowred }} - {{ player.cards.red === null ? 0 :
             player.cards.red }}</div>
+
+          <div style="position: relative; margin: auto; height: 300;">
+            <canvas id="chart2" *ngIf="players2.length != 0"></canvas>
+          </div>
         </ion-card-content>
       </ion-card>
 
-      <ion-card color="secondary" *ngIf="players1.length != 0">
+      <!-- <ion-card color="secondary" *ngIf="players1.length != 0">
         <ion-card-header *ngFor="let player of players1">
           {{ player.viewValue }}
         </ion-card-header>
@@ -143,9 +151,9 @@
             <canvas id="chart1" *ngIf="players1.length != 0"></canvas>
           </div>
         </ion-card-content>
-      </ion-card>
+      </ion-card> -->
 
-      <ion-card color="secondary" *ngIf="players2.length != 0">
+      <!-- <ion-card color="secondary" *ngIf="players2.length != 0">
         <ion-card-header *ngFor="let player of players2">
           {{ player.viewValue }}
         </ion-card-header>
@@ -154,7 +162,7 @@
             <canvas id="chart2" *ngIf="players2.length != 0"></canvas>
           </div>
         </ion-card-content>
-      </ion-card>
+      </ion-card> -->
     </form>
 
   </div>
