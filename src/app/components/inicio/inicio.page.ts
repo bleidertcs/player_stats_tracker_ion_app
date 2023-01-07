@@ -256,8 +256,8 @@ export class InicioPage implements OnInit {
 
   }
 
-  logout() {
-    loadingSpinner(this.loadingCtrl)
+  async logout() {
+    await loadingSpinner(this.loadingCtrl)
 
     this.authService.call(null, 'logout', 'POST', false).subscribe({
       next: (response) => {
@@ -275,6 +275,13 @@ export class InicioPage implements OnInit {
       error: (error) => {
         console.log(error)
         this.loadingCtrl.dismiss()
+
+        alert({
+          title: 'Error',
+          text: 'Falla en el servidor',
+          button: ['Cerrar'],
+          alertController: this.alertController
+        })
       }
     })
   }
