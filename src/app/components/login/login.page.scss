@@ -7,44 +7,50 @@
   align-items: center;
   justify-content: center;
   display: grid;
+  grid-template-columns: 100%;
 }
 
 .loginForm {
   margin-bottom: 10px;
 }
 
-* {
-  font-family: 'segoeui';
+.forgot-password {
+  margin-top: 10px;
+  text-align: center;
 }
 
-ion-card-title{
+// * {
+//   font-family: 'segoeui';
+// }
 
-  padding: 10px;
-  
-  margin: auto;
-  
-  width: 200px;
-  
-  border-radius: 10px;
+// ion-card-title {
 
-  background: linear-gradient(to bottom,rgb(226, 226, 226), rgb(255, 255, 255),rgb(226, 226, 226) );
-  
-  }
+//   padding: 10px;
+
+//   margin: auto;
+
+//   width: 200px;
+
+//   border-radius: 10px;
+
+//   background: linear-gradient(to bottom, rgb(226, 226, 226), rgb(255, 255, 255), rgb(226, 226, 226));
+
+// }
 
 
-  ion-title{
+// ion-title {
 
-    text-align:center; 
-    
-    color:white;
-    
-    width: 83px;
-    
-    border-radius: 4px;
-    
-    background: linear-gradient(to bottom,black, rgb(55, 0, 255),black );
+//   text-align: center;
 
-    margin-left:auto ;
-    
-    margin-right:15px;
-    }
+//   color: white;
+
+//   width: 83px;
+
+//   border-radius: 4px;
+
+//   background: linear-gradient(to bottom, black, rgb(55, 0, 255), black);
+
+//   margin-left: auto;
+
+//   margin-right: 15px;
+// }

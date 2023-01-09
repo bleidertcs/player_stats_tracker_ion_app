@@ -1,42 +1,41 @@
+ion-title {
 
-ion-title{
+  text-align: center;
 
-  text-align:center; 
-  
-  color:white;
-  
+  color: white;
+
   width: 83px;
-  
+
   border-radius: 4px;
-  
-  background: linear-gradient(to bottom,black, rgb(55, 0, 255),black );
 
-  margin-left:auto ;
-  
-  margin-right:15px;
-  }
+  background: linear-gradient(to bottom, black, rgb(55, 0, 255), black);
 
-ion-card{
+  margin-left: auto;
 
-padding: 10px;
+  margin-right: 15px;
+}
 
-background-repeat: no-repeat;
+ion-card {
 
-color: white;
+  padding: 10px;
+
+  background-repeat: no-repeat;
+
+  color: white;
 
 }
 
-div{
+div {
 
-text-align: center;
+  text-align: center;
 
-margin-top: 5px;
+  margin-top: 5px;
 
-margin-bottom: 5px;
+  margin-bottom: 5px;
 
 
 }
 
-* {
-    font-family: 'segoeui';
-  }
+// * {
+//     font-family: 'segoeui';
+//   }
