@@ -27,19 +27,31 @@
 
 ion-card-title{
 
-background-color:rgb(226, 226, 226) ;  
+  padding: 10px;
+  
+  margin: auto;
+  
+  width: 200px;
+  
+  border-radius: 10px;
 
-padding: 10px;
-
-margin: auto;
-
-width: 200px;
-
-border-radius: 30px;
-
-}
+  background: linear-gradient(to bottom,rgb(226, 226, 226), rgb(255, 255, 255),rgb(226, 226, 226) );
+  
+  }
 
 ion-title{
 
-text-align: center;  
+text-align:center; 
+
+color:white;
+
+width: 83px;
+
+border-radius: 4px;
+
+background: linear-gradient(to bottom,black, rgb(55, 0, 255),black );
+
+margin-left:auto ;
+    
+margin-right:15px;
 }
