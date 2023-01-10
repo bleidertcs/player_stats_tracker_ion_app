@@ -9,15 +9,18 @@
 </ion-header>
 
 <ion-content color="light">
-  <ion-card >
+  <ion-card>
     <ion-card-header>
-      <ion-card-title class="ion-text-center" color="dark">REGISTRO</ion-card-title>
+      <ion-card-title class="ion-text-center" color="dark">Registrate</ion-card-title>
+      <ion-card-subtitle class="card-subtitle">Es rápido y sencillo</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
+      <ion-img src="assets/icon/registro.jpg" alt="Register Picture"></ion-img>
+
       <form [formGroup]="formularioRegistro">
 
         <ion-list>
-          <ion-item counter="true" fill="solid" class="registerForm">
+          <ion-item counter="true" fill="outline" class="registerForm">
             <ion-label position="floating">Nombre</ion-label>
             <ion-input (input)="checkFirstName()" (keypress)="validateName($event)" formControlName="firstName"
               maxlength="30"></ion-input>
@@ -28,7 +31,7 @@
             </ion-note>
           </ion-item>
 
-          <ion-item counter="true" fill="solid" class="registerForm">
+          <ion-item counter="true" fill="outline" class="registerForm">
             <ion-label position="floating">Apellido</ion-label>
             <ion-input (input)="checkLastName()" (keypress)="validateName($event)" formControlName="lastName"
               maxlength="30"></ion-input>
@@ -39,7 +42,7 @@
             </ion-note>
           </ion-item>
 
-          <ion-item counter="true" fill="solid" class="registerForm">
+          <ion-item counter="true" fill="outline" class="registerForm">
             <ion-label position="floating">Correo Electrónico</ion-label>
             <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
               maxlength="50"></ion-input>
@@ -53,7 +56,7 @@
             </ion-note>
           </ion-item>
 
-          <ion-item counter="true" fill="solid" class="registerForm">
+          <ion-item counter="true" fill="outline" class="registerForm">
             <ion-label position="floating">Contraseña</ion-label>
             <ion-input (keypress)="validatePassword($event)" (input)="checkPassword()" formControlName="password"
               [type]="passwordVisibility ? 'password' : 'text'" maxlength="20">

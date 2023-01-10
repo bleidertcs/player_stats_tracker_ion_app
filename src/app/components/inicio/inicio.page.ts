@@ -189,11 +189,11 @@ export class InicioPage implements OnInit {
     const ctx = document.getElementById('chart1') as ChartItem;
 
     let dataChart = [
-      this.players1.map(e => e.shots.total === null ? 0 : e.shots.total),
-      this.players1.map(e => e.goals.total === null ? 0 : e.goals.total),
-      this.players1.map(e => e.passes.total === null ? 0 : e.passes.total),
-      this.players1.map(e => e.tackles.total === null ? 0 : e.tackles.total),
-      this.players1.map(e => e.dribbles.success === null ? 0 : e.dribbles.success)
+      this.players1.map(e => e.shots.total === null ? 1 : e.shots.total),
+      this.players1.map(e => e.goals.total === null ? 1 : e.goals.total),
+      this.players1.map(e => e.passes.total === null ? 1 : e.passes.total),
+      this.players1.map(e => e.tackles.total === null ? 1 : e.tackles.total),
+      this.players1.map(e => e.dribbles.success === null ? 1 : e.dribbles.success)
     ]
 
     console.log(dataChart)
@@ -228,11 +228,11 @@ export class InicioPage implements OnInit {
     const ctx = document.getElementById('chart2') as ChartItem;
 
     let dataChart2 = [
-      this.players2.map(e => e.shots.total === null ? 0 : e.shots.total),
-      this.players2.map(e => e.goals.total === null ? 0 : e.goals.total),
-      this.players2.map(e => e.passes.total === null ? 0 : e.passes.total),
-      this.players2.map(e => e.tackles.total === null ? 0 : e.tackles.total),
-      this.players2.map(e => e.dribbles.success === null ? 0 : e.dribbles.success)
+      this.players2.map(e => e.shots.total === null ? 1 : e.shots.total),
+      this.players2.map(e => e.goals.total === null ? 1 : e.goals.total),
+      this.players2.map(e => e.passes.total === null ? 1 : e.passes.total),
+      this.players2.map(e => e.tackles.total === null ? 1 : e.tackles.total),
+      this.players2.map(e => e.dribbles.success === null ? 1 : e.dribbles.success)
     ]
 
     this.chart2 = new Chart(ctx, {
