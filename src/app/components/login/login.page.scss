@@ -41,14 +41,14 @@
 
 
 ion-title {
-
+/*
   color: white;
 
   width: 90px;
 
-  margin-left: auto;
+  margin-left: auto;*/
 
-  margin-right: 8px;
+  margin-right: auto;
 
 }
 
@@ -117,7 +117,47 @@ h2 {
   /************************************************/
 
   
-   
+   /***********************************************/
+
+.contenedor{
+
+display: flex;
+width: 400px;
+height: 40px;
+color: white;
+font-size: 28px;
+line-height: 40px;
+overflow: hidden;
+}
+
+ul{
+  list-style: none;
+  padding-left: 10px;
+  animation:cambiar 20s infinite;
+}
+
+ul,p {
+margin: 0; 
+}
+
+@keyframes cambiar {
+
+0%{margin-top:0;}
+20%{margin-top:0;}
+
+25%{margin-top:-40px;}
+50%{margin-top:-40px;}
+
+55%{margin-top:-80px;}
+80%{margin-top:-80px;}
+
+85%{margin-top:-40px;}
+95%{margin-top:-40px;}
+
+
+}
+
+   /***********************************************/
     
 
 
