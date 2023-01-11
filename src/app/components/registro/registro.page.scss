@@ -2,22 +2,20 @@
   align-items: center;
   justify-content: center;
   display: grid;
-
-
-
+  grid-template-columns: 100%;
 }
 
 .iconEye {
   font-size: 24px;
   vertical-align: middle;
-
-
 }
 
 .registerForm {
   margin-bottom: 10px;
+}
 
-
+.card-subtitle {
+  text-align: center;
 }
 
 // * {
@@ -38,12 +36,13 @@ ion-card-title {
 
 }
 
- ion-title{
+ion-title {
 
-color:white;
+  color: white;
 
-width: 90px;
+  width: 90px;
 
-margin-left:auto;
+  margin-left: auto;
 
-margin-right:8px;}
+  margin-right: 8px;
+}
