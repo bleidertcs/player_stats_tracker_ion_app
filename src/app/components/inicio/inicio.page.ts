@@ -116,6 +116,7 @@ interface Players2 {
 })
 export class InicioPage implements OnInit {
 
+
   teams1: selectTeam1[] = []
   teams2: selectTeam2[] = []
   squads1: selectSquad1[] = []
@@ -139,8 +140,7 @@ export class InicioPage implements OnInit {
       idTeams2: new FormControl('', [Validators.required, e => this.loadSquads2(e)]),
       idSquad1: new FormControl('', [Validators.required, e => this.loadPlayers1(e)]),
       idSquad2: new FormControl('', [Validators.required, e => this.loadPlayers2(e)]),
-    });
-  }
+    });}
 
   ngOnInit() {
     this.footballTeams1();

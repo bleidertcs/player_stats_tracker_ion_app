@@ -25,9 +25,13 @@ const routes: Routes = [
     path: 'inicio',
     loadChildren: () => import('./components/inicio/inicio.module').then(m => m.InicioPageModule),
     canActivate: [IngresadoGuard]
+  },
+  {
+    path: 'logout',
+    loadChildren: () => import('./components/logout/logout.module').then( m => m.LogoutPageModule)
   }
 
-
+ 
 ];
 @NgModule({
   imports: [
