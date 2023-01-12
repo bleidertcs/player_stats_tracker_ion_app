@@ -54,7 +54,7 @@ body {
   font-family: "Work Sans", sans-serif;
   letter-spacing: 2vmin;
   background: rgb(0, 0, 0);
-  display: flex;  
+  display: flex;
   height: 100vh;
   width: 100vw;
   align-items: center;
@@ -69,12 +69,12 @@ h2 {
 }
 
 .border {
-  color: rgb(0, 153, 255);  
+  color: rgb(0, 153, 255);
   text-shadow:
-    -1px -1px 0 rgb(7, 7, 7), 
+    -1px -1px 0 rgb(7, 7, 7),
     1px -1px 0 rgb(4, 4, 4),
     -1px 1px 0 rgb(3, 3, 3),
-    1px 1px 0 rgb(1, 1, 1);  
+    1px 1px 0 rgb(1, 1, 1);
 }
 
 .wave {
@@ -91,7 +91,9 @@ h2 {
 }
 
 @keyframes wave {
-  0%, 100% {
+
+  0%,
+  100% {
     clip-path: polygon(0% 47%, 10% 48%, 33% 54%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
   }
 
@@ -101,11 +103,69 @@ h2 {
 }
 
 
-.data-container{
-     
-  height:20vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+.data-container {
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 20px;
+}
+
+.contenedor {
+  display: flex;
+  width: 400px;
+  height: 40px;
+  color: white;
+  // font-size: 28px;
+  line-height: 40px;
+  overflow: hidden;
+  justify-content: center;
+}
+
+ul {
+  list-style: none;
+  padding-left: 10px;
+  animation: cambiar 20s infinite;
+}
+
+ul,
+p {
+  margin: 0;
+}
+
+@keyframes cambiar {
+
+  0% {
+    margin-top: 0;
+  }
+
+  20% {
+    margin-top: 0;
+  }
+
+  25% {
+    margin-top: -40px;
+  }
+
+  50% {
+    margin-top: -40px;
+  }
+
+  55% {
+    margin-top: -80px;
+  }
+
+  80% {
+    margin-top: -80px;
+  }
+
+  85% {
+    margin-top: -40px;
+  }
+
+  95% {
+    margin-top: -40px;
+  }
+
+
 }
