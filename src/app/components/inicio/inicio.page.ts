@@ -140,7 +140,8 @@ export class InicioPage implements OnInit {
       idTeams2: new FormControl('', [Validators.required, e => this.loadSquads2(e)]),
       idSquad1: new FormControl('', [Validators.required, e => this.loadPlayers1(e)]),
       idSquad2: new FormControl('', [Validators.required, e => this.loadPlayers2(e)]),
-    });}
+    });
+  }
 
   ngOnInit() {
     this.footballTeams1();
@@ -259,7 +260,9 @@ export class InicioPage implements OnInit {
   async logout() {
     await loadingSpinner(this.loadingCtrl)
 
-    this.authService.call(null, 'logout', 'POST', false).subscribe({
+    let data = this.authService.getIdUser()
+
+    this.authService.call(data, 'logout', 'POST', false).subscribe({
       next: (response) => {
         console.log(response)
         if (response.status === 'SUCCESS') {
