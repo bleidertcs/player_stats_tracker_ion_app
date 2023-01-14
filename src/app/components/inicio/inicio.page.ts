@@ -202,7 +202,7 @@ export class InicioPage implements OnInit {
     this.chart1 = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: ['Shots', 'Goals', 'Passes', 'Tackles', 'Dribbles'],
+        labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
         datasets: [{
           // label: '# of Votes',
           data: dataChart,
@@ -239,7 +239,7 @@ export class InicioPage implements OnInit {
     this.chart2 = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: ['Shots', 'Goals', 'Passes', 'Tackles', 'Dribbles'],
+        labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
         datasets: [{
           // label: '# of Votes',
           data: dataChart2,
@@ -278,7 +278,7 @@ export class InicioPage implements OnInit {
 
           alert({
             title: response.status,
-            text: 'Error logout',
+            text: response.data,
             button: ['Cerrar'],
             alertController: this.alertController
           })

@@ -110,25 +110,5 @@ export class LoginPage implements OnInit {
         })
       }
     })
-
-    // let f = this.formularioLogin.value;
-
-    // let usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
-
-
-    // if (f.email != undefined && f.password != undefined) {
-    //   // localStorage.setItem('ingresado', 'true');
-    //   this.loadingCtrl.dismiss();
-    //   this.navCtrl.navigateRoot('inicio');
-    // } else {
-    //   const alert = await this.alertController.create({
-    //     header: 'Datos incorrectos',
-    //     message: 'Los datos que ingresaste son incorrectos.',
-    //     buttons: ['Aceptar']
-    //   });
-
-    //   await alert.present();
-    //   this.loadingCtrl.dismiss();
-    // }
   }
 }

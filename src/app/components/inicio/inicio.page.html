@@ -80,7 +80,8 @@
           <div>Altura: {{ player.height }}</div>
           <div>Peso: {{ player.weight }}</div>
           <div>Liga: {{ player.league }}</div>
-          <div>Position: {{ player.position }}</div>
+          <div>Position: {{ player.position === 'Defender' ? 'Defensa' : player.position === 'Goalkeeper' ? 'Portero' :
+            player.position === 'Midfielder' ? 'Centrocampista' : 'Delantero' }}</div>
           <div>Tiros: {{ player.shots.total === null ? 0 : player.shots.total }} - {{ player.shots.on === null ? 0 :
             player.shots.on }} </div>
           <div>Goles: {{ player.goals.total === null ? 0 : player.goals.total }} - {{ player.goals.assists === null ? 0
@@ -114,7 +115,8 @@
           <div>Altura: {{ player.height }}</div>
           <div>Peso: {{ player.weight }}</div>
           <div>Liga: {{ player.league }}</div>
-          <div>Position: {{ player.position }}</div>
+          <div>Position: {{ player.position === 'Defender' ? 'Defensa' : player.position === 'Goalkeeper' ? 'Portero' :
+            player.position === 'Midfielder' ? 'Centrocampista' : 'Delantero' }}</div>
           <div>Tiros: {{ player.shots.total === null ? 0 : player.shots.total }} - {{ player.shots.on === null ? 0 :
             player.shots.on }} </div>
           <div>Goles: {{ player.goals.total === null ? 0 : player.goals.total }} - {{ player.goals.assists === null ? 0
