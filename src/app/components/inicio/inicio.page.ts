@@ -260,9 +260,11 @@ export class InicioPage implements OnInit {
   async logout() {
     await loadingSpinner(this.loadingCtrl)
 
-    let data = this.authService.getIdUser()
+    let data = {
+      idUser: this.authService.getIdUser()
+    }
 
-    this.authService.call(data, 'logout', 'POST', false).subscribe({
+    this.authService.call(data, 'logout', 'POST', true).subscribe({
       next: (response) => {
         console.log(response)
         if (response.status === 'SUCCESS') {
@@ -273,6 +275,13 @@ export class InicioPage implements OnInit {
         } else {
           console.log(response)
           this.loadingCtrl.dismiss()
+
+          alert({
+            title: response.status,
+            text: 'Error logout',
+            button: ['Cerrar'],
+            alertController: this.alertController
+          })
         }
       },
       error: (error) => {
@@ -290,7 +299,7 @@ export class InicioPage implements OnInit {
   }
 
   footballTeams1() {
-    this.authService.call(null, 'teams', 'GET', false).subscribe({
+    this.authService.call(null, 'teams', 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
           response.data.map((e: { teamID: any; name: any; }) => {
@@ -317,7 +326,7 @@ export class InicioPage implements OnInit {
   }
 
   footballTeams2() {
-    this.authService.call(null, 'teams', 'GET', false).subscribe({
+    this.authService.call(null, 'teams', 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
           response.data.map((e: { teamID: any; name: any; }) => {
@@ -346,7 +355,7 @@ export class InicioPage implements OnInit {
   async squad1(teamID: any) {
     await loadingSpinner(this.loadingCtrl)
 
-    this.authService.call(null, `squad/${teamID}`, 'GET', false).subscribe({
+    this.authService.call(null, `squad/${teamID}`, 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
           response.data.players.map((e: { id: any; name: any; }) => {
@@ -378,7 +387,7 @@ export class InicioPage implements OnInit {
   async squad2(teamID: any) {
     await loadingSpinner(this.loadingCtrl)
 
-    this.authService.call(null, `squad/${teamID}`, 'GET', false).subscribe({
+    this.authService.call(null, `squad/${teamID}`, 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
           response.data.players.map((e: { id: any; name: any; }) => {
@@ -410,7 +419,7 @@ export class InicioPage implements OnInit {
   async player1(playerId: any) {
     await loadingSpinner(this.loadingCtrl);
 
-    this.authService.call(null, `player/${playerId}/2022/299`, 'GET', false).subscribe({
+    this.authService.call(null, `player/${playerId}/2022/299`, 'GET', true).subscribe({
       next: (response) => {
         console.log(response)
         if (response.status === 'SUCCESS') {
@@ -493,7 +502,7 @@ export class InicioPage implements OnInit {
   async player2(playerId: any) {
     await loadingSpinner(this.loadingCtrl);
 
-    this.authService.call(null, `player/${playerId}/2022/299`, 'GET', false).subscribe({
+    this.authService.call(null, `player/${playerId}/2022/299`, 'GET', true).subscribe({
       next: (response) => {
         console.log(response)
         if (response.status === 'SUCCESS') {
