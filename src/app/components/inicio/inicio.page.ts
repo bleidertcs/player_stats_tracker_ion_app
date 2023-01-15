@@ -19,11 +19,13 @@ interface selectTeam2 {
 interface selectSquad1 {
   value: number;
   viewValue: string;
+  number: number
 }
 
 interface selectSquad2 {
   value: number;
   viewValue: string;
+  number: number
 }
 
 interface Players1 {
@@ -115,7 +117,6 @@ interface Players2 {
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit {
-
 
   teams1: selectTeam1[] = []
   teams2: selectTeam2[] = []
@@ -257,6 +258,19 @@ export class InicioPage implements OnInit {
 
   }
 
+  selectDisabled(list1: any, list2: any) {
+    console.log('lista1', list1);
+    console.log('lista2', list2);
+    if (list1[0] === undefined || list1[0] === null || list2[0] === undefined || list2[0] === null) {
+      this.formTeams.get('idSquad1')?.disable()
+      this.formTeams.get('idSquad2')?.disable()
+    } else {
+      this.formTeams.get('idSquad1')?.enable()
+      this.formTeams.get('idSquad2')?.enable()
+    }
+  }
+
+
   async logout() {
     await loadingSpinner(this.loadingCtrl)
 
@@ -358,13 +372,16 @@ export class InicioPage implements OnInit {
     this.authService.call(null, `squad/${teamID}`, 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
-          response.data.players.map((e: { id: any; name: any; }) => {
+          response.data.players.map((e: { id: any; name: any; number: any }) => {
             this.squads1.push({
               value: e.id,
               viewValue: e.name,
+              number: e.number
             })
           })
           this.loadingCtrl.dismiss();
+
+          // this.selectDisabled(this.squads1, this.squads2)
         } else {
           console.log(response)
           this.loadingCtrl.dismiss();
@@ -390,13 +407,16 @@ export class InicioPage implements OnInit {
     this.authService.call(null, `squad/${teamID}`, 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
-          response.data.players.map((e: { id: any; name: any; }) => {
+          response.data.players.map((e: { id: any; name: any; number: any }) => {
             this.squads2.push({
               value: e.id,
               viewValue: e.name,
+              number: e.number
             })
           })
           this.loadingCtrl.dismiss();
+
+          // this.selectDisabled(this.squads1, this.squads2)
         } else {
           console.log(response)
           this.loadingCtrl.dismiss();
