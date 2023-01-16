@@ -19,11 +19,13 @@ interface selectTeam2 {
 interface selectSquad1 {
   value: number;
   viewValue: string;
+  number: number
 }
 
 interface selectSquad2 {
   value: number;
   viewValue: string;
+  number: number
 }
 
 interface Players1 {
@@ -116,7 +118,6 @@ interface Players2 {
 })
 export class InicioPage implements OnInit {
 
-
   teams1: selectTeam1[] = []
   teams2: selectTeam2[] = []
   squads1: selectSquad1[] = []
@@ -202,7 +203,7 @@ export class InicioPage implements OnInit {
     this.chart1 = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: ['Shots', 'Goals', 'Passes', 'Tackles', 'Dribbles'],
+        labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
         datasets: [{
           // label: '# of Votes',
           data: dataChart,
@@ -239,7 +240,7 @@ export class InicioPage implements OnInit {
     this.chart2 = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: ['Shots', 'Goals', 'Passes', 'Tackles', 'Dribbles'],
+        labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
         datasets: [{
           // label: '# of Votes',
           data: dataChart2,
@@ -257,12 +258,27 @@ export class InicioPage implements OnInit {
 
   }
 
+  selectDisabled(list1: any, list2: any) {
+    console.log('lista1', list1);
+    console.log('lista2', list2);
+    if (list1[0] === undefined || list1[0] === null || list2[0] === undefined || list2[0] === null) {
+      this.formTeams.get('idSquad1')?.disable()
+      this.formTeams.get('idSquad2')?.disable()
+    } else {
+      this.formTeams.get('idSquad1')?.enable()
+      this.formTeams.get('idSquad2')?.enable()
+    }
+  }
+
+
   async logout() {
     await loadingSpinner(this.loadingCtrl)
 
-    let data = this.authService.getIdUser()
+    let data = {
+      idUser: this.authService.getIdUser()
+    }
 
-    this.authService.call(data, 'logout', 'POST', false).subscribe({
+    this.authService.call(data, 'logout', 'POST', true).subscribe({
       next: (response) => {
         console.log(response)
         if (response.status === 'SUCCESS') {
@@ -273,6 +289,13 @@ export class InicioPage implements OnInit {
         } else {
           console.log(response)
           this.loadingCtrl.dismiss()
+
+          alert({
+            title: response.status,
+            text: response.data,
+            button: ['Cerrar'],
+            alertController: this.alertController
+          })
         }
       },
       error: (error) => {
@@ -290,7 +313,7 @@ export class InicioPage implements OnInit {
   }
 
   footballTeams1() {
-    this.authService.call(null, 'teams', 'GET', false).subscribe({
+    this.authService.call(null, 'teams', 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
           response.data.map((e: { teamID: any; name: any; }) => {
@@ -317,7 +340,7 @@ export class InicioPage implements OnInit {
   }
 
   footballTeams2() {
-    this.authService.call(null, 'teams', 'GET', false).subscribe({
+    this.authService.call(null, 'teams', 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
           response.data.map((e: { teamID: any; name: any; }) => {
@@ -346,16 +369,19 @@ export class InicioPage implements OnInit {
   async squad1(teamID: any) {
     await loadingSpinner(this.loadingCtrl)
 
-    this.authService.call(null, `squad/${teamID}`, 'GET', false).subscribe({
+    this.authService.call(null, `squad/${teamID}`, 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
-          response.data.players.map((e: { id: any; name: any; }) => {
+          response.data.players.map((e: { id: any; name: any; number: any }) => {
             this.squads1.push({
               value: e.id,
               viewValue: e.name,
+              number: e.number
             })
           })
           this.loadingCtrl.dismiss();
+
+          // this.selectDisabled(this.squads1, this.squads2)
         } else {
           console.log(response)
           this.loadingCtrl.dismiss();
@@ -378,16 +404,19 @@ export class InicioPage implements OnInit {
   async squad2(teamID: any) {
     await loadingSpinner(this.loadingCtrl)
 
-    this.authService.call(null, `squad/${teamID}`, 'GET', false).subscribe({
+    this.authService.call(null, `squad/${teamID}`, 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
-          response.data.players.map((e: { id: any; name: any; }) => {
+          response.data.players.map((e: { id: any; name: any; number: any }) => {
             this.squads2.push({
               value: e.id,
               viewValue: e.name,
+              number: e.number
             })
           })
           this.loadingCtrl.dismiss();
+
+          // this.selectDisabled(this.squads1, this.squads2)
         } else {
           console.log(response)
           this.loadingCtrl.dismiss();
@@ -410,7 +439,7 @@ export class InicioPage implements OnInit {
   async player1(playerId: any) {
     await loadingSpinner(this.loadingCtrl);
 
-    this.authService.call(null, `player/${playerId}/2022/299`, 'GET', false).subscribe({
+    this.authService.call(null, `player/${playerId}/2022/299`, 'GET', true).subscribe({
       next: (response) => {
         console.log(response)
         if (response.status === 'SUCCESS') {
@@ -493,7 +522,7 @@ export class InicioPage implements OnInit {
   async player2(playerId: any) {
     await loadingSpinner(this.loadingCtrl);
 
-    this.authService.call(null, `player/${playerId}/2022/299`, 'GET', false).subscribe({
+    this.authService.call(null, `player/${playerId}/2022/299`, 'GET', true).subscribe({
       next: (response) => {
         console.log(response)
         if (response.status === 'SUCCESS') {

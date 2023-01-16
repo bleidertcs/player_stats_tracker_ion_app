@@ -51,6 +51,7 @@ export class AuthService {
     switch (method.toUpperCase()) {
       case 'GET':
         if (status === true) {
+          this.headers = this.headers.set('auth-token', this.modelSession.token);
           return this.httpClient.get(environment.apiUrl + route, { headers: this.headers });
         } else {
           return this.httpClient.get(environment.apiUrl + route, { headers: this.headers });
@@ -58,6 +59,7 @@ export class AuthService {
       case 'POST':
         if (data != null) {
           if (status === true) {
+            this.headers = this.headers.set('auth-token', this.modelSession.token);
             this.json = JSON.stringify(data);
             return this.httpClient.post(environment.apiUrl + route, this.json, { headers: this.headers });
           } else {
@@ -66,6 +68,7 @@ export class AuthService {
           }
         } else {
           if (status === true) {
+            this.headers = this.headers.set('auth-token', this.modelSession.token);
             this.json = {};
             return this.httpClient.post(environment.apiUrl + route, this.json, { headers: this.headers });
           } else {
