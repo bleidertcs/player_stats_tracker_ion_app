@@ -316,9 +316,9 @@ export class InicioPage implements OnInit {
     this.authService.call(null, 'teams', 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
-          response.data.map((e: { teamID: any; name: any; }) => {
+          response.data.map((e: { id: any; name: any; }) => {
             this.teams1.push({
-              value: e.teamID,
+              value: e.id,
               viewValue: e.name,
             })
           })
@@ -343,9 +343,9 @@ export class InicioPage implements OnInit {
     this.authService.call(null, 'teams', 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
-          response.data.map((e: { teamID: any; name: any; }) => {
+          response.data.map((e: { id: any; name: any; }) => {
             this.teams2.push({
-              value: e.teamID,
+              value: e.id,
               viewValue: e.name,
             })
           })
