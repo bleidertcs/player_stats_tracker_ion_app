@@ -28,10 +28,12 @@ const routes: Routes = [
   },
   {
     path: 'logout',
-    loadChildren: () => import('./components/logout/logout.module').then( m => m.LogoutPageModule)
+    loadChildren: () => import('./components/logout/logout.module').then(m => m.LogoutPageModule)
+  },
+  {
+    path: 'statistics',
+    loadChildren: () => import('./components/statistics/statistics.module').then(m => m.StatisticsPageModule)
   }
-
- 
 ];
 @NgModule({
   imports: [

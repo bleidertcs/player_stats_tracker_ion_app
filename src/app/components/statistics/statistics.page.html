@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>SIFA</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Estadisticas</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -150,7 +153,6 @@
   <ion-toolbar color="primary">
     <ion-buttons slot="end">
       <ion-button (click)="logout()">Cerrar Sesión</ion-button>
-      <ion-button [routerLink]="['/statistics']">test</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

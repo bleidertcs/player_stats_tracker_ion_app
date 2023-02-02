@@ -111,12 +111,13 @@ interface Players2 {
     red: any
   },
 }
+
 @Component({
-  selector: 'app-inicio',
-  templateUrl: './inicio.page.html',
-  styleUrls: ['./inicio.page.scss'],
+  selector: 'app-statistics',
+  templateUrl: './statistics.page.html',
+  styleUrls: ['./statistics.page.scss'],
 })
-export class InicioPage implements OnInit {
+export class StatisticsPage implements OnInit {
 
   teams1: selectTeam1[] = []
   teams2: selectTeam2[] = []
@@ -608,4 +609,5 @@ export class InicioPage implements OnInit {
       }
     })
   }
+
 }
