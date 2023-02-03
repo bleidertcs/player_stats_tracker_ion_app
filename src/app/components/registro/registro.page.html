@@ -89,8 +89,8 @@
               [type]="passwordVisibility ? 'password' : 'text'" maxlength="20">
             </ion-input>
             <ion-button slot="end" fill="clear" (click)="showPassword()">
-              <ion-icon *ngIf="passwordVisibility == false" name="eye-outline" class="iconEye"></ion-icon>
-              <ion-icon *ngIf="passwordVisibility == true" name="eye-off-outline" class="iconEye"></ion-icon>
+              <ion-icon *ngIf="passwordVisibility === false" name="eye-outline" class="iconEye"></ion-icon>
+              <ion-icon *ngIf="passwordVisibility === true" name="eye-off-outline" class="iconEye"></ion-icon>
             </ion-button>
             <ion-note *ngIf="formularioRegistro.controls['password'].hasError('pattern')" slot="error">
               Contraseña inválido
