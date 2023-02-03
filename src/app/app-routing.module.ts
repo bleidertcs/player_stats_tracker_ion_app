@@ -33,7 +33,12 @@ const routes: Routes = [
   {
     path: 'statistics',
     loadChildren: () => import('./components/statistics/statistics.module').then(m => m.StatisticsPageModule)
+  },
+  {
+    path: 'add-team',
+    loadChildren: () => import('./components/add-team/add-team.module').then(m => m.AddTeamPageModule)
   }
+
 ];
 @NgModule({
   imports: [

@@ -16,14 +16,16 @@ export class InicioPage implements OnInit {
 
   slider = [
     {
-      img: 'assets/icon/statistics.jpg',
+      img: 'assets/icon/statistics',
       title: 'Welcome',
-      description: 'The ionic conference app is a practical preview of the ionic framework in action, and a demonstration of proper code use.'
+      description: 'The ionic conference app is a practical preview of the ionic framework in action, and a demonstration of proper code use.',
+      route: '/statistics',
     },
     {
-      img: 'assets/icon/add.jpg',
+      img: 'assets/icon/add',
       title: 'What is Ionic?',
-      description: 'Ionic Framework is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.'
+      description: 'Ionic Framework is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.',
+      route: '/add-team',
     },
   ]
 

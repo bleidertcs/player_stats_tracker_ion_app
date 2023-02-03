@@ -6,26 +6,40 @@
 
 <ion-content>
   <ion-slides pager="true">
-    <ion-slide *ngFor="let slice of slider">
+    <!-- <ion-slide *ngFor="let slice of slider">
       <div class="slide">
         <img src="slide.img" />
         <h2>{{ slice.title }}</h2>
         <p>
           {{ slice.description }}
         </p>
-        <ion-button fill="clear" [routerLink]="['/statistics']">Comparar<ion-icon slot="end"
+        <ion-button fill="clear" [routerLink]="['/add-team']">Comparar<ion-icon slot="end"
             name="arrow-forward"></ion-icon></ion-button>
       </div>
+    </ion-slide> -->
+
+    <ion-slide>
+      <img src="assets/icon/statistics.jpg" />
+      <h2>Visualizar estadísticas</h2>
+      <p>
+        The ionic conference app is a practical preview of the ionic framework in action, and a demonstration of proper
+        code
+        use.
+      </p>
+      <ion-button fill="clear" [routerLink]="['/statistics']">Comparar<ion-icon slot="end"
+          name="arrow-forward"></ion-icon></ion-button>
     </ion-slide>
 
-    <!-- <ion-slide>
+    <ion-slide>
       <img src="assets/icon/add.jpg" />
-      <h2>What is Ionic?</h2>
+      <h2>Agregar Equipo</h2>
       <p>
         <b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps
         with web technologies like HTML, CSS, and JavaScript.
       </p>
-    </ion-slide> -->
+      <ion-button fill="clear" [routerLink]="['/add-team']">Agregar<ion-icon slot="end"
+          name="arrow-forward"></ion-icon></ion-button>
+    </ion-slide>
 
     <!-- <ion-slide>
       <img src="./slide-3.png" />
