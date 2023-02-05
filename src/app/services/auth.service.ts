@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { ApiCalled } from '../models/api-called.models';
 import { FootballPlayers, FootballSquads, FootballTeams } from '../models/football.models';
 import { Session } from '../models/login.models';
+import { Users } from '../models/users.models';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,10 @@ export class AuthService {
     profile: this.getProfile(),
     email: this.getEmail(),
   };
+
+  public modelUsers: Users = {
+    userList: this.getUsersList(),
+  }
 
   public modelFootballTeams: FootballTeams = {
     team1: this.getListFootballTeams1(),
@@ -76,6 +81,26 @@ export class AuthService {
             return this.httpClient.post(environment.apiUrl + route, this.json, { headers: this.headers });
           }
         }
+      case 'PATCH':
+        if (data != null) {
+          if (status === true) {
+            this.headers = this.headers.set('auth-token', this.modelSession.token);
+            this.json = JSON.stringify(data);
+            return this.httpClient.patch(environment.apiUrl + route, this.json, { headers: this.headers });
+          } else {
+            this.json = JSON.stringify(data);
+            return this.httpClient.patch(environment.apiUrl + route, this.json, { headers: this.headers });
+          }
+        } else {
+          if (status === true) {
+            this.headers = this.headers.set('auth-token', this.modelSession.token);
+            this.json = {};
+            return this.httpClient.patch(environment.apiUrl + route, this.json, { headers: this.headers });
+          } else {
+            this.json = {};
+            return this.httpClient.patch(environment.apiUrl + route, this.json, { headers: this.headers });
+          }
+        }
       case 'DELETE':
         if (status === true) {
           this.headers = this.headers.set('auth-token', this.modelSession.token);
@@ -93,6 +118,9 @@ export class AuthService {
 
   setModelSesionInSession(modelSession: Session) {
     sessionStorage.setItem('modelSession', JSON.stringify(modelSession));
+  }
+  setModelUsers(modelUsers: Users) {
+    sessionStorage.setItem('modelUsers', JSON.stringify(modelUsers));
   }
   setModelFootballTeams(modelFootballTeams: FootballTeams) {
     sessionStorage.setItem('modelFootballTeams', JSON.stringify(modelFootballTeams))
@@ -112,6 +140,9 @@ export class AuthService {
   getModelSesion() {
     return sessionStorage.getItem('modelSession') === null ? null : JSON.parse(sessionStorage.getItem('modelSession') || '')
   }
+  getModelUsers() {
+    return sessionStorage.getItem('modelUsers') === null ? null : JSON.parse(sessionStorage.getItem('modelUsers') || '')
+  }
   getModelFootballTeams() {
     return sessionStorage.getItem('modelFootballTeams') === null ? null : JSON.parse(sessionStorage.getItem('modelFootballTeams') || '');
   }
@@ -130,6 +161,7 @@ export class AuthService {
   setIdUser(idUser: number) { this.modelSession.idUser = idUser }
   setProfile(profile: any) { this.modelSession.profile = profile }
   setEmail(email: string) { this.modelSession.email = email }
+  setUsersList(list: object[]) { this.modelUsers.userList = list }
   setListFootballTeams1(list: object[]) { this.modelFootballTeams.team1 = list }
   setListFootballTeams2(list: object[]) { this.modelFootballTeams.team2 = list }
   setListFootballSquads1(list: object[]) { this.modelFootballSquads.squad1 = list }
@@ -142,6 +174,7 @@ export class AuthService {
   getIdUser() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().idUser }
   getProfile() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().profile }
   getEmail() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().email }
+  getUsersList() { return this.getModelUsers() === null || this.getModelUsers() === undefined ? null : this.getModelUsers().userList }
   getListFootballTeams1() { return this.getModelFootballTeams() === null || this.getModelFootballTeams() === undefined ? null : this.getModelFootballTeams().teams1 }
   getListFootballTeams2() { return this.getModelFootballTeams() === null || this.getModelFootballTeams() === undefined ? null : this.getModelFootballTeams().teams2 }
   getListFootballSquads1() { return this.getModelFootballSquads() === null || this.getModelFootballSquads() === undefined ? null : this.getModelFootballSquads().squad1 }
