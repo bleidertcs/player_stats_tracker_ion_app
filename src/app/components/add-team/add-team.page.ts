@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
+import { alert } from 'src/app/shared/alert/alert.component';
 
 @Component({
   selector: 'app-add-team',
@@ -38,7 +39,12 @@ export class AddTeamPage implements OnInit {
     this.authService.call(data, 'addTeam', 'POST', false).subscribe({
       next: async (response) => {
         if (response.status === 'SUCCESS') {
-          console.log(response);
+          alert({
+            title: response.status,
+            text: 'Equipo agregado exitosamente',
+            button: ['Cerrar'],
+            alertController: this.alertController
+          })
 
           this.loadingCtrl.dismiss();
         } else if (response.status === 'Error') {
