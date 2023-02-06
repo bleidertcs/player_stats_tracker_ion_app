@@ -192,71 +192,74 @@ export class StatisticsPage implements OnInit {
     const ctx = document.getElementById('chart1') as ChartItem;
 
     let dataChart = [
-      this.players1.map(e => e.shots.total === null ? 1 : e.shots.total),
-      this.players1.map(e => e.goals.total === null ? 1 : e.goals.total),
-      this.players1.map(e => e.passes.total === null ? 1 : e.passes.total),
-      this.players1.map(e => e.tackles.total === null ? 1 : e.tackles.total),
-      this.players1.map(e => e.dribbles.success === null ? 1 : e.dribbles.success)
+      this.players1.map(e => e.shots.total === null ? 3 : e.shots.total)[0],
+      this.players1.map(e => e.goals.total === null ? 1 : e.goals.total)[0],
+      this.players1.map(e => e.passes.total === null ? 5 : e.passes.total)[0],
+      this.players1.map(e => e.tackles.total === null ? 4 : e.tackles.total)[0],
+      this.players1.map(e => e.dribbles.success === null ? 2 : e.dribbles.success)[0]
     ]
 
     console.log(dataChart)
 
     this.chart1 = new Chart(ctx, {
-      type: 'doughnut',
+      type: 'line',
       data: {
         labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
         datasets: [{
-          // label: '# of Votes',
+          label: this.players1.map(e => e.viewValue)[0],
           data: dataChart,
-          borderWidth: 1
+          // borderWidth: 1
         }]
       },
-      // options: {
-      //   scales: {
-      //     y: {
-      //       beginAtZero: true
-      //     }
-      //   },
-      //   plugins: {
-      //       subtitle: {
-      //           display: true,
-      //           text: 'Custom Chart Subtitle'
-      //       }
-      //   }
-      // }
     });
+
+    // this.chart1 = new Chart(ctx, {
+    //   type: 'doughnut',
+    //   data: {
+    //     labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
+    //     datasets: [{
+    //       // label: '# of Votes',
+    //       data: dataChart,
+    //       borderWidth: 1
+    //     }]
+    //   },
+    // });
   }
 
   generateChartPlayer2() {
     const ctx = document.getElementById('chart2') as ChartItem;
 
     let dataChart2 = [
-      this.players2.map(e => e.shots.total === null ? 1 : e.shots.total),
-      this.players2.map(e => e.goals.total === null ? 1 : e.goals.total),
-      this.players2.map(e => e.passes.total === null ? 1 : e.passes.total),
-      this.players2.map(e => e.tackles.total === null ? 1 : e.tackles.total),
-      this.players2.map(e => e.dribbles.success === null ? 1 : e.dribbles.success)
+      this.players2.map(e => e.shots.total === null ? 6 : e.shots.total)[0],
+      this.players2.map(e => e.goals.total === null ? 2 : e.goals.total)[0],
+      this.players2.map(e => e.passes.total === null ? 4 : e.passes.total)[0],
+      this.players2.map(e => e.tackles.total === null ? 5 : e.tackles.total)[0],
+      this.players2.map(e => e.dribbles.success === null ? 3 : e.dribbles.success)[0]
     ]
 
     this.chart2 = new Chart(ctx, {
-      type: 'doughnut',
+      type: 'line',
       data: {
         labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
         datasets: [{
-          // label: '# of Votes',
+          label: this.players2.map(e => e.viewValue)[0],
           data: dataChart2,
-          borderWidth: 1
+          // borderWidth: 1
         }]
       },
-      // options: {
-      //   scales: {
-      //     y: {
-      //       beginAtZero: true
-      //     }
-      //   }
-      // }
     });
 
+    // this.chart2 = new Chart(ctx, {
+    //   type: 'doughnut',
+    //   data: {
+    //     labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
+    //     datasets: [{
+    //       // label: '# of Votes',
+    //       data: dataChart2,
+    //       borderWidth: 1
+    //     }]
+    //   },
+    // });
   }
 
   selectDisabled(list1: any, list2: any) {

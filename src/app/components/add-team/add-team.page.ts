@@ -39,14 +39,14 @@ export class AddTeamPage implements OnInit {
     this.authService.call(data, 'addTeam', 'POST', false).subscribe({
       next: async (response) => {
         if (response.status === 'SUCCESS') {
+          this.loadingCtrl.dismiss();
+
           alert({
             title: response.status,
             text: 'Equipo agregado exitosamente',
             button: ['Cerrar'],
             alertController: this.alertController
           })
-
-          this.loadingCtrl.dismiss();
         } else if (response.status === 'Error') {
           console.log(response);
           this.loadingCtrl.dismiss();
