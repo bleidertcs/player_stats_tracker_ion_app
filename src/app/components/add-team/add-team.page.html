@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Agregar Equipo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div>
+    <form [formGroup]="addTeamForm">
+      <ion-card color="secondary">
+        <div>Nombre del Equipo</div>
+        <ion-row>
+          <ion-col col-6>
+            <ion-item class="loginForm">
+              <ion-label position="floating">Nombre del Equipo</ion-label>
+              <ion-input formControlName="teamName" maxlength="50"></ion-input>
+              <!-- <ion-icon name="mail-outline" slot="end" fill="clear"></ion-icon> -->
+              <ion-note
+                *ngIf="addTeamForm.controls['teamName'].hasError('required') && addTeamForm.get('teamName')?.touched"
+                slot="error">
+                Nombre del Equipo es requerido
+              </ion-note>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </form>
+
+    <ion-button [disabled]="addTeamForm.invalid" (click)="addTeam(addTeamForm.value)" class="loginButton">
+      Agregar
+    </ion-button>
+  </div>
+</ion-content>

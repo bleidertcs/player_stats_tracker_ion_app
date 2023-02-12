@@ -28,10 +28,20 @@ const routes: Routes = [
   },
   {
     path: 'logout',
-    loadChildren: () => import('./components/logout/logout.module').then( m => m.LogoutPageModule)
+    loadChildren: () => import('./components/logout/logout.module').then(m => m.LogoutPageModule)
+  },
+  {
+    path: 'statistics',
+    loadChildren: () => import('./components/statistics/statistics.module').then(m => m.StatisticsPageModule)
+  },
+  {
+    path: 'add-team',
+    loadChildren: () => import('./components/add-team/add-team.module').then(m => m.AddTeamPageModule)
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./components/users/users.module').then(m => m.UsersPageModule)
   }
-
- 
 ];
 @NgModule({
   imports: [
