@@ -1,0 +1,22 @@
+@mixin flex($dir,$wrap,$just,$aling){
+
+display: flex;    
+
+flex-flow: $dir $wrap;
+
+justify-content: $just;
+
+align-items: $aling;
+}
+/* codigo con errores y su supuesta solucion
+@media media (){
+    
+@media screen and (max-width:480px){
+    @content;
+}}
+
+*/
+
+@media screen and (max-width: 480px) {
+    @content;
+  }

@@ -1,19 +1,167 @@
-ion-card {
-  padding: 10px;
-  background-repeat: no-repeat;
-  color: white;
-}
+/*@import '_mixins.scss';*/
 
-div {
-  text-align: center;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
 
-ion-row {
-  justify-content: space-between;
-}
+/*
 
 // * {
 //     font-family: 'segoeui';
 //   }
+
+ion-header{
+
+@include flex (row,wrap,space-between,center);
+
+  width: 100%;
+  padding: 1em;
+.h1{
+
+background-color: red;
+}
+.a{}
+.button{
+
+background-color: blue;  
+display: none;
+
+@include media(){
+
+display: block;}
+
+
+}
+.svg{
+
+width: 2em;
+
+height: 2em;
+}
+
+.nav{
+
+  background-color: yellow;
+
+ @include media(){
+
+ width: 100%; 
+
+ display: none;
+
+&.activo {
+
+display:flex;
+
+@include flex (column,nowrap,center,center);
+}
+
+ }
+
+}
+.ul{
+
+  @include flex (row,wrap,flex-end,center);
+  
+  @include media(){
+
+  flex-direction: column;  
+  }
+}
+.li{
+
+margin: 0 .5em;
+
+@include media(){}
+margin: 1em 0;
+}
+
+}*/
+
+
+/*********************************/
+:root{
+  /* Colores */
+  --negro         : #393939;
+  
+  /* Tipografía */
+  --tipo-principal   : Helvetica, Arial, sans-serif;
+  --tipo-secundaria  : Verdana;
+}
+  
+/* (Opcional) Las adaptamos al modo oscuro */
+@media (prefers-color-scheme: dark) {
+  :root{
+      --negro: #ececec;
+  }
+}
+
+/* (Opcional) Configuramos si un usuario ha activado el modo alto contraste. (WD) */
+@media (prefers-contrast: high){
+    :root{}
+}
+
+/* (Opcional) Desactivamos los animations en el caso de que el usuario haya configurado el modo sin animation */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Reseteamos los margin y paddings de todas las etiquetas */
+* , *::before , *::after{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  vertical-align: baseline;
+}
+*::before , *::after{
+  display: block;
+}
+
+/* Evitamos problemas con las imagenes */
+img , picture , video , iframe , figure{
+  max-width: 100%;
+  width: 100%;
+  display: block;
+  /* (Opcional) */ object-fit: cover;        
+  /* (Opcional) */ object-position: center center;
+}
+
+/*********************************/
+ion-header{
+
+    width: 100%;
+    background-color: orange;
+    padding: 1em;
+/*********************************************/
+  .h1{
+  
+  background-color: red;
+  }
+
+/*********************************************/
+  .a{}
+/*********************************************/
+  .button{}
+
+  /*********************************************/
+  .svg{
+  
+  width: 2em;
+
+  height: 2em;
+  }
+
+  /*********************************************/
+  .nav{
+  
+    background-color: yellow;
+  
+
+  }
+  /*********************************************/
+  .ul{}
+/*********************************************/
+  .li{}
+/*********************************************/
+}

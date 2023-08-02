@@ -1,16 +1,24 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ApiCalled } from '../models/api-called.models';
 import { FootballPlayers, FootballSquads, FootballTeams } from '../models/football.models';
 import { Session } from '../models/login.models';
 import { Users } from '../models/users.models';
+import { Route } from '@angular/router';
+import { map, filter } from 'rxjs/operators';
+import { User, UserWithToken } from '../models/user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
+
+  private user = new BehaviorSubject<UserWithToken | null>(null);
+  user$ = this.user.asObservable();
+  isLoggedIn$: Observable<boolean> = this.user$.pipe(map(Boolean));
 
   public modelSession: Session = {
     token: this.getToken(),
@@ -135,8 +143,6 @@ export class AuthService {
     sessionStorage.setItem('modelApiCalled', JSON.stringify(modelApiCalled))
   }
 
-
-
   getModelSesion() {
     return sessionStorage.getItem('modelSession') === null ? null : JSON.parse(sessionStorage.getItem('modelSession') || '')
   }
@@ -182,4 +188,9 @@ export class AuthService {
   getListFootballPlayers1() { return this.getModelFootballPlayers() === null || this.getModelFootballPlayers() === undefined ? null : this.getModelFootballPlayers().player1 }
   getListFootballPlayers2() { return this.getModelFootballPlayers() === null || this.getModelFootballPlayers() === undefined ? null : this.getModelFootballPlayers().player2 }
   getApiCalled() { return this.getModelApiCalled() === null || this.getModelApiCalled() === undefined ? null : this.getModelApiCalled().band }
+
+////////////////////////////// Codigo de prueba colocado aqui /////////
+
+
+
 }
