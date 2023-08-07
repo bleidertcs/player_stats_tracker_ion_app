@@ -62,3 +62,26 @@
       }
   }
 }
+
+.custom-card {
+     /* Cambiar el color de fondo */
+    border: 1px solid #ccc; /* Añadir un borde */
+    border-radius: 8px; /* Añadir esquinas redondeadas */
+    padding: 15px; /* Añadir espaciado interno */
+  }
+  
+  .card-header {
+    font-size: 1.5rem; /* Tamaño de fuente más grande para el encabezado */
+    margin-bottom: 10px; /* Espaciado inferior */
+    
+  }
+  
+  .team-select {
+    margin-bottom: 10px;
+    margin-left:5px;
+    margin-top:10px;
+    margin-right:5px;
+    border-radius: 8px;
+
+  }
+  

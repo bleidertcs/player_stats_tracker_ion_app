@@ -2,6 +2,7 @@ ion-card {
   padding: 10px;
   background-repeat: no-repeat;
   color: white;
+  border-radius: 8px;
 }
 
 div {
@@ -9,3 +10,20 @@ div {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+.center{
+  text-align: center; 
+  margin: auto; 
+  display: block;
+  margin-bottom: 10px;
+}
+
+.nameselect{
+
+  margin-bottom: 10px;
+    margin-left:5px;
+    margin-top:10px;
+    margin-right:5px;
+    border-radius: 8px;
+}
+

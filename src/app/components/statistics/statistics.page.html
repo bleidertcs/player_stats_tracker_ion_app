@@ -29,11 +29,12 @@
       [ngClass]="{ 'header__nav--activo' : active }">
 
       <ul class="header__ul">
-          <li class="header__li"><a href="#" class="header__a">Item 1</a></li>
-          <li class="header__li"><a href="#" class="header__a">Item 2</a></li>
-          <li class="header__li"><a href="#" class="header__a">Item 3</a></li>
-          <li class="header__li"><a href="#" class="header__a">Item 4</a></li>
-          <li class="header__li"><a href="#" class="header__a">Item 5</a></li>
+
+          <li class="header__li"><a href="/add-team"  class="header__a">Añadir equipo</a></li>
+          <li class="header__li"><a href="/statistics" class="header__a">Comparar estadisticas</a></li>
+          <li class="header__li"><a href="#" class="header__a"></a></li>
+          <li class="header__li"><a href="#" class="header__a"></a></li>
+          <li class="header__li"><a href="#" class="header__a"></a></li>
       </ul>
   </nav>
 
@@ -52,7 +53,8 @@
   <div>
 
     <form [formGroup]="formTeams">
-      <ion-card color="primary">
+<!------------------------------------------------------------->
+     <!-- <ion-card color="primary">
         <div>Equipo</div>
         <ion-row>
           <ion-col col-6>
@@ -60,11 +62,14 @@
               <ion-select interface="popover" placeholder="Seleccionar equipo" formControlName="idTeams1">
                 <ion-select-option *ngFor="let team of teams1"
                   [value]="team.value">{{team.viewValue}}</ion-select-option>
-              </ion-select>
+              </ion-select>  -->
+
               <!-- <ion-note *ngIf="formTeams.controls['idTeams'].hasError('required') && formTeams.get('idTeams')?.touched"
                       slot="error">
                       Equipo es requerido
                     </ion-note> -->
+
+               <!--      
             </ion-item>
           </ion-col>
 
@@ -73,16 +78,49 @@
               <ion-select interface="popover" placeholder="Seleccionar equipo" formControlName="idTeams2">
                 <ion-select-option *ngFor="let team of teams2"
                   [value]="team.value">{{team.viewValue}}</ion-select-option>
-              </ion-select>
+              </ion-select>-->
+
               <!-- <ion-note *ngIf="formTeams.controls['idTeams'].hasError('required') && formTeams.get('idTeams')?.touched"
                       slot="error">
                       Equipo es requerido
                     </ion-note> -->
+          <!--  </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-card>  -->
+
+      <ion-card class="custom-card" color="primary">
+        <div class="card-header">
+          Equipo
+        </div>
+        <ion-row>
+          <ion-col size="6" >
+            <ion-item class="team-select">
+              <ion-label position="floating">Seleccionar equipo</ion-label>
+              <ion-select interface="popover" formControlName="idTeams1">
+                <ion-select-option *ngFor="let team of teams1" [value]="team.value">{{team.viewValue}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+      
+          <ion-col size="6">
+            <ion-item class="team-select">
+              <ion-label position="floating">Seleccionar equipo</ion-label>
+              <ion-select interface="popover" formControlName="idTeams2">
+                <ion-select-option *ngFor="let team of teams2" [value]="team.value">{{team.viewValue}}</ion-select-option>
+              </ion-select>
             </ion-item>
           </ion-col>
         </ion-row>
       </ion-card>
+      
 
+
+
+
+
+
+<!------------------------------------------------------------->
       <ion-card color="primary" *ngIf="squads1.length !== 0 || squads2.length !== 0">
         <div>Jugador</div>
         <ion-row *ngIf="squads1.length !== 0 || squads2.length !== 0">
