@@ -1,6 +1,6 @@
 {
 	"appId": "io.ionic.starter",
-	"appName": "test-ionic",
+	"appName": "Player Stats Tracker Ion App",
 	"webDir": "www",
 	"bundledWebRuntime": false
 }
