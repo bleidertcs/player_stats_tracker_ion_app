@@ -7,109 +7,191 @@ import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 import { alert } from 'src/app/shared/alert/alert.component';
 
 interface selectTeam1 {
-  value: number;
-  viewValue: string;
+  id: number;
+  name: string;
+  country: string;
+  founded: number;
+  logo: string;
 }
 
 interface selectTeam2 {
-  value: number;
-  viewValue: string;
+  id: number;
+  name: string;
+  country: string;
+  founded: number;
+  logo: string;
 }
 
 interface selectSquad1 {
-  value: number;
-  viewValue: string;
-  number: number
+  id: number;
+  name: string;
+  age: number;
+  number: number;
+  photo: string;
 }
 
 interface selectSquad2 {
-  value: number;
-  viewValue: string;
-  number: number
+  id: number;
+  name: string;
+  age: number;
+  number: number;
+  photo: string;
 }
 
 interface Players1 {
-  value: number;
-  viewValue: string;
+  id: number;
+  name: string;
+  firstname: string;
+  lastname: string;
   age: number,
+  birth: string;
+  nationality: string;
   height: any,
   weight: any,
-  league: string,
-  position: string,
-  shots: {
+  photo: string,
+  league: {
+    name: string;
+    country: string;
+    logo: string;
+    season: number;
+  }
+  game: {
+    appearences: number,
+    lineups: number,
+    minutes: number,
+    number: number,
+    position: string,
+    rating: string,
+    captain: boolean
+  },
+  substitute: {
+    in: any,
+    out: any,
+    bench: any
+  },
+  shot: {
     total: any,
     on: any
   },
-  goals: {
+  goal: {
     total: any,
-    assists: any
+    conceded: any,
+    assists: any,
+    saves: any
   },
-  passes: {
+  passe: {
     total: any,
     key: any,
     accuracy: any
   },
-  tackles: {
+  tackle: {
     total: any,
     blocks: any,
     interceptions: any
   },
-  dribbles: {
+  duel: {
+    total: any,
+    won: any
+  },
+  dribble: {
     attempts: any,
     success: any,
     past: any
   },
-  fouls: {
+  foul: {
     drawn: any,
     committed: any
   },
-  cards: {
+  card: {
     yellow: any,
     yellowred: any,
     red: any
   },
+  penalty: {
+    won: any,
+    committed: any,
+    scored: any,
+    missed: any,
+    saved: any
+  }
 }
 
 interface Players2 {
-  value: number;
-  viewValue: string;
+  id: number;
+  name: string;
+  firstname: string;
+  lastname: string;
   age: number,
+  birth: string;
+  nationality: string;
   height: any,
   weight: any,
-  league: string,
-  position: string,
-  shots: {
+  photo: string,
+  league: {
+    name: string;
+    country: string;
+    logo: string;
+    season: number;
+  }
+  game: {
+    appearences: number,
+    lineups: number,
+    minutes: number,
+    number: number,
+    position: string,
+    rating: string,
+    captain: boolean
+  },
+  substitute: {
+    in: any,
+    out: any,
+    bench: any
+  },
+  shot: {
     total: any,
     on: any
   },
-  goals: {
+  goal: {
     total: any,
-    assists: any
+    conceded: any,
+    assists: any,
+    saves: any
   },
-  passes: {
+  passe: {
     total: any,
     key: any,
     accuracy: any
   },
-  tackles: {
+  tackle: {
     total: any,
     blocks: any,
     interceptions: any
   },
-  dribbles: {
+  duel: {
+    total: any,
+    won: any
+  },
+  dribble: {
     attempts: any,
     success: any,
     past: any
   },
-  fouls: {
+  foul: {
     drawn: any,
     committed: any
   },
-  cards: {
+  card: {
     yellow: any,
     yellowred: any,
     red: any
   },
+  penalty: {
+    won: any,
+    committed: any,
+    scored: any,
+    missed: any,
+    saved: any
+  }
 }
 
 @Component({
@@ -192,11 +274,11 @@ export class StatisticsPage implements OnInit {
     const ctx = document.getElementById('chart1') as ChartItem;
 
     let dataChart = [
-      this.players1.map(e => e.shots.total === null ? 3 : e.shots.total)[0],
-      this.players1.map(e => e.goals.total === null ? 1 : e.goals.total)[0],
-      this.players1.map(e => e.passes.total === null ? 5 : e.passes.total)[0],
-      this.players1.map(e => e.tackles.total === null ? 4 : e.tackles.total)[0],
-      this.players1.map(e => e.dribbles.success === null ? 2 : e.dribbles.success)[0]
+      this.players1.map(e => e.shot.total === null ? 3 : e.shot.total)[0],
+      this.players1.map(e => e.goal.total === null ? 1 : e.goal.total)[0],
+      this.players1.map(e => e.passe.total === null ? 5 : e.passe.total)[0],
+      this.players1.map(e => e.tackle.total === null ? 4 : e.tackle.total)[0],
+      this.players1.map(e => e.dribble.success === null ? 2 : e.dribble.success)[0]
     ]
 
     console.log(dataChart)
@@ -206,7 +288,7 @@ export class StatisticsPage implements OnInit {
       data: {
         labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
         datasets: [{
-          label: this.players1.map(e => e.viewValue)[0],
+          label: this.players1.map(e => e.name)[0],
           data: dataChart,
           // borderWidth: 1
         }]
@@ -230,11 +312,11 @@ export class StatisticsPage implements OnInit {
     const ctx = document.getElementById('chart2') as ChartItem;
 
     let dataChart2 = [
-      this.players2.map(e => e.shots.total === null ? 6 : e.shots.total)[0],
-      this.players2.map(e => e.goals.total === null ? 2 : e.goals.total)[0],
-      this.players2.map(e => e.passes.total === null ? 4 : e.passes.total)[0],
-      this.players2.map(e => e.tackles.total === null ? 5 : e.tackles.total)[0],
-      this.players2.map(e => e.dribbles.success === null ? 3 : e.dribbles.success)[0]
+      this.players2.map(e => e.shot.total === null ? 6 : e.shot.total)[0],
+      this.players2.map(e => e.goal.total === null ? 2 : e.goal.total)[0],
+      this.players2.map(e => e.passe.total === null ? 4 : e.passe.total)[0],
+      this.players2.map(e => e.tackle.total === null ? 5 : e.tackle.total)[0],
+      this.players2.map(e => e.dribble.success === null ? 3 : e.dribble.success)[0]
     ]
 
     this.chart2 = new Chart(ctx, {
@@ -242,7 +324,7 @@ export class StatisticsPage implements OnInit {
       data: {
         labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
         datasets: [{
-          label: this.players2.map(e => e.viewValue)[0],
+          label: this.players2.map(e => e.name)[0],
           data: dataChart2,
           // borderWidth: 1
         }]
@@ -320,16 +402,24 @@ export class StatisticsPage implements OnInit {
   }
 
   footballTeams1() {
-    this.authService.call(null, 'teams', 'GET', true).subscribe({
+    this.authService.call(null, 'getTeam', 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
-          response.data.map((e: { id: any; name: any; }) => {
+          response.data.map((e: {
+            id: any; name: any;
+            country: string;
+            founded: any;
+            logo: string;  
+          },) => {
             this.teams1.push({
-              value: e.id,
-              viewValue: e.name,
+              id: e.id,
+              name: e.name,
+              country: e.country,
+              founded: e.founded,
+              logo: e.logo,
             })
           })
-          this.teams1.sort((a, b) => (a.viewValue < b.viewValue) ? -1 : 1)
+          this.teams1.sort((a, b) => (a.name < b.name) ? -1 : 1)
         } else {
           console.log(response)
         }
@@ -348,16 +438,24 @@ export class StatisticsPage implements OnInit {
   }
 
   footballTeams2() {
-    this.authService.call(null, 'teams', 'GET', true).subscribe({
+    this.authService.call(null, 'getTeam', 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
-          response.data.map((e: { id: any; name: any; }) => {
+          response.data.map((e: { 
+            id: any; name: any;
+            country: string;
+            founded: any;
+            logo: string;  
+          }) => {
             this.teams2.push({
-              value: e.id,
-              viewValue: e.name,
+              id: e.id,
+              name: e.name,
+              country: e.country,
+              founded: e.founded,
+              logo: e.logo,
             })
           })
-          this.teams2.sort((a, b) => (a.viewValue < b.viewValue) ? -1 : 1)
+          this.teams2.sort((a, b) => (a.name < b.name) ? -1 : 1)
         } else {
           console.log(response)
         }
@@ -378,17 +476,24 @@ export class StatisticsPage implements OnInit {
   async squad1(teamID: any) {
     await loadingSpinner(this.loadingCtrl)
 
-    this.authService.call(null, `squad/${teamID}`, 'GET', true).subscribe({
+    this.authService.call(null, `getSquad/${teamID}`, 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
-          response.data.players.map((e: { id: any; name: any; number: any }) => {
+          response.data.map((e: {
+            age: number;
+            photo: string; 
+            id: any; name: any; 
+            number: any 
+          }) => {
             this.squads1.push({
-              value: e.id,
-              viewValue: e.name,
-              number: e.number
+              id: e.id,
+              name: e.name,
+              age: e.age,
+              number: e.number,
+              photo: e.photo,
             })
           })
-          this.squads1.sort((a, b) => (a.number < b.number) ? -1 : 1)
+          this.squads1.sort((a, b) => (a.name < b.name) ? -1 : 1)
           this.loadingCtrl.dismiss();
 
           // this.selectDisabled(this.squads1, this.squads2)
@@ -414,17 +519,24 @@ export class StatisticsPage implements OnInit {
   async squad2(teamID: any) {
     await loadingSpinner(this.loadingCtrl)
 
-    this.authService.call(null, `squad/${teamID}`, 'GET', true).subscribe({
+    this.authService.call(null, `getSquad/${teamID}`, 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
-          response.data.players.map((e: { id: any; name: any; number: any }) => {
+          response.data.map((e: { 
+            age: number;
+            photo: string;
+            id: any; name: any;
+            number: any 
+          }) => {
             this.squads2.push({
-              value: e.id,
-              viewValue: e.name,
-              number: e.number
+              id: e.id,
+              name: e.name,
+              age: e.age,
+              number: e.number,
+              photo: e.photo,
             })
           })
-          this.squads2.sort((a, b) => (a.number < b.number) ? -1 : 1)
+          this.squads2.sort((a, b) => (a.name < b.name) ? -1 : 1)
           this.loadingCtrl.dismiss();
 
           // this.selectDisabled(this.squads1, this.squads2)
@@ -450,64 +562,104 @@ export class StatisticsPage implements OnInit {
   async player1(playerId: any) {
     await loadingSpinner(this.loadingCtrl);
 
-    this.authService.call(null, `player/${playerId}/2022/299`, 'GET', true).subscribe({
+    this.authService.call(null, `getPlayer/${playerId}`, 'GET', true).subscribe({
       next: (response) => {
         console.log(response)
         if (response.status === 'SUCCESS') {
-          response.data.statistics?.map((
+          response.data.statistics.map((
             e: {
-              league: { name: any; };
-              games: { position: any; };
-              shots: { total: any, on: any },
-              goals: { total: any; assists: any; };
-              passes: { total: any; key: any; accuracy: any; };
-              tackles: { total: any; blocks: any; interceptions: any; };
-              dribbles: { attempts: any; success: any; past: any };
-              fouls: { drawn: any; committed: any; };
-              cards: { yellow: any, yellowred: any; red: any; };
+              league: { country: any; logo: any; season: any; name: any; };
+              game: { appearences: any, lineups: any, minutes: any, number: any, position: any, rating: any, captain: any };
+              substitute: { in: any, out: any, bench: any },
+              shot: { total: any, on: any },
+              goal: {  total: any, conceded: any, assists: any, saves: any };
+              passe: { total: any; key: any; accuracy: any; };
+              tackle: { total: any; blocks: any; interceptions: any; };
+              duel: { total: any, won: any },
+              dribble: { attempts: any; success: any; past: any };
+              foul: { drawn: any; committed: any; };
+              card: { yellow: any, yellowred: any; red: any; };
+              penalty: { won: any, committed: any, scored: any, missed: any, saved: any }
             }) => {
-            this.players1.push({
-              value: response.data.player.id,
-              viewValue: response.data.player.name,
-              age: response.data.player.age,
-              height: response.data.player.height,
-              weight: response.data.player.weight,
-              league: e.league.name,
-              position: e.games.position,
-              shots: {
-                total: e.shots.total,
-                on: e.shots.on
-              },
-              goals: {
-                total: e.goals.total,
-                assists: e.goals.assists
-              },
-              passes: {
-                total: e.passes.total,
-                key: e.passes.key,
-                accuracy: e.passes.accuracy
-              },
-              tackles: {
-                total: e.tackles.total,
-                blocks: e.tackles.blocks,
-                interceptions: e.tackles.interceptions
-              },
-              dribbles: {
-                attempts: e.dribbles.attempts,
-                success: e.dribbles.success,
-                past: e.dribbles.past
-              },
-              fouls: {
-                drawn: e.fouls.drawn,
-                committed: e.fouls.committed,
-              },
-              cards: {
-                yellow: e.cards.yellow,
-                yellowred: e.cards.yellowred,
-                red: e.cards.red
-              },
-            })
-          })
+              this.players1.push({
+                id: response.data.player.id,
+                name: response.data.player.name,
+                firstname: response.data.player.firstname,
+                lastname: response.data.player.lastname,
+                age: response.data.player.age,
+                birth: response.data.player.birth,
+                nationality: response.data.player.nationality,
+                height: response.data.player.height,
+                weight: response.data.player.weight,
+                photo: response.data.player.photo,
+                league: {
+                  name: e.league.name,
+                  country: e.league.country,
+                  logo: e.league.logo,
+                  season: e.league.season
+                },
+                game: {
+                  appearences: e.game.appearences,
+                  lineups: e.game.lineups,
+                  minutes: e.game.minutes,
+                  number: e.game.number,
+                  position: e.game.position,
+                  rating: e.game.rating,
+                  captain: e.game.captain
+                },
+                substitute: {
+                  in: e.substitute.in,
+                  out: e.substitute.out,
+                  bench: e.substitute.bench
+                },
+                shot: {
+                  total: e.shot.total,
+                  on: e.shot.on
+                },
+                goal: {
+                  total: e.goal.total,
+                  conceded: e.goal.conceded,
+                  assists: e.goal.assists,
+                  saves: e.goal.saves
+                },
+                passe: {
+                  total: e.passe.total,
+                  key: e.passe.key,
+                  accuracy: e.passe.accuracy
+                },
+                tackle: {
+                  total: e.tackle.total,
+                  blocks: e.tackle.blocks,
+                  interceptions: e.tackle.interceptions
+                },
+                duel: {
+                  total: e.duel.total,
+                  won: e.duel.won
+                },
+                dribble: {
+                  attempts: e.dribble.attempts,
+                  success: e.dribble.success,
+                  past: e.dribble.past
+                },
+                foul: {
+                  drawn: e.foul.drawn,
+                  committed: e.foul.committed,
+                },
+                card: {
+                  yellow: e.card.yellow,
+                  yellowred: e.card.yellowred,
+                  red: e.card.red
+                },
+                penalty: {
+                  won: e.penalty.won,
+                  committed: e.penalty.committed,
+                  scored: e.penalty.scored,
+                  missed: e.penalty.missed,
+                  saved: e.penalty.saved
+                }
+              })
+            },
+          )
           this.loadingCtrl.dismiss()
           this.ref.detectChanges()
           this.generateChartPlayer1()
@@ -533,62 +685,101 @@ export class StatisticsPage implements OnInit {
   async player2(playerId: any) {
     await loadingSpinner(this.loadingCtrl);
 
-    this.authService.call(null, `player/${playerId}/2022/299`, 'GET', true).subscribe({
+    this.authService.call(null, `getPlayer/${playerId}`, 'GET', true).subscribe({
       next: (response) => {
         console.log(response)
         if (response.status === 'SUCCESS') {
           response.data.statistics?.map((
             e: {
-              league: { name: any; };
-              games: { position: any; };
-              shots: { total: any, on: any },
-              goals: { total: any; assists: any; };
-              passes: { total: any; key: any; accuracy: any; };
-              tackles: { total: any; blocks: any; interceptions: any; };
-              dribbles: { attempts: any; success: any; past: any };
-              fouls: { drawn: any; committed: any; };
-              cards: { yellow: any, yellowred: any; red: any; };
+              league: { country: string; logo: string; season: number; name: any; };
+              game: { appearences: any, lineups: any, minutes: any, number: any, position: any, rating: any, captain: any };
+              substitute: { in: any, out: any, bench: any },
+              shot: { total: any, on: any },
+              goal: { total: any, conceded: any, assists: any, saves: any };
+              passe: { total: any; key: any; accuracy: any; };
+              tackle: { total: any; blocks: any; interceptions: any; };
+              duel: { total: any, won: any },
+              dribble: { attempts: any; success: any; past: any };
+              foul: { drawn: any; committed: any; };
+              card: { yellow: any, yellowred: any; red: any; };
+              penalty: { won: any, committed: any, scored: any, missed: any, saved: any }
             }) => {
             this.players2.push({
-              value: response.data.player.id,
-              viewValue: response.data.player.name,
+              id: response.data.player.id,
+              name: response.data.player.name,
+              firstname: response.data.player.firstname,
+              lastname: response.data.player.lastname,
               age: response.data.player.age,
+              birth: response.data.player.birth,
+              nationality: response.data.player.nationality,
               height: response.data.player.height,
               weight: response.data.player.weight,
-              league: e.league.name,
-              position: e.games.position,
-              shots: {
-                total: e.shots.total,
-                on: e.shots.on
+              photo: response.data.player.photo,
+              league: {
+                name: e.league.name,
+                country: e.league.country,
+                logo: e.league.logo,
+                season: e.league.season
               },
-              goals: {
-                total: e.goals.total,
-                assists: e.goals.assists
+              game: {
+                appearences: e.game.appearences,
+                lineups: e.game.lineups,
+                minutes: e.game.minutes,
+                number: e.game.number,
+                position: e.game.position,
+                rating: e.game.rating,
+                captain: e.game.captain
               },
-              passes: {
-                total: e.passes.total,
-                key: e.passes.key,
-                accuracy: e.passes.accuracy
+              substitute: {
+                in: e.substitute.in,
+                out: e.substitute.out,
+                bench: e.substitute.bench
               },
-              tackles: {
-                total: e.tackles.total,
-                blocks: e.tackles.blocks,
-                interceptions: e.tackles.interceptions
+              shot: {
+                total: e.shot.total,
+                on: e.shot.on
               },
-              dribbles: {
-                attempts: e.dribbles.attempts,
-                success: e.dribbles.success,
-                past: e.dribbles.past
+              goal: {
+                total: e.goal.total,
+                conceded: e.goal.conceded,
+                assists: e.goal.assists,
+                saves: e.goal.saves
               },
-              fouls: {
-                drawn: e.fouls.drawn,
-                committed: e.fouls.committed,
+              passe: {
+                total: e.passe.total,
+                key: e.passe.key,
+                accuracy: e.passe.accuracy
               },
-              cards: {
-                yellow: e.cards.yellow,
-                yellowred: e.cards.yellowred,
-                red: e.cards.red
+              tackle: {
+                total: e.tackle.total,
+                blocks: e.tackle.blocks,
+                interceptions: e.tackle.interceptions
               },
+              duel: {
+                total: e.duel.total,
+                won: e.duel.won
+              },
+              dribble: {
+                attempts: e.dribble.attempts,
+                success: e.dribble.success,
+                past: e.dribble.past
+              },
+              foul: {
+                drawn: e.foul.drawn,
+                committed: e.foul.committed,
+              },
+              card: {
+                yellow: e.card.yellow,
+                yellowred: e.card.yellowred,
+                red: e.card.red
+              },
+              penalty: {
+                won: e.penalty.won,
+                committed: e.penalty.committed,
+                scored: e.penalty.scored,
+                missed: e.penalty.missed,
+                saved: e.penalty.saved
+              }
             })
           })
           this.loadingCtrl.dismiss()

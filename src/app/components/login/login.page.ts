@@ -12,7 +12,8 @@ import { alert } from 'src/app/shared/alert/alert.component';
 })
 export class LoginPage implements OnInit {
 
-  emailPattern = /^(([a-zA-Z0-9]([\.\-\_]){1})|([a-zA-Z0-9]))+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4}|[a-zA-Z]{1,3}\.[a-zA-Z]{1,3})$/;
+  // emailPattern = /^(([a-zA-Z0-9]([\.\-\_]){1})|([a-zA-Z0-9]))+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4}|[a-zA-Z]{1,3}\.[a-zA-Z]{1,3})$/;
+  emailPattern = /^(?=.*[a-zA-Z0-9@.])[a-zA-Z0-9@.]{6,}$/;
   passwordPattern = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{5,20}$/;
 
   formularioLogin: FormGroup;
@@ -78,15 +79,15 @@ export class LoginPage implements OnInit {
       next: async (response) => {
         if (response.status === 'SUCCESS') {
           console.log(response);
-          this.authService.setToken(response.data);
-          this.authService.setIdUser(response.id);
-          this.authService.setProfile(response.profile);
-          this.authService.setEmail(response.email);
+          this.authService.setToken(response.data.token);
+          this.authService.setIdUser(response.data.id);
+          this.authService.setProfile(response.data.profile.id);
+          // this.authService.setEmail(response.email);
           this.authService.setModelSesionInSession(this.authService.modelSession);
 
           this.navCtrl.navigateRoot('inicio');
           this.loadingCtrl.dismiss();
-        } else if (response.status === 'Error') {
+        } else if (response.status === 'ERROR') {
           console.log(response);
           this.loadingCtrl.dismiss();
 

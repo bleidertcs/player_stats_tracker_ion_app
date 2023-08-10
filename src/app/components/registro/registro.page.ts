@@ -14,7 +14,8 @@ export class RegistroPage implements OnInit {
 
   namePattern = /^[a-zA-ZñÑáÁéÉíÍóÓúÚ ]+$/;
   passwordPattern = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{5,20}$/;
-  emailPattern = /^(([a-zA-Z0-9]([\.\-\_]){1})|([a-zA-Z0-9]))+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4}|[a-zA-Z]{1,3}\.[a-zA-Z]{1,3})$/;
+  // emailPattern = /^(([a-zA-Z0-9]([\.\-\_]){1})|([a-zA-Z0-9]))+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4}|[a-zA-Z]{1,3}\.[a-zA-Z]{1,3})$/;
+  emailPattern = /^(?=.*[a-zA-Z0-9@.])[a-zA-Z0-9@.]{6,}$/
 
   formularioRegistro: FormGroup;
   passwordVisibility: boolean = true;
@@ -27,8 +28,8 @@ export class RegistroPage implements OnInit {
     public navCtrl: NavController
   ) {
     this.formularioRegistro = this.fb.group({
-      firstName: new FormControl("", [Validators.required, Validators.pattern(this.namePattern)]),
-      lastName: new FormControl("", [Validators.required, Validators.pattern(this.namePattern)]),
+      firstname: new FormControl("", [Validators.required, Validators.pattern(this.namePattern)]),
+      lastname: new FormControl("", [Validators.required, Validators.pattern(this.namePattern)]),
       email: new FormControl("", [Validators.required, Validators.pattern(this.emailPattern)]),
       password: new FormControl("", [Validators.required, Validators.pattern(this.passwordPattern)]),
       // confirmacionPassword: new FormControl("", Validators.required)
@@ -112,10 +113,11 @@ export class RegistroPage implements OnInit {
     await loadingSpinner(this.loadingCtrl);
 
     let data = {
-      firstName: registerForm.firstName,
-      lastName: registerForm.lastName,
+      firstname: registerForm.firstname,
+      lastname: registerForm.lastname,
       email: registerForm.email,
-      password: registerForm.password
+      password: registerForm.password,
+      id_profile: 2
     }
 
     this.auth.call(data, 'register', 'POST', false).subscribe({

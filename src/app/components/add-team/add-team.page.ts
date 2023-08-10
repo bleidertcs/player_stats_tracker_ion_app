@@ -22,6 +22,9 @@ export class AddTeamPage implements OnInit {
   ) {
     this.addTeamForm = this.form.group({
       teamName: new FormControl('', [Validators.required]),
+      teamCountry: new FormControl('', [Validators.required]),
+      teamFounded: new FormControl('', [Validators.required]),
+      teamLogoUrl: new FormControl('', [Validators.required]),
     })
   }
 
@@ -33,7 +36,10 @@ export class AddTeamPage implements OnInit {
     await loadingSpinner(this.loadingCtrl)
 
     let data = {
-      name: form.teamName
+      name: form.teamName,
+      country: form.teamCountry,
+      founded: form.founded,
+      logo: form.teamLogoUrl
     }
 
     this.authService.call(data, 'addTeam', 'POST', false).subscribe({
@@ -47,7 +53,7 @@ export class AddTeamPage implements OnInit {
             button: ['Cerrar'],
             alertController: this.alertController
           })
-        } else if (response.status === 'Error') {
+        } else if (response.status === 'ERROR') {
           console.log(response);
           this.loadingCtrl.dismiss();
 

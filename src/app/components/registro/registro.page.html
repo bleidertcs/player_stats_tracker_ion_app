@@ -4,7 +4,7 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <div class="contenedor">
-      <p>SIFA</p>
+      <p>Player Stats Tracker</p>
       <ul>
         <li>es sistema</li>
         <li>es información</li>
@@ -49,10 +49,10 @@
         <ion-list>
           <ion-item counter="true" fill="outline" class="registerForm">
             <ion-label position="floating">Nombre</ion-label>
-            <ion-input (input)="checkFirstName()" (keypress)="validateName($event)" formControlName="firstName"
+            <ion-input (input)="checkFirstName()" (keypress)="validateName($event)" formControlName="firstname"
               maxlength="30"></ion-input>
             <ion-note
-              *ngIf="formularioRegistro.controls['firstName'].hasError('required') && formularioRegistro.get('firstName')?.touched"
+              *ngIf="formularioRegistro.controls['firstname'].hasError('required') && formularioRegistro.get('firstname')?.touched"
               slot="error">
               Nombre es requerido
             </ion-note>
@@ -60,17 +60,17 @@
 
           <ion-item counter="true" fill="outline" class="registerForm">
             <ion-label position="floating">Apellido</ion-label>
-            <ion-input (input)="checkLastName()" (keypress)="validateName($event)" formControlName="lastName"
+            <ion-input (input)="checkLastName()" (keypress)="validateName($event)" formControlName="lastname"
               maxlength="30"></ion-input>
             <ion-note
-              *ngIf="formularioRegistro.controls['lastName'].hasError('required') && formularioRegistro.get('lastName')?.touched"
+              *ngIf="formularioRegistro.controls['lastname'].hasError('required') && formularioRegistro.get('lastname')?.touched"
               slot="error">
               Apellido es requerido
             </ion-note>
           </ion-item>
 
           <ion-item counter="true" fill="outline" class="registerForm">
-            <ion-label position="floating">Correo Electrónico</ion-label>
+            <ion-label position="floating">Correo Electrónico o Usuario</ion-label>
             <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
               maxlength="50"></ion-input>
             <ion-note *ngIf="formularioRegistro.controls['email'].hasError('pattern')" slot="error">
