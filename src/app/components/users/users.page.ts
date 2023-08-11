@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertController, LoadingController, NavController } from '@ionic/angular';
+import { AlertController, IonModal, LoadingController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 import { alert } from 'src/app/shared/alert/alert.component';
 
 interface Users {
   id: number,
-  firstName: string,
-  lastName: string,
+  firstname: string,
+  lastname: string,
   email: string,
   password: string,
 }
@@ -20,15 +20,18 @@ interface Users {
 })
 export class UsersPage implements OnInit {
 
+  namePattern = /^[a-zA-ZñÑáÁéÉíÍóÓúÚ ]+$/;
   emailPattern = /^(([a-zA-Z0-9]([\.\-\_]){1})|([a-zA-Z0-9]))+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4}|[a-zA-Z]{1,3}\.[a-zA-Z]{1,3})$/;
   passwordPattern = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{5,20}$/;
 
   users: Users[] = [];
-  // updateForm: FormGroup;
-  firstName: string = '';
-  lastName: string = '';
+  profiles: any = []
+  updateUserForm: FormGroup;
+  firstname: string = '';
+  lastname: string = '';
   email: string = '';
   password: string = '';
+  isModalOpen = false;
 
   constructor(
     private authService: AuthService,
@@ -37,34 +40,109 @@ export class UsersPage implements OnInit {
     public form: FormBuilder,
     public alertController: AlertController,
   ) {
-    // this.updateForm = this.form.group({
-    //   firstName: new FormControl('', [Validators.required,]),
-    //   lastName: new FormControl('', [Validators.required,]),
-    //   email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
-    //   password: new FormControl('', [Validators.required, Validators.pattern(this.passwordPattern)])
-    // })
+    this.updateUserForm = this.form.group({
+      firstname: new FormControl('', [Validators.required, Validators.pattern(this.namePattern)]),
+      lastname: new FormControl('', [Validators.required, Validators.pattern(this.namePattern)]),
+      email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
+      password: new FormControl('', [Validators.required, Validators.pattern(this.passwordPattern)]),
+      idProfile: new FormControl('', [Validators.required]), 
+    })
   }
 
   ngOnInit() {
     this.getUsers()
+    this.getProfile()
+  }
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+
+  validateName(event: KeyboardEvent) {
+    let regex = RegExp(this.namePattern);
+    return regex.test(event.key);
+  }
+
+  checkFirstName() {
+    if (this.updateUserForm.controls['firstname'].value[0] === ' ') {
+      this.updateUserForm.controls['firstname'].reset();
+    }
+  }
+
+  checkLastName() {
+    if (this.updateUserForm.controls['lastname'].value[0] === ' ') {
+      this.updateUserForm.controls['lastname'].reset();
+    }
+  }
+
+  validateEmail(event: KeyboardEvent) {
+    return !(event.key === ' ');
+  }
+
+  checkEmail() {
+    if (this.updateUserForm.controls['email'].value[0] === ' ') {
+      this.updateUserForm.controls['email'].reset();
+    }
+  }
+
+  validatePassword(event: KeyboardEvent) {
+    return !(event.key === ' ');
+  }
+
+  checkPassword() {
+    if (this.updateUserForm.controls['password'].value[0] === ' ') {
+      this.updateUserForm.controls['password'].reset();
+    }
+  }
+
+  getProfile() {
+    this.authService.call(null, 'getProfile', 'GET', true).subscribe({
+      next: (response) => {
+        if (response.status === 'SUCCESS') {
+          this.profiles = response.data
+          
+        } else {
+          console.log(response)
+          this.loadingCtrl.dismiss()
+
+          alert({
+            title: response.status,
+            text: response.data,
+            button: ['Cerrar'],
+            alertController: this.alertController
+          })
+        }
+      },
+      error: (error) => {
+        console.log(error)
+        this.loadingCtrl.dismiss()
+
+        alert({
+          title: 'Error',
+          text: 'Falla en el servidor',
+          button: ['Cerrar'],
+          alertController: this.alertController
+        })
+      }
+    })
   }
 
   getUsers() {
-    this.authService.call(null, 'users', 'GET', false).subscribe({
+    this.authService.call(null, 'getUsers', 'GET', false).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
-          response.data.map((e: { id: any; firstName: any; lastName: any; email: any; password: any }) => {
+          response.data.map((e: { id: any; firstname: any; lastname: any; email: any; password: any }) => {
             this.users.push({
               id: e.id,
-              firstName: e.firstName,
-              lastName: e.lastName,
+              firstname: e.firstname,
+              lastname: e.lastname,
               email: e.email,
               password: e.password
             })
           })
           this.authService.setUsersList(this.users)
           this.authService.setModelUsers(this.authService.modelUsers)
-          this.users.sort((a, b) => (a.firstName < b.firstName) ? -1 : 1)
+          this.users.sort((a, b) => (a.firstname < b.firstname) ? -1 : 1)
         } else {
           console.log(response)
           this.loadingCtrl.dismiss()
@@ -93,12 +171,12 @@ export class UsersPage implements OnInit {
 
   getUser(id: any) {
     return new Promise<void>((resolve, reject) => {
-      this.authService.call(null, `user/${id}`, 'GET', false).subscribe({
+      this.authService.call(null, `getUser/${id}`, 'GET', false).subscribe({
         next: (response) => {
           if (response.status === 'SUCCESS') {
-            response.data.map((e: { firstName: string; lastName: string; email: string; password: string; }) => {
-              this.firstName = e.firstName,
-                this.lastName = e.lastName,
+            response.data.map((e: { firstname: string; lastname: string; email: string; password: string; }) => {
+              this.firstname = e.firstname,
+                this.lastname = e.lastname,
                 this.email = e.email,
                 this.password = e.password
             })
@@ -123,7 +201,7 @@ export class UsersPage implements OnInit {
   async deleteUser(id: any) {
     await loadingSpinner(this.loadingCtrl)
 
-    this.authService.call(null, `delete/${id}`, 'DELETE', false).subscribe({
+    this.authService.call(null, `deleteUser/${id}`, 'DELETE', false).subscribe({
       next: (response) => {
         // this.users.pop()
         this.loadingCtrl.dismiss();
@@ -157,28 +235,52 @@ export class UsersPage implements OnInit {
     await this.getUser(id)
     let users = this.authService.getUsersList()
 
-    const alertTest = await this.alertController.create({
+    const alertInput = await this.alertController.create({
       header: 'Actualizar información usuario',
       inputs: [
         {
           placeholder: 'Nombre',
           name: 'firstName',
-          value: this.firstName
+          value: this.firstname,
+          type: 'text'
         },
         {
           placeholder: 'Apellido',
           name: 'lastName',
-          value: this.lastName
+          value: this.lastname,
+          type: 'text'
         },
         {
           placeholder: 'Correo Electrónico',
           name: 'email',
-          value: this.email
+          value: this.email,
+          type: 'email'
         },
         {
           placeholder: 'Contraseña',
           name: 'password',
+          type: 'password'
         },
+        {
+          name: 'opcion',
+          type: 'radio',
+          label: 'Opción 1',
+          value: 'opcion1',
+          checked: true,
+          
+        },
+        {
+          name: 'opcion',
+          type: 'radio',
+          label: 'Opción 2',
+          value: 'opcion2'
+        },
+        {
+          name: 'opcion',
+          type: 'radio',
+          label: 'Opción 3',
+          value: 'opcion3'
+        }
       ],
       buttons: [
         {
@@ -193,7 +295,7 @@ export class UsersPage implements OnInit {
               password: alertData.password
             }
 
-            this.authService.call(data, `update/${id}`, 'PATCH', false).subscribe({
+            this.authService.call(data, `updateUser/${id}`, 'PATCH', false).subscribe({
               next: (response) => {
                 if (response.status === 'SUCCESS') {
                   this.loadingCtrl.dismiss()
@@ -227,6 +329,6 @@ export class UsersPage implements OnInit {
       ],
     });
 
-    await alertTest.present();
+    await alertInput.present();
   }
 }

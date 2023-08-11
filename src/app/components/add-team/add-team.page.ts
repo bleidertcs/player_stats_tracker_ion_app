@@ -13,6 +13,7 @@ import { alert } from 'src/app/shared/alert/alert.component';
 export class AddTeamPage implements OnInit {
 
   addTeamForm: FormGroup;
+  allTeams: any = [];
 
   constructor(
     public form: FormBuilder,
@@ -24,11 +25,12 @@ export class AddTeamPage implements OnInit {
       teamName: new FormControl('', [Validators.required]),
       teamCountry: new FormControl('', [Validators.required]),
       teamFounded: new FormControl('', [Validators.required]),
-      teamLogoUrl: new FormControl('', [Validators.required]),
+      teamLogoUrl: new FormControl(''),
     })
   }
 
   ngOnInit() {
+    this.getAllTeams()
   }
 
 
@@ -38,21 +40,56 @@ export class AddTeamPage implements OnInit {
     let data = {
       name: form.teamName,
       country: form.teamCountry,
-      founded: form.founded,
+      founded: form.teamFounded,
       logo: form.teamLogoUrl
     }
 
-    this.authService.call(data, 'addTeam', 'POST', false).subscribe({
+    this.authService.call(data, 'addTeam', 'POST', true).subscribe({
       next: async (response) => {
         if (response.status === 'SUCCESS') {
           this.loadingCtrl.dismiss();
-
+          this.getAllTeams()
           alert({
             title: response.status,
             text: 'Equipo agregado exitosamente',
             button: ['Cerrar'],
             alertController: this.alertController
           })
+        } else if (response.status === 'ERROR') {
+          console.log(response);
+          this.loadingCtrl.dismiss();
+
+          alert({
+            title: response.status,
+            text: response.data,
+            button: ['Cerrar'],
+            alertController: this.alertController
+          })
+        }
+      },
+      error: (error) => {
+        console.log(error);
+        this.loadingCtrl.dismiss();
+
+        alert({
+          title: 'Error',
+          text: 'Falla en el servidor',
+          button: ['Cerrar'],
+          alertController: this.alertController
+        })
+      }
+    })
+  }
+
+  async getAllTeams() {
+    await loadingSpinner(this.loadingCtrl)
+
+    this.authService.call(null, 'getAllTeams', 'GET', true).subscribe({
+      next: async (response) => {
+        if (response.status === 'SUCCESS') {
+          this.loadingCtrl.dismiss();
+
+          this.allTeams = response.data
         } else if (response.status === 'ERROR') {
           console.log(response);
           this.loadingCtrl.dismiss();

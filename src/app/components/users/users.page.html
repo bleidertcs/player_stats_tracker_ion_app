@@ -10,8 +10,8 @@
 <ion-content>
   <ion-card *ngFor="let user of users">
     <ion-card-content>
-      <div>Nombre: {{ user.firstName }} </div>
-      <div>Apellido: {{ user.lastName }} </div>
+      <div>Nombre: {{ user.firstname }} </div>
+      <div>Apellido: {{ user.lastname }} </div>
       <div>Correo: {{ user.email }} </div>
     </ion-card-content>
     <ion-button fill="clear" (click)="updateUser(user.id)">

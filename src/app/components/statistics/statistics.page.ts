@@ -402,7 +402,7 @@ export class StatisticsPage implements OnInit {
   }
 
   footballTeams1() {
-    this.authService.call(null, 'getTeam', 'GET', true).subscribe({
+    this.authService.call(null, 'getAllTeams', 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
           response.data.map((e: {
@@ -438,7 +438,7 @@ export class StatisticsPage implements OnInit {
   }
 
   footballTeams2() {
-    this.authService.call(null, 'getTeam', 'GET', true).subscribe({
+    this.authService.call(null, 'getAllTeams', 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
           response.data.map((e: { 

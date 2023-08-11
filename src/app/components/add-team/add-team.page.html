@@ -42,6 +42,11 @@
                 Fundación es requerido
               </ion-note>
             </ion-item>
+            <ion-item class="loginForm">
+              <ion-label position="floating">Logo URL</ion-label>
+              <ion-input formControlName="teamLogoUrl" maxlength="50" fill="outline"></ion-input>
+              <!-- <ion-icon name="mail-outline" slot="end" fill="clear"></ion-icon> -->
+            </ion-item>
           </ion-col>
         </ion-row>
       </ion-card>
@@ -50,5 +55,26 @@
     <ion-button [disabled]="addTeamForm.invalid" (click)="addTeam(addTeamForm.value)" class="loginButton">
       Agregar
     </ion-button>
+
+    <ion-grid class="ion-margin">
+      <ion-row>
+        <ion-col>N°</ion-col>
+        <ion-col>Nombre</ion-col>
+        <ion-col>Fundación</ion-col>
+        <!-- <ion-col>Country</ion-col> -->
+      </ion-row>
+      <ion-row *ngFor="let team of allTeams; index as i">
+        <ion-col>{{ team.id }}</ion-col>
+        <ion-col>{{ team.name }}</ion-col>
+        <ion-col>{{ team.founded }}</ion-col>
+        <!-- <ion-col>bbnb</ion-col> -->
+      </ion-row>
+    </ion-grid>
+  
+    <ion-item lines="none">
+      <ion-button (click)="getAllTeams()" color="primary" size="small" slot="end">
+        Material Design Table
+      </ion-button>
+    </ion-item>
   </div>
 </ion-content>
