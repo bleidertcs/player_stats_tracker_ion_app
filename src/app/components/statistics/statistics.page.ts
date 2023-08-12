@@ -4,7 +4,7 @@ import { AlertController, LoadingController, NavController } from '@ionic/angula
 import { Chart, ChartItem } from 'chart.js/auto';
 import { AuthService } from 'src/app/services/auth.service';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
-import { alert } from 'src/app/shared/alert/alert.component';
+import { alertModal } from 'src/app/shared/alert/alert.component';
 
 interface selectTeam1 {
   id: number;
@@ -379,7 +379,7 @@ export class StatisticsPage implements OnInit {
           console.log(response)
           this.loadingCtrl.dismiss()
 
-          alert({
+          alertModal({
             title: response.status,
             text: response.data,
             button: ['Cerrar'],
@@ -391,7 +391,7 @@ export class StatisticsPage implements OnInit {
         console.log(error)
         this.loadingCtrl.dismiss()
 
-        alert({
+        alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
           button: ['Cerrar'],
@@ -409,7 +409,7 @@ export class StatisticsPage implements OnInit {
             id: any; name: any;
             country: string;
             founded: any;
-            logo: string;  
+            logo: string;
           },) => {
             this.teams1.push({
               id: e.id,
@@ -427,7 +427,7 @@ export class StatisticsPage implements OnInit {
       error: (error) => {
         console.log(error)
 
-        alert({
+        alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
           button: ['Cerrar'],
@@ -441,11 +441,11 @@ export class StatisticsPage implements OnInit {
     this.authService.call(null, 'getAllTeams', 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
-          response.data.map((e: { 
+          response.data.map((e: {
             id: any; name: any;
             country: string;
             founded: any;
-            logo: string;  
+            logo: string;
           }) => {
             this.teams2.push({
               id: e.id,
@@ -463,7 +463,7 @@ export class StatisticsPage implements OnInit {
       error: (error) => {
         console.log(error)
 
-        alert({
+        alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
           button: ['Cerrar'],
@@ -481,9 +481,9 @@ export class StatisticsPage implements OnInit {
         if (response.status === 'SUCCESS') {
           response.data.map((e: {
             age: number;
-            photo: string; 
-            id: any; name: any; 
-            number: any 
+            photo: string;
+            id: any; name: any;
+            number: any
           }) => {
             this.squads1.push({
               id: e.id,
@@ -506,7 +506,7 @@ export class StatisticsPage implements OnInit {
         console.log(error)
         this.loadingCtrl.dismiss();
 
-        alert({
+        alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
           button: ['Cerrar'],
@@ -522,11 +522,11 @@ export class StatisticsPage implements OnInit {
     this.authService.call(null, `getSquad/${teamID}`, 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
-          response.data.map((e: { 
+          response.data.map((e: {
             age: number;
             photo: string;
             id: any; name: any;
-            number: any 
+            number: any
           }) => {
             this.squads2.push({
               id: e.id,
@@ -549,7 +549,7 @@ export class StatisticsPage implements OnInit {
         console.log(error)
         this.loadingCtrl.dismiss();
 
-        alert({
+        alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
           button: ['Cerrar'],
@@ -572,7 +572,7 @@ export class StatisticsPage implements OnInit {
               game: { appearences: any, lineups: any, minutes: any, number: any, position: any, rating: any, captain: any };
               substitute: { in: any, out: any, bench: any },
               shot: { total: any, on: any },
-              goal: {  total: any, conceded: any, assists: any, saves: any };
+              goal: { total: any, conceded: any, assists: any, saves: any };
               passe: { total: any; key: any; accuracy: any; };
               tackle: { total: any; blocks: any; interceptions: any; };
               duel: { total: any, won: any },
@@ -581,84 +581,84 @@ export class StatisticsPage implements OnInit {
               card: { yellow: any, yellowred: any; red: any; };
               penalty: { won: any, committed: any, scored: any, missed: any, saved: any }
             }) => {
-              this.players1.push({
-                id: response.data.player.id,
-                name: response.data.player.name,
-                firstname: response.data.player.firstname,
-                lastname: response.data.player.lastname,
-                age: response.data.player.age,
-                birth: response.data.player.birth,
-                nationality: response.data.player.nationality,
-                height: response.data.player.height,
-                weight: response.data.player.weight,
-                photo: response.data.player.photo,
-                league: {
-                  name: e.league.name,
-                  country: e.league.country,
-                  logo: e.league.logo,
-                  season: e.league.season
-                },
-                game: {
-                  appearences: e.game.appearences,
-                  lineups: e.game.lineups,
-                  minutes: e.game.minutes,
-                  number: e.game.number,
-                  position: e.game.position,
-                  rating: e.game.rating,
-                  captain: e.game.captain
-                },
-                substitute: {
-                  in: e.substitute.in,
-                  out: e.substitute.out,
-                  bench: e.substitute.bench
-                },
-                shot: {
-                  total: e.shot.total,
-                  on: e.shot.on
-                },
-                goal: {
-                  total: e.goal.total,
-                  conceded: e.goal.conceded,
-                  assists: e.goal.assists,
-                  saves: e.goal.saves
-                },
-                passe: {
-                  total: e.passe.total,
-                  key: e.passe.key,
-                  accuracy: e.passe.accuracy
-                },
-                tackle: {
-                  total: e.tackle.total,
-                  blocks: e.tackle.blocks,
-                  interceptions: e.tackle.interceptions
-                },
-                duel: {
-                  total: e.duel.total,
-                  won: e.duel.won
-                },
-                dribble: {
-                  attempts: e.dribble.attempts,
-                  success: e.dribble.success,
-                  past: e.dribble.past
-                },
-                foul: {
-                  drawn: e.foul.drawn,
-                  committed: e.foul.committed,
-                },
-                card: {
-                  yellow: e.card.yellow,
-                  yellowred: e.card.yellowred,
-                  red: e.card.red
-                },
-                penalty: {
-                  won: e.penalty.won,
-                  committed: e.penalty.committed,
-                  scored: e.penalty.scored,
-                  missed: e.penalty.missed,
-                  saved: e.penalty.saved
-                }
-              })
-            },
+            this.players1.push({
+              id: response.data.player.id,
+              name: response.data.player.name,
+              firstname: response.data.player.firstname,
+              lastname: response.data.player.lastname,
+              age: response.data.player.age,
+              birth: response.data.player.birth,
+              nationality: response.data.player.nationality,
+              height: response.data.player.height,
+              weight: response.data.player.weight,
+              photo: response.data.player.photo,
+              league: {
+                name: e.league.name,
+                country: e.league.country,
+                logo: e.league.logo,
+                season: e.league.season
+              },
+              game: {
+                appearences: e.game.appearences,
+                lineups: e.game.lineups,
+                minutes: e.game.minutes,
+                number: e.game.number,
+                position: e.game.position,
+                rating: e.game.rating,
+                captain: e.game.captain
+              },
+              substitute: {
+                in: e.substitute.in,
+                out: e.substitute.out,
+                bench: e.substitute.bench
+              },
+              shot: {
+                total: e.shot.total,
+                on: e.shot.on
+              },
+              goal: {
+                total: e.goal.total,
+                conceded: e.goal.conceded,
+                assists: e.goal.assists,
+                saves: e.goal.saves
+              },
+              passe: {
+                total: e.passe.total,
+                key: e.passe.key,
+                accuracy: e.passe.accuracy
+              },
+              tackle: {
+                total: e.tackle.total,
+                blocks: e.tackle.blocks,
+                interceptions: e.tackle.interceptions
+              },
+              duel: {
+                total: e.duel.total,
+                won: e.duel.won
+              },
+              dribble: {
+                attempts: e.dribble.attempts,
+                success: e.dribble.success,
+                past: e.dribble.past
+              },
+              foul: {
+                drawn: e.foul.drawn,
+                committed: e.foul.committed,
+              },
+              card: {
+                yellow: e.card.yellow,
+                yellowred: e.card.yellowred,
+                red: e.card.red
+              },
+              penalty: {
+                won: e.penalty.won,
+                committed: e.penalty.committed,
+                scored: e.penalty.scored,
+                missed: e.penalty.missed,
+                saved: e.penalty.saved
+              }
+            })
+          },
           )
           this.loadingCtrl.dismiss()
           this.ref.detectChanges()
@@ -672,7 +672,7 @@ export class StatisticsPage implements OnInit {
         console.log(error);
         this.loadingCtrl.dismiss()
 
-        alert({
+        alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
           button: ['Cerrar'],
@@ -794,7 +794,7 @@ export class StatisticsPage implements OnInit {
         console.log(error);
         this.loadingCtrl.dismiss()
 
-        alert({
+        alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
           button: ['Cerrar'],

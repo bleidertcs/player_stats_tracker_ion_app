@@ -104,11 +104,9 @@ export class AuthService {
       case 'DELETE':
         if (status === true) {
           this.headers = this.headers.set('auth-token', this.modelSession.token);
-          this.json = {};
-          return this.httpClient.delete(environment.apiUrl + route, this.json);
+          return this.httpClient.get(environment.apiUrl + route, { headers: this.headers });
         } else {
-          this.json = {};
-          return this.httpClient.delete(environment.apiUrl + route, this.json);
+          return this.httpClient.get(environment.apiUrl + route, { headers: this.headers });
         }
 
     }

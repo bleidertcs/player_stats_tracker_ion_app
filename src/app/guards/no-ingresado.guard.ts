@@ -21,7 +21,7 @@ export class NoIngresadoGuard implements CanActivate {
     console.log(token)
 
     if (token !== null && token !== undefined) {
-      this.navCtrl.navigateRoot('inicio');
+      this.navCtrl.navigateRoot('home');
       return false;
     } else {
       return true;

@@ -14,9 +14,10 @@
       <div>Apellido: {{ user.lastname }} </div>
       <div>Correo: {{ user.email }} </div>
     </ion-card-content>
-    <ion-button fill="clear" (click)="updateUser(user.id)">
+    <!-- <ion-button fill="clear" (click)="updateUser(user.id)">
       Editar <ion-icon name="pencil-outline" style="margin-left: 10px;"></ion-icon>
-    </ion-button>
+    </ion-button> -->
+    <ion-button expand="block" (click)="openModal(user.id)">Editar</ion-button>
     <ion-button fill="clear" (click)="deleteUser(user.id)">
       Eliminar <ion-icon name="trash-outline" style="margin-left: 10px;"></ion-icon>
     </ion-button>

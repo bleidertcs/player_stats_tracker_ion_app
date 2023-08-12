@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
-import { alert } from 'src/app/shared/alert/alert.component';
+import { alertModal } from 'src/app/shared/alert/alert.component';
 
 @Component({
   selector: 'app-add-team',
@@ -49,7 +49,7 @@ export class AddTeamPage implements OnInit {
         if (response.status === 'SUCCESS') {
           this.loadingCtrl.dismiss();
           this.getAllTeams()
-          alert({
+          alertModal({
             title: response.status,
             text: 'Equipo agregado exitosamente',
             button: ['Cerrar'],
@@ -59,7 +59,7 @@ export class AddTeamPage implements OnInit {
           console.log(response);
           this.loadingCtrl.dismiss();
 
-          alert({
+          alertModal({
             title: response.status,
             text: response.data,
             button: ['Cerrar'],
@@ -71,7 +71,7 @@ export class AddTeamPage implements OnInit {
         console.log(error);
         this.loadingCtrl.dismiss();
 
-        alert({
+        alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
           button: ['Cerrar'],
@@ -94,7 +94,7 @@ export class AddTeamPage implements OnInit {
           console.log(response);
           this.loadingCtrl.dismiss();
 
-          alert({
+          alertModal({
             title: response.status,
             text: response.data,
             button: ['Cerrar'],
@@ -106,7 +106,7 @@ export class AddTeamPage implements OnInit {
         console.log(error);
         this.loadingCtrl.dismiss();
 
-        alert({
+        alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
           button: ['Cerrar'],

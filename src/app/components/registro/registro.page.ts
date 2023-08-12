@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { loadingSpinner } from '../../shared/loading/loading.component';
 import { AuthService } from '../../services/auth.service';
-import { alert } from 'src/app/shared/alert/alert.component';
+import { alertModal } from 'src/app/shared/alert/alert.component';
 
 @Component({
   selector: 'app-registro',
@@ -130,7 +130,7 @@ export class RegistroPage implements OnInit {
           console.log(response);
           this.loadingCtrl.dismiss();
 
-          alert({
+          alertModal({
             title: response.status,
             text: response.data,
             button: ['Cerrar'],
@@ -142,7 +142,7 @@ export class RegistroPage implements OnInit {
         console.log(error);
         this.loadingCtrl.dismiss();
 
-        alert({
+        alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
           button: ['Cerrar'],

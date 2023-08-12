@@ -4,25 +4,23 @@ import { IngresadoGuard } from './guards/ingresado.guard';
 import { NoIngresadoGuard } from './guards/no-ingresado.guard';
 
 const routes: Routes = [
-
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
   },
-
   {
     path: 'login',
     loadChildren: () => import('./components/login/login.module').then(m => m.LoginPageModule),
     canActivate: [NoIngresadoGuard]
   },
   {
-    path: 'registro',
+    path: 'register',
     loadChildren: () => import('./components/registro/registro.module').then(m => m.RegistroPageModule),
     canActivate: [NoIngresadoGuard]
   },
   {
-    path: 'inicio',
+    path: 'home',
     loadChildren: () => import('./components/inicio/inicio.module').then(m => m.InicioPageModule),
     canActivate: [IngresadoGuard]
   },
@@ -41,6 +39,14 @@ const routes: Routes = [
   {
     path: 'users',
     loadChildren: () => import('./components/users/users.module').then(m => m.UsersPageModule)
+  },
+  {
+    path: 'user-information',
+    loadChildren: () => import('./user-information/user-information.module').then(m => m.UserInformationPageModule)
+  },
+  {
+    path: 'add-player',
+    loadChildren: () => import('./components/add-player/add-player.module').then(m => m.AddPlayerPageModule)
   }
 ];
 @NgModule({

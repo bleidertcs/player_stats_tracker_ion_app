@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-title>Welcome</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="updateUserForm">
+
+    <ion-list>
+      <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input (input)="checkFirstName()" (keypress)="validateName($event)" formControlName="firstname"
+          maxlength="30"></ion-input>
+      </ion-item>
+
+      <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-label position="floating">Apellido</ion-label>
+        <ion-input (input)="checkLastName()" (keypress)="validateName($event)" formControlName="lastname"
+          maxlength="30"></ion-input>
+      </ion-item>
+
+      <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-label position="floating">Correo Electrónico o Usuario</ion-label>
+        <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
+          maxlength="50"></ion-input>
+        <ion-note *ngIf="updateUserForm.controls['email'].hasError('pattern')" slot="error">
+          Correo Electrónico inválido
+        </ion-note>
+      </ion-item>
+
+      <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input (keypress)="validatePassword($event)" (input)="checkPassword()" formControlName="password"
+          maxlength="20">
+        </ion-input>
+        <ion-note *ngIf="updateUserForm.controls['password'].hasError('pattern')" slot="error">
+          Contraseña inválido
+        </ion-note>
+      </ion-item>
+
+      <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-select label="Perfiles" placeholder="Selecciona una opción" formControlName="idProfile">
+          <ion-select-option *ngFor="let profile of profiles"
+            [value]="profile.id">{{profile.description}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-button [disabled]="updateUserForm.invalid" (click)="updateUser(updateUserForm.value)"
+      class="registerButton">Guardar
+    </ion-button>
+    <!-- <ion-button (click)="test()">Test Registro</ion-button> -->
+
+  </form>
+</ion-content>

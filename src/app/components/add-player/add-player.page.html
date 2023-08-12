@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Jugador</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="addPlayerForm">
+
+    <ion-list>
+      <div formGroupName="player">
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input formControlName="name" maxlength="30"></ion-input>
+        </ion-item>
+
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-label position="floating">Nombres</ion-label>
+          <ion-input formControlName="firstname" maxlength="30"></ion-input>
+        </ion-item>
+
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-label position="floating">Apellidos</ion-label>
+          <ion-input formControlName="lastname" maxlength="50"></ion-input>
+        </ion-item>
+
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-label position="floating">age</ion-label>
+          <ion-input formControlName="age" maxlength="20">
+          </ion-input>
+        </ion-item>
+
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-label position="floating">Fecha de Nacimiento</ion-label>
+          <ion-input formControlName="birth" maxlength="20">
+          </ion-input>
+        </ion-item>
+
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-label position="floating">Nacionalidad</ion-label>
+          <ion-input formControlName="nationality" maxlength="20">
+          </ion-input>
+        </ion-item>
+
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-label position="floating">Altura</ion-label>
+          <ion-input formControlName="height" maxlength="20">
+          </ion-input>
+        </ion-item>
+
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-label position="floating">Peso</ion-label>
+          <ion-input formControlName="weight" maxlength="20">
+          </ion-input>
+        </ion-item>
+
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-label position="floating">URL imagen</ion-label>
+          <ion-input formControlName="photo" maxlength="20">
+          </ion-input>
+        </ion-item>
+
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-select label="Equipos" placeholder="Selecciona una opción" formControlName="id_team">
+            <ion-select-option *ngFor="let team of teams" [value]="team.id">{{team.description}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <div formGroupName="game">
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-label position="floating">Apariencia</ion-label>
+          <ion-input formControlName="appearences" maxlength="30"></ion-input>
+        </ion-item>
+
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-label position="floating">Alineación</ion-label>
+          <ion-input formControlName="lineups" maxlength="30"></ion-input>
+        </ion-item>
+
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-label position="floating">Minutos Jugados</ion-label>
+          <ion-input formControlName="minutes" maxlength="50"></ion-input>
+        </ion-item>
+
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-label position="floating">Número</ion-label>
+          <ion-input formControlName="number" maxlength="20">
+          </ion-input>
+        </ion-item>
+
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-label position="floating">Position</ion-label>
+          <ion-input formControlName="position" maxlength="20">
+          </ion-input>
+        </ion-item>
+
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-label position="floating">Valor</ion-label>
+          <ion-input formControlName="rating" maxlength="20">
+          </ion-input>
+        </ion-item>
+
+        <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-label position="floating">Capitan</ion-label>
+          <ion-input formControlName="captain" maxlength="20">
+          </ion-input>
+        </ion-item>
+      </div>
+
+    </ion-list>
+
+    <ion-button [disabled]="addPlayerForm.invalid" (click)="addPlayer()" class="registerButton">Guardar
+    </ion-button>
+
+  </form>
+</ion-content>
