@@ -6,58 +6,17 @@
 
 <ion-content>
   <ion-slides pager="true">
-    <!-- <ion-slide *ngFor="let slice of slider">
-      <div class="slide">
-        <img src="slide.img" />
-        <h2>{{ slice.title }}</h2>
-        <p>
-          {{ slice.description }}
-        </p>
-        <ion-button fill="clear" [routerLink]="['/add-team']">Comparar<ion-icon slot="end"
-            name="arrow-forward"></ion-icon></ion-button>
-      </div>
-    </ion-slide> -->
-
-    <ion-slide>
-      <img src="assets/icon/statistics.jpg" />
-      <h2>Visualizar estadísticas</h2>
+    <ion-slide *ngFor="let slide of sliders">
+      <img [src]="slide.img" />
+      <h2>{{ slide.title }}</h2>
       <p>
         The ionic conference app is a practical preview of the ionic framework in action, and a demonstration of proper
         code
         use.
       </p>
-      <ion-button fill="clear" [routerLink]="['/statistics']">Comparar<ion-icon slot="end"
+      <ion-button fill="clear" [routerLink]="[slide.route]">Comparar<ion-icon slot="end"
           name="arrow-forward"></ion-icon></ion-button>
     </ion-slide>
-
-    <ion-slide>
-      <img src="assets/icon/add.jpg" />
-      <h2>Agregar Equipo</h2>
-      <p>
-        <b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps
-        with web technologies like HTML, CSS, and JavaScript.
-      </p>
-      <ion-button fill="clear" [routerLink]="['/add-team']">Agregar<ion-icon slot="end"
-          name="arrow-forward"></ion-icon></ion-button>
-    </ion-slide>
-
-    <ion-slide>
-      <img src="assets/icon/user.jpg" />
-      <h2>Ver Usuarios</h2>
-      <p>
-        <b>Appflow</b> is a powerful set of services and features built on top of Ionic Framework that brings a
-        totally new level of app development agility to mobile dev teams.
-      </p>
-      <ion-button fill="clear" [routerLink]="['/users']">Agregar<ion-icon slot="end"
-          name="arrow-forward"></ion-icon></ion-button>
-    </ion-slide>
-
-    <!-- <ion-slide>
-      <img src="./slide-4.png" />
-      <h2>Ready to Play?</h2>
-      <ion-button fill="clear" [routerLink]="['/statistics']">Continue <ion-icon slot="end"
-          name="arrow-forward"></ion-icon></ion-button>
-    </ion-slide> -->
   </ion-slides>
 </ion-content>
 

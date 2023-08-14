@@ -14,6 +14,23 @@ export class AddPlayerPage implements OnInit {
 
   addPlayerForm: FormGroup;
   teams: any = []
+  captainList = [
+    {
+      id: 1,
+      description: 'Si',
+    },
+    {
+      id: 0,
+      description: 'No',
+    }
+  ]
+
+  textPattern = /^[a-zA-ZñÑáÁéÉíÍóÓúÚ ]+$/;
+
+  validateText(event: KeyboardEvent) {
+    let regex = RegExp(this.textPattern);
+    return regex.test(event.key);
+  }
 
   constructor(
     public fb: FormBuilder,
@@ -24,81 +41,87 @@ export class AddPlayerPage implements OnInit {
   ) {
     this.addPlayerForm = this.fb.group({
       player: new FormGroup({
-        name: new FormControl('', [Validators.required]),
-        firstname: new FormControl('', [Validators.required]),
-        lastname: new FormControl('', [Validators.required]),
-        age: new FormControl('', [Validators.required]),
+        name: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(this.textPattern)]),
+        firstname: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(this.textPattern)]),
+        lastname: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(this.textPattern)]),
+        age: new FormControl('', [Validators.required, Validators.maxLength(2)]),
         birth: new FormControl('', [Validators.required]),
-        nationality: new FormControl('', [Validators.required]),
-        height: new FormControl('', [Validators.required]),
-        weight: new FormControl('', [Validators.required]),
+        nationality: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(this.textPattern)]),
+        height: new FormControl('', [Validators.required, Validators.maxLength(4)]),
+        weight: new FormControl('', [Validators.required, Validators.maxLength(3)]),
         photo: new FormControl(''),
         id_team: new FormControl('', [Validators.required]),
       }),
       game: new FormGroup({
-        appearences: new FormControl('', [Validators.required]),
-        lineups: new FormControl('', [Validators.required]),
-        minutes: new FormControl('', [Validators.required]),
-        number: new FormControl('', [Validators.required]),
-        position: new FormControl('', [Validators.required]),
-        rating: new FormControl('', [Validators.required]),
+        appearences: new FormControl('', [Validators.required, Validators.maxLength(3)]),
+        lineups: new FormControl('', [Validators.required, Validators.maxLength(3)]),
+        minutes: new FormControl('', [Validators.required, Validators.maxLength(5)]),
+        number: new FormControl('', [Validators.required, Validators.maxLength(2)]),
+        position: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(this.textPattern)]),
+        rating: new FormControl('', [Validators.required, Validators.maxLength(10)]),
         captain: new FormControl('', [Validators.required])
       }),
       substitute: new FormGroup({
-        in: new FormControl('', [Validators.required]),
-        out: new FormControl('', [Validators.required]),
-        bench: new FormControl('', [Validators.required])
+        in: new FormControl('', [Validators.required, Validators.maxLength(2)]),
+        out: new FormControl('', [Validators.required, Validators.maxLength(2)]),
+        bench: new FormControl('', [Validators.required, Validators.maxLength(2)])
       }),
       shot: new FormGroup({
-        total: new FormControl('', [Validators.required]),
-        on: new FormControl('', [Validators.required])
+        total: new FormControl('', [Validators.required, Validators.maxLength(3)]),
+        on: new FormControl('', [Validators.required, Validators.maxLength(3)])
       }),
       goal: new FormGroup({
-        total: new FormControl('', [Validators.required]),
-        conceded: new FormControl('', [Validators.required]),
-        assists: new FormControl('', [Validators.required]),
-        save: new FormControl('', [Validators.required])
+        total: new FormControl('', [Validators.required, Validators.maxLength(3)]),
+        conceded: new FormControl('', [Validators.required, Validators.maxLength(3)]),
+        assists: new FormControl('', [Validators.required, Validators.maxLength(3)]),
+        saves: new FormControl('', [Validators.required, Validators.maxLength(3)])
       }),
       passe: new FormGroup({
-        total: new FormControl('', [Validators.required]),
-        key: new FormControl('', [Validators.required]),
-        accuracy: new FormControl('', [Validators.required])
+        total: new FormControl('', [Validators.required, Validators.maxLength(3)]),
+        key: new FormControl('', [Validators.required, Validators.maxLength(3)]),
+        accuracy: new FormControl('', [Validators.required, Validators.maxLength(3)])
       }),
       tackle: new FormGroup({
-        total: new FormControl('', [Validators.required]),
-        blocks: new FormControl('', [Validators.required]),
-        interceptions: new FormControl('', [Validators.required])
+        total: new FormControl('', [Validators.required, Validators.maxLength(3)]),
+        blocks: new FormControl('', [Validators.required, Validators.maxLength(3)]),
+        interceptions: new FormControl('', [Validators.required, Validators.maxLength(3)])
       }),
       duel: new FormGroup({
-        total: new FormControl('', [Validators.required]),
-        won: new FormControl('', [Validators.required])
+        total: new FormControl('', [Validators.required, Validators.maxLength(3)]),
+        won: new FormControl('', [Validators.required, Validators.maxLength(3)])
       }),
       dribble: new FormGroup({
-        attempts: new FormControl('', [Validators.required]),
-        success: new FormControl('', [Validators.required]),
-        past: new FormControl('', [Validators.required])
+        attempts: new FormControl('', [Validators.required, Validators.maxLength(3)]),
+        success: new FormControl('', [Validators.required, Validators.maxLength(3)]),
+        past: new FormControl('', [Validators.required, Validators.maxLength(3)])
       }),
       foul: new FormGroup({
-        drawn: new FormControl('', [Validators.required]),
-        committed: new FormControl('', [Validators.required])
+        drawn: new FormControl('', [Validators.required, Validators.maxLength(3)]),
+        committed: new FormControl('', [Validators.required, Validators.maxLength(3)])
       }),
       card: new FormGroup({
-        yellow: new FormControl('', [Validators.required]),
-        yellowred: new FormControl('', [Validators.required]),
-        red: new FormControl('', [Validators.required])
+        yellow: new FormControl('', [Validators.required, Validators.maxLength(2)]),
+        yellowred: new FormControl('', [Validators.required, Validators.maxLength(2)]),
+        red: new FormControl('', [Validators.required, Validators.maxLength(2)])
       }),
       penalty: new FormGroup({
-        won: new FormControl('', [Validators.required]),
-        committed: new FormControl('', [Validators.required]),
-        scored: new FormControl('', [Validators.required]),
-        missed: new FormControl('', [Validators.required]),
-        saved: new FormControl('', [Validators.required])
+        won: new FormControl('', [Validators.required, Validators.maxLength(2)]),
+        committed: new FormControl('', [Validators.required, Validators.maxLength(2)]),
+        scored: new FormControl('', [Validators.required, Validators.maxLength(2)]),
+        missed: new FormControl('', [Validators.required, Validators.maxLength(2)]),
+        saved: new FormControl('', [Validators.required, Validators.maxLength(2)])
       }),
     })
   }
 
   ngOnInit() {
     this.getAllTeams()
+  }
+
+  limitInput(maxLength: any, formControl: any) {
+    if (formControl.length > maxLength) {
+      formControl = Number(formControl.slice(0, maxLength));
+    }
   }
 
   getAllTeams() {
@@ -156,7 +179,7 @@ export class AddPlayerPage implements OnInit {
       goalTotal: this.addPlayerForm.controls['goal'].value.total,
       conceded: this.addPlayerForm.controls['goal'].value.conceded,
       assists: this.addPlayerForm.controls['goal'].value.assists,
-      save: this.addPlayerForm.controls['goal'].value.save,
+      saves: this.addPlayerForm.controls['goal'].value.save,
       passeTotal: this.addPlayerForm.controls['passe'].value.total,
       key: this.addPlayerForm.controls['passe'].value.key,
       accuracy: this.addPlayerForm.controls['passe'].value.accuracy,
@@ -190,40 +213,43 @@ export class AddPlayerPage implements OnInit {
       id_team: this.addPlayerForm.controls['player'].value.id_team
     }
 
-    this.authService.call(data, 'addPlayer', 'POST', true).subscribe({
-      next: async (response) => {
-        if (response.status === 'SUCCESS') {
-          alertModal({
-            title: response.status,
-            text: response.data,
-            button: ['Cerrar'],
-            alertController: this.alertController
-          })
+    console.log(data);
+    
+    this.loadingCtrl.dismiss();
+    // this.authService.call(data, 'addPlayer', 'POST', true).subscribe({
+    //   next: async (response) => {
+    //     if (response.status === 'SUCCESS') {
+    //       alertModal({
+    //         title: response.status,
+    //         text: response.data,
+    //         button: ['Cerrar'],
+    //         alertController: this.alertController
+    //       })
 
-          this.loadingCtrl.dismiss();
-        } else if (response.status === 'ERROR') {
-          console.log(response);
-          this.loadingCtrl.dismiss();
+    //       this.loadingCtrl.dismiss();
+    //     } else if (response.status === 'ERROR') {
+    //       console.log(response);
+    //       this.loadingCtrl.dismiss();
 
-          alertModal({
-            title: response.status,
-            text: response.data,
-            button: ['Cerrar'],
-            alertController: this.alertController
-          })
-        }
-      },
-      error: (error) => {
-        console.log(error);
-        this.loadingCtrl.dismiss();
+    //       alertModal({
+    //         title: response.status,
+    //         text: response.data,
+    //         button: ['Cerrar'],
+    //         alertController: this.alertController
+    //       })
+    //     }
+    //   },
+    //   error: (error) => {
+    //     console.log(error);
+    //     this.loadingCtrl.dismiss();
 
-        alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
-          button: ['Cerrar'],
-          alertController: this.alertController
-        })
-      }
-    })
+    //     alertModal({
+    //       title: 'Error',
+    //       text: 'Falla en el servidor',
+    //       button: ['Cerrar'],
+    //       alertController: this.alertController
+    //     })
+    //   }
+    // })
   }
 }

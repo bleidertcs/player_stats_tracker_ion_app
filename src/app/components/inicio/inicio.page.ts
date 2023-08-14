@@ -14,18 +14,30 @@ import { title } from 'process';
 })
 export class InicioPage implements OnInit {
 
-  slider = [
+  sliders = [
     {
-      img: 'assets/icon/statistics',
-      title: 'Welcome',
+      img: 'assets/icon/statistics.jpg',
+      title: 'Estadísticas',
       description: 'The ionic conference app is a practical preview of the ionic framework in action, and a demonstration of proper code use.',
       route: '/statistics',
     },
     {
-      img: 'assets/icon/add',
-      title: 'What is Ionic?',
+      img: 'assets/icon/add.jpg',
+      title: 'Equipo',
       description: 'Ionic Framework is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.',
       route: '/add-team',
+    },
+    {
+      img: 'assets/icon/add.jpg',
+      title: 'Jugador',
+      description: 'Ionic Framework is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.',
+      route: '/add-player',
+    },
+    {
+      img: 'assets/icon/user.jpg',
+      title: 'Usuario',
+      description: 'Ionic Framework is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.',
+      route: '/users',
     },
   ]
 
