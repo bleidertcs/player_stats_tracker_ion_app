@@ -95,8 +95,8 @@
             <div *ngFor="let player of players2">Peso: {{ player.weight }}</div>
           </ion-row>
           <ion-row>
-            <div *ngFor="let player of players1">Liga: {{ player.league }}</div>
-            <div *ngFor="let player of players2">Liga: {{ player.league }}</div>
+            <div *ngFor="let player of players1">Liga: {{ player.league.name }}</div>
+            <div *ngFor="let player of players2">Liga: {{ player.league.name }}</div>
           </ion-row>
           <ion-row>
             <div *ngFor="let player of players1">Position: {{ player.game.position === 'Defender' ? 'Defensa' :

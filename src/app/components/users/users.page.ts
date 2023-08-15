@@ -4,7 +4,7 @@ import { AlertController, IonModal, LoadingController, ModalController, NavContr
 import { AuthService } from 'src/app/services/auth.service';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 import { alertModal } from 'src/app/shared/alert/alert.component';
-import { UserInformationPage } from '../../user-information/user-information.page';
+import { UserInformationPage } from '../user-information/user-information.page';
 
 interface Users {
   id: number,
@@ -40,7 +40,7 @@ export class UsersPage implements OnInit {
     public navCtrl: NavController,
     public form: FormBuilder,
     public alertController: AlertController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
   ) {
   }
 
