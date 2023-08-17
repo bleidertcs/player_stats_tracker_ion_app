@@ -372,6 +372,7 @@ export class StatisticsPage implements OnInit {
         console.log(response)
         if (response.status === 'SUCCESS') {
           this.authService.setToken(null);
+          this.authService.setLogged(false)
           this.authService.setModelSesionInSession(this.authService.modelSession);
           this.navCtrl.navigateRoot('login');
           this.loadingCtrl.dismiss()

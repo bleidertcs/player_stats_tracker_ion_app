@@ -14,29 +14,17 @@
 </ion-header>
 
 <ion-content color="light">
-
-  <ion-card>
-
+  <ion-card style="height: 98%;">
     <ion-card-header>
-
       <ion-card-title class="ion-text-center">
-
         <div class="data-container">
-          <!-- <h2 class="border three">INICIO DE SESION</h2>
-
-          <h2 class="wave three">INICIO DE SESION</h2> -->
           Inicia Sesión
         </div>
-
       </ion-card-title>
-
     </ion-card-header>
     <ion-card-content>
-
-      <ion-img src="assets/icon/login.jpg" alt="The Wisconsin State Capitol building in Madison, WI at night"></ion-img>
-
+      <ion-img src="assets/icon/login.jpg"></ion-img>
       <form [formGroup]="formularioLogin">
-
         <ion-list>
           <ion-item fill="outline" class="loginForm">
             <ion-label position="floating">Correo Electrónico o Usuario</ion-label>
@@ -74,26 +62,26 @@
         </ion-list>
       </form>
 
+      <div class="forgot-password">
+        ¿Olvidaste la contraseña?
+      </div>
+
       <ion-button [disabled]="formularioLogin.invalid" (click)="login(formularioLogin.value)"
         class="loginButton">Iniciar Sesión
       </ion-button>
 
-      <div class="forgot-password">
-        ¿Olvidaste la contraseña?
+      <div class="register">
+        ¿No tienes una cuenta? <div style="font-weight: bold; color: black; margin-left: 5px;" [routerLink]="'/register'">Regístrate</div>
       </div>
-      <!-- <ion-button (click)="testSquad()">Squad</ion-button>
-      <ion-button (click)="testPlayer()">Player</ion-button> -->
 
     </ion-card-content>
   </ion-card>
-
 </ion-content>
 
-
-<ion-footer>
+<!-- <ion-footer>
   <ion-toolbar color="primary">
     <ion-buttons slot="end">
       <ion-button [routerLink]="['/register']">Regístrate</ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->

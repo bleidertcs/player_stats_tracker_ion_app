@@ -17,26 +17,27 @@ export class AuthService {
     idUser: this.getIdUser(),
     profile: this.getProfile(),
     email: this.getEmail(),
+    logged: this.getLogged(),
   };
 
   public modelUsers: Users = {
     userList: this.getUsersList(),
   }
 
-  public modelFootballTeams: FootballTeams = {
-    team1: this.getListFootballTeams1(),
-    team2: this.getListFootballTeams2()
-  }
+  // public modelFootballTeams: FootballTeams = {
+  //   team1: this.getListFootballTeams1(),
+  //   team2: this.getListFootballTeams2()
+  // }
 
-  public modelFootballSquads: FootballSquads = {
-    squad1: this.getListFootballSquads1(),
-    squad2: this.getListFootballSquads2()
-  }
+  // public modelFootballSquads: FootballSquads = {
+  //   squad1: this.getListFootballSquads1(),
+  //   squad2: this.getListFootballSquads2()
+  // }
 
-  public modelFootballPlayers: FootballPlayers = {
-    player1: this.getListFootballPlayers1(),
-    player2: this.getListFootballPlayers2()
-  }
+  // public modelFootballPlayers: FootballPlayers = {
+  //   player1: this.getListFootballPlayers1(),
+  //   player2: this.getListFootballPlayers2()
+  // }
 
   public modelApiCalled: ApiCalled = {
     band: this.getApiCalled(),
@@ -159,25 +160,27 @@ export class AuthService {
   setIdUser(idUser: number) { this.modelSession.idUser = idUser }
   setProfile(profile: any) { this.modelSession.profile = profile }
   setEmail(email: string) { this.modelSession.email = email }
+  setLogged(logged: boolean) { this.modelSession.logged = logged }
   setUsersList(list: object[]) { this.modelUsers.userList = list }
-  setListFootballTeams1(list: object[]) { this.modelFootballTeams.team1 = list }
-  setListFootballTeams2(list: object[]) { this.modelFootballTeams.team2 = list }
-  setListFootballSquads1(list: object[]) { this.modelFootballSquads.squad1 = list }
-  setListFootballSquads2(list: object[]) { this.modelFootballSquads.squad2 = list }
-  setListFootballPlayers1(list: object[]) { this.modelFootballPlayers.player1 = list }
-  setListFootballPlayers2(list: object[]) { this.modelFootballPlayers.player2 = list }
+  // setListFootballTeams1(list: object[]) { this.modelFootballTeams.team1 = list }
+  // setListFootballTeams2(list: object[]) { this.modelFootballTeams.team2 = list }
+  // setListFootballSquads1(list: object[]) { this.modelFootballSquads.squad1 = list }
+  // setListFootballSquads2(list: object[]) { this.modelFootballSquads.squad2 = list }
+  // setListFootballPlayers1(list: object[]) { this.modelFootballPlayers.player1 = list }
+  // setListFootballPlayers2(list: object[]) { this.modelFootballPlayers.player2 = list }
   setApiCalled(band: Boolean) { this.modelApiCalled.band = band }
 
   getToken() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().token }
   getIdUser() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().idUser }
   getProfile() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().profile }
   getEmail() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().email }
+  getLogged() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().logged  }
   getUsersList() { return this.getModelUsers() === null || this.getModelUsers() === undefined ? null : this.getModelUsers().userList }
-  getListFootballTeams1() { return this.getModelFootballTeams() === null || this.getModelFootballTeams() === undefined ? null : this.getModelFootballTeams().teams1 }
-  getListFootballTeams2() { return this.getModelFootballTeams() === null || this.getModelFootballTeams() === undefined ? null : this.getModelFootballTeams().teams2 }
-  getListFootballSquads1() { return this.getModelFootballSquads() === null || this.getModelFootballSquads() === undefined ? null : this.getModelFootballSquads().squad1 }
-  getListFootballSquads2() { return this.getModelFootballSquads() === null || this.getModelFootballSquads() === undefined ? null : this.getModelFootballSquads().squad2 }
-  getListFootballPlayers1() { return this.getModelFootballPlayers() === null || this.getModelFootballPlayers() === undefined ? null : this.getModelFootballPlayers().player1 }
-  getListFootballPlayers2() { return this.getModelFootballPlayers() === null || this.getModelFootballPlayers() === undefined ? null : this.getModelFootballPlayers().player2 }
+  // getListFootballTeams1() { return this.getModelFootballTeams() === null || this.getModelFootballTeams() === undefined ? null : this.getModelFootballTeams().teams1 }
+  // getListFootballTeams2() { return this.getModelFootballTeams() === null || this.getModelFootballTeams() === undefined ? null : this.getModelFootballTeams().teams2 }
+  // getListFootballSquads1() { return this.getModelFootballSquads() === null || this.getModelFootballSquads() === undefined ? null : this.getModelFootballSquads().squad1 }
+  // getListFootballSquads2() { return this.getModelFootballSquads() === null || this.getModelFootballSquads() === undefined ? null : this.getModelFootballSquads().squad2 }
+  // getListFootballPlayers1() { return this.getModelFootballPlayers() === null || this.getModelFootballPlayers() === undefined ? null : this.getModelFootballPlayers().player1 }
+  // getListFootballPlayers2() { return this.getModelFootballPlayers() === null || this.getModelFootballPlayers() === undefined ? null : this.getModelFootballPlayers().player2 }
   getApiCalled() { return this.getModelApiCalled() === null || this.getModelApiCalled() === undefined ? null : this.getModelApiCalled().band }
 }

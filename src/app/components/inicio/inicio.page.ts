@@ -52,45 +52,4 @@ export class InicioPage implements OnInit {
 
   ngOnInit() {
   }
-
-  async logout() {
-    await loadingSpinner(this.loadingCtrl)
-
-    let data = {
-      idUser: this.authService.getIdUser()
-    }
-
-    this.authService.call(data, 'logout', 'POST', true).subscribe({
-      next: (response) => {
-        console.log(response)
-        if (response.status === 'SUCCESS') {
-          this.authService.setToken(null);
-          this.authService.setModelSesionInSession(this.authService.modelSession);
-          this.navCtrl.navigateRoot('login');
-          this.loadingCtrl.dismiss()
-        } else {
-          console.log(response)
-          this.loadingCtrl.dismiss()
-
-          alertModal({
-            title: response.status,
-            text: response.data,
-            button: ['Cerrar'],
-            alertController: this.alertController
-          })
-        }
-      },
-      error: (error) => {
-        console.log(error)
-        this.loadingCtrl.dismiss()
-
-        alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
-          button: ['Cerrar'],
-          alertController: this.alertController
-        })
-      }
-    })
-  }
 }

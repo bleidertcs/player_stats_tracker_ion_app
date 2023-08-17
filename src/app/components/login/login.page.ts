@@ -18,6 +18,7 @@ export class LoginPage implements OnInit {
 
   formularioLogin: FormGroup;
   passwordVisibility: boolean = true;
+  logged: boolean = false;
 
   constructor(
     public fb: FormBuilder,
@@ -35,13 +36,18 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    if (this.authService.getLogged() === false) {
+      this.authService.setLogged(false)
+      this.authService.setModelSesionInSession(this.authService.modelSession);
+    } else {
+      this.authService.setLogged(true)
+      this.authService.setModelSesionInSession(this.authService.modelSession);
+    }
   }
 
   validateEmail(event: KeyboardEvent) {
     return !(event.key === ' ');
   }
-
-
 
   checkEmail() {
     if (this.formularioLogin.controls['email'].value[0] === ' ') {
@@ -84,8 +90,15 @@ export class LoginPage implements OnInit {
           this.authService.setProfile(response.data.profile.id);
           // this.authService.setEmail(response.email);
           this.authService.setModelSesionInSession(this.authService.modelSession);
+          console.log(this.authService.getLogged());
+          
 
-          this.navCtrl.navigateRoot('home');
+          if (this.authService.getLogged() === true) {
+            this.navCtrl.navigateRoot('onboarding');
+          } else {
+            this.navCtrl.navigateRoot('home');
+          }
+          
           this.loadingCtrl.dismiss();
         } else if (response.status === 'ERROR') {
           console.log(response);

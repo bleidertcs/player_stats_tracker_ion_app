@@ -1,29 +1,30 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Player Stats Tracker</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content>
   <ion-slides pager="true">
     <ion-slide *ngFor="let slide of sliders">
       <img [src]="slide.img" />
       <h2>{{ slide.title }}</h2>
-      <p>
-        The ionic conference app is a practical preview of the ionic framework in action, and a demonstration of proper
-        code
-        use.
-      </p>
-      <ion-button fill="clear" [routerLink]="[slide.route]">Comparar<ion-icon slot="end"
+      <p>{{ slide.description }}</p>
+    </ion-slide>
+    <ion-slide>
+      <img [src]="'assets/icon/statistics.jpg'" />
+      <h2>Felicitaciones</h2>
+      <p>Hola mundo</p>
+      <ion-button fill="clear" [routerLink]="'/home'">Continuar<ion-icon slot="end"
           name="arrow-forward"></ion-icon></ion-button>
     </ion-slide>
   </ion-slides>
 </ion-content>
 
-<ion-footer>
+<!-- <ion-footer>
   <ion-toolbar color="primary">
     <ion-buttons slot="end">
       <ion-button (click)="logout()">Cerrar Sesión</ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->
