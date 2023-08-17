@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, ModalController, NavController, NavParams } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-import { alertModal } from '../../shared/alert/alert.component';
-import { loadingSpinner } from '../../shared/loading/loading.component';
+import { alertModal } from '../shared/alert/alert.component';
+import { loadingSpinner } from '../shared/loading/loading.component';
 
 @Component({
   selector: 'app-user-information',

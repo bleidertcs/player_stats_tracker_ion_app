@@ -12,7 +12,7 @@
 
     <ion-list>
       <div formGroupName="player">
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Nombre</ion-label>
           <ion-input placeholder="Ej: J. Zheng" (keypress)="validateText($event)" formControlName="name" maxlength="50"></ion-input>
         </ion-item>
@@ -26,7 +26,7 @@
           El nombre contiene caracteres no válidos.
         </ion-note>
 
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Nombres</ion-label>
           <ion-input placeholder="Ej: Jonathan Henry" (keypress)="validateText($event)" formControlName="firstname" maxlength="50"></ion-input>
         </ion-item>
@@ -40,7 +40,7 @@
           Nombres contiene caracteres no válidos.
         </ion-note>
 
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Apellidos</ion-label>
           <ion-input placeholder="Ej: Zheng Fung" (keypress)="validateText($event)" formControlName="lastname" maxlength="50"></ion-input>
         </ion-item>
@@ -54,7 +54,7 @@
           Apellidos contiene caracteres no válidos.
         </ion-note>
 
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Edad</ion-label>
           <ion-input placeholder="Ej: 20" type="number" formControlName="age" maxlength="2">
           </ion-input>
@@ -69,18 +69,21 @@
           Edad contiene caracteres no válidos.
         </ion-note>
 
-        <ion-datetime-button datetime="datetime"></ion-datetime-button>
-        
-        <ion-modal [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime id="datetime" formControlName="birth"></ion-datetime>
-          </ng-template>
-        </ion-modal>
+        <ion-item>
+          Fecha de Nacimiento
+          <ion-datetime-button datetime="datetime"></ion-datetime-button>
+          
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime id="datetime" formControlName="birth"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item>
         <ion-note *ngIf="addPlayerForm.get('player.birth')?.hasError('required') && addPlayerForm.get('player.birth')?.touched">
           Fecha de Nacimiento es requerido.
         </ion-note>
 
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Nacionalidad</ion-label>
           <ion-input placeholder="Ej: Veneco" (keypress)="validateText($event)" formControlName="nationality" maxlength="20">
           </ion-input>
@@ -95,7 +98,7 @@
           Nacionalidad contiene caracteres no válidos.
         </ion-note>
 
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Altura</ion-label>
           <ion-input placeholder="Ej: 1.20" type="number" formControlName="height" maxlength="4">
           </ion-input>
@@ -110,7 +113,7 @@
           Altura contiene caracteres no válidos.
         </ion-note>
 
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Peso</ion-label>
           <ion-input placeholder="Ej: 82" type="number" formControlName="weight" maxlength="3">
           </ion-input>
@@ -125,13 +128,13 @@
           Peso contiene caracteres no válidos.
         </ion-note>
 
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">URL imagen</ion-label>
           <ion-input placeholder="Ej: https://google.com" formControlName="photo" maxlength="50">
           </ion-input>
         </ion-item>
 
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-select label="Equipos" placeholder="Selecciona un equipo" formControlName="id_team">
             <ion-select-option *ngFor="let team of teams" [value]="team.id">{{team.name}}</ion-select-option>
           </ion-select>
@@ -142,7 +145,7 @@
       </div>
 
       <div formGroupName="game">
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Patidos jugados</ion-label>
           <ion-input placeholder="Ej: 12" type="number" formControlName="appearences" maxlength="3"></ion-input>
         </ion-item>
@@ -156,7 +159,7 @@
           Partidos jugados contiene caracteres no válidos.
         </ion-note>
 
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Titularidades</ion-label>
           <ion-input placeholder="Ej: 20" type="number" formControlName="lineups" maxlength="3"></ion-input>
         </ion-item>
@@ -171,7 +174,7 @@
           Titularidades contiene caracteres no válidos.
         </ion-note>
 
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Minutos jugados</ion-label>
           <ion-input placeholder="Ej: 521" type="number" formControlName="minutes" maxlength="5"></ion-input>
         </ion-item>
@@ -186,7 +189,7 @@
           Minutos jugados contiene caracteres no válidos.
         </ion-note>
 
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Dorsal</ion-label>
           <ion-input placeholder="Ej: 20" type="number" formControlName="number" maxlength="2">
           </ion-input>
@@ -202,7 +205,7 @@
           Dorsal contiene caracteres no válidos.
         </ion-note>
 
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Posición</ion-label>
           <ion-input placeholder="Ej: Attacker" (keypress)="validateText($event)" formControlName="position" maxlength="20">
           </ion-input>
@@ -218,7 +221,7 @@
           Posición contiene caracteres no válidos.
         </ion-note>
 
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Valoración por partidos</ion-label>
           <ion-input placeholder="Ej: 2" type="number" formControlName="rating" maxlength="2">
           </ion-input>
@@ -234,7 +237,7 @@
           Valoración por partidos contiene caracteres no válidos.
         </ion-note>
 
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-select label="Equipos" placeholder="¿Es el jugador un capitán?" formControlName="captain">
             <ion-select-option *ngFor="let captain of captainList" [value]="captain.id">{{captain.description}}</ion-select-option>
           </ion-select>
@@ -246,7 +249,7 @@
       </div>
 
       <div formGroupName="substitute">
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Ingresos</ion-label>
           <ion-input placeholder="Ej: 1" type="number" formControlName="in" maxlength="2">
           </ion-input>
@@ -262,7 +265,7 @@
           Ingreso contiene caracteres no válidos.
         </ion-note>
         
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Sustituidos</ion-label>
           <ion-input placeholder="Ej: 3" type="number" formControlName="out" maxlength="2">
           </ion-input>
@@ -277,7 +280,7 @@
           Sustituidos contiene caracteres no válidos.
         </ion-note>
         
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Banqueados</ion-label>
           <ion-input placeholder="Ej: 5" type="number" formControlName="bench" maxlength="2">
           </ion-input>
@@ -294,7 +297,7 @@
       </div>
 
       <div formGroupName="shot">
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Total disparos</ion-label>
           <ion-input placeholder="Ej: 12" type="number" formControlName="total" maxlength="3">
           </ion-input>
@@ -309,7 +312,7 @@
           Total disparos contiene caracteres no válidos.
         </ion-note>
       
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Al arco</ion-label>
           <ion-input placeholder="Ej: 3" type="number" formControlName="on" maxlength="3">
           </ion-input>
@@ -326,7 +329,7 @@
       </div>
 
       <div formGroupName="goal">
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Total goles</ion-label>
           <ion-input placeholder="Ej: 4" type="number" formControlName="total" maxlength="3">
           </ion-input>
@@ -341,7 +344,7 @@
           Total goles contiene caracteres no válidos.
         </ion-note>
       
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Goles recibidos</ion-label>
           <ion-input placeholder="Ej: 2" type="number" formControlName="conceded" maxlength="3">
           </ion-input>
@@ -356,7 +359,7 @@
           Goles recibidos contiene caracteres no válidos.
         </ion-note>
 
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Asistencias</ion-label>
           <ion-input placeholder="Ej: 1" type="number" formControlName="assists" maxlength="3">
           </ion-input>
@@ -371,7 +374,7 @@
           Asistencias contiene caracteres no válidos.
         </ion-note>
         
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Goles salvados</ion-label>
           <ion-input placeholder="Ej: 0" type="number" formControlName="saves" maxlength="3">
           </ion-input>
@@ -388,7 +391,7 @@
       </div>
 
       <div formGroupName="passe">
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Total pases</ion-label>
           <ion-input placeholder="Ej: 50" type="number" formControlName="total" maxlength="3">
           </ion-input>
@@ -403,7 +406,7 @@
           Total pases contiene caracteres no válidos.
         </ion-note>
       
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Pases claves</ion-label>
           <ion-input placeholder="Ej: 5" type="number" formControlName="key" maxlength="3">
           </ion-input>
@@ -418,7 +421,7 @@
           Pases claves contiene caracteres no válidos.
         </ion-note>
       
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Precisión del pase</ion-label>
           <ion-input placeholder="Ej: 7" type="number" formControlName="accuracy" maxlength="3">
           </ion-input>
@@ -435,7 +438,7 @@
       </div>
 
       <div formGroupName="tackle">
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Total entradas</ion-label>
           <ion-input placeholder="Ej: 6" type="number" formControlName="total" maxlength="3">
           </ion-input>
@@ -450,7 +453,7 @@
           Total entradas contiene caracteres no válidos.
         </ion-note>
       
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Entrada bloqueadas</ion-label>
           <ion-input placeholder="Ej: 4" type="number" formControlName="blocks" maxlength="3">
           </ion-input>
@@ -465,7 +468,7 @@
           Entrada bloqueadas contiene caracteres no válidos.
         </ion-note>
       
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Intercepción del pase</ion-label>
           <ion-input placeholder="Ej: 3" type="number" formControlName="interceptions" maxlength="3">
           </ion-input>
@@ -482,7 +485,7 @@
       </div>
 
       <div formGroupName="duel">
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Total duelos</ion-label>
           <ion-input placeholder="Ej: 2" type="number" formControlName="total" maxlength="3">
           </ion-input>
@@ -497,7 +500,7 @@
           Total duelos contiene caracteres no válidos.
         </ion-note>
       
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Duelos ganados</ion-label>
           <ion-input placeholder="Ej: 1" type="number" formControlName="won" maxlength="3">
           </ion-input>
@@ -514,7 +517,7 @@
       </div>
 
       <div formGroupName="dribble">
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Total regates</ion-label>
           <ion-input placeholder="Ej: 8" type="number" formControlName="attempts" maxlength="3">
           </ion-input>
@@ -529,7 +532,7 @@
           Total regates contiene caracteres no válidos.
         </ion-note>
       
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Regate exitosos</ion-label>
           <ion-input placeholder="Ej: 7" type="number" formControlName="success" maxlength="3">
           </ion-input>
@@ -544,7 +547,7 @@
           Regate exitosos contiene caracteres no válidos.
         </ion-note>
       
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Regate pasados</ion-label>
           <ion-input placeholder="Ej: 4" type="number" formControlName="past" maxlength="3">
           </ion-input>
@@ -561,7 +564,7 @@
       </div>
 
       <div formGroupName="foul">
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Faltas fuertes</ion-label>
           <ion-input placeholder="Ej: 7" type="number" formControlName="drawn" maxlength="3">
           </ion-input>
@@ -576,7 +579,7 @@
           Faltas fuertes contiene caracteres no válidos.
         </ion-note>
       
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Faltas cometidas</ion-label>
           <ion-input placeholder="Ej: 0" type="number" formControlName="committed" maxlength="3">
           </ion-input>
@@ -593,7 +596,7 @@
       </div>
 
       <div formGroupName="card">
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Tarjetas amarilla</ion-label>
           <ion-input placeholder="Ej: 5" type="number" formControlName="yellow" maxlength="2">
           </ion-input>
@@ -608,7 +611,7 @@
           Tarjetas amarilla contiene caracteres no válidos.
         </ion-note>
       
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Doble amarilla</ion-label>
           <ion-input placeholder="Ej: 1" type="number" formControlName="yellowred" maxlength="2">
           </ion-input>
@@ -623,7 +626,7 @@
           Doble amarilla contiene caracteres no válidos.
         </ion-note>
       
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Tarjetas rojas</ion-label>
           <ion-input placeholder="Ej: 2" type="number" formControlName="red" maxlength="2">
           </ion-input>
@@ -640,7 +643,7 @@
       </div>
 
       <div formGroupName="penalty">
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Penalti ganados</ion-label>
           <ion-input placeholder="Ej: 3" type="number" formControlName="won" maxlength="2">
           </ion-input>
@@ -655,7 +658,7 @@
           Penalti ganados contiene caracteres no válidos.
         </ion-note>
       
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Penalti cometidos</ion-label>
           <ion-input placeholder="Ej: 6" type="number" formControlName="committed" maxlength="2">
           </ion-input>
@@ -670,7 +673,7 @@
           Penalti cometidos contiene caracteres no válidos.
         </ion-note>
       
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Penalti anotados</ion-label>
           <ion-input placeholder="Ej: 2" type="number" formControlName="scored" maxlength="2">
           </ion-input>
@@ -685,7 +688,7 @@
           Penalti anotados contiene caracteres no válidos.
         </ion-note>
 
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Penalti fallados</ion-label>
           <ion-input placeholder="Ej: 9" type="number" formControlName="missed" maxlength="2">
           </ion-input>
@@ -700,7 +703,7 @@
           Penalti fallados contiene caracteres no válidos.
         </ion-note>
         
-        <ion-item counter="true" fill="outline" class="registerForm">
+        <ion-item counter="true" fill="outline" class="full-width">
           <ion-label position="floating">Penalti salvados</ion-label>
           <ion-input placeholder="Ej: 7" type="number" formControlName="saved" maxlength="2">
           </ion-input>
@@ -720,20 +723,20 @@
     <ion-button [disabled]="addPlayerForm.invalid" (click)="addPlayer()" class="registerButton">Guardar
     </ion-button>
     
-    <!-- <div  *ngIf="squads !== undefined">
+    <div>
       <ion-grid class="ion-margin">
         <ion-row>
           <ion-col>N°</ion-col>
           <ion-col>Nombre</ion-col>
           <ion-col>Fundación</ion-col>
         </ion-row>
-        <ion-row *ngFor="let squad of squads; index as i">
+        <ion-row *ngFor="let squad of allSquads; index as i">
           <ion-col>{{ squad.id }}</ion-col>
           <ion-col>{{ squad.name }}</ion-col>
-          <ion-col>{{ squad.team.name }}</ion-col>
+          <ion-col>{{ squad.t_team.name }}</ion-col>
         </ion-row>
       </ion-grid>
-    </div> -->
+    </div>
 
   </form>
 </ion-content>

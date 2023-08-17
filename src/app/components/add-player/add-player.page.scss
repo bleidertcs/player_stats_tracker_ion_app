@@ -1,0 +1,23 @@
+.form-row {
+  display: grid;
+  flex-direction: row;
+}
+
+.form-column {
+  flex: 1;
+  margin-right: 5px;
+}
+
+.full-width {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.button {
+  display: grid;
+  grid-template-columns: 100%;
+}
+
+ion-note {
+  margin: 10px;
+}

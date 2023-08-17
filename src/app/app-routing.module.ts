@@ -42,7 +42,7 @@ const routes: Routes = [
   },
   {
     path: 'user-information',
-    loadChildren: () => import('./components/user-information/user-information.module').then(m => m.UserInformationPageModule)
+    loadChildren: () => import('./user-information/user-information.module').then(m => m.UserInformationPageModule)
   },
   {
     path: 'add-player',

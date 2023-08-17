@@ -5,7 +5,6 @@ import { Chart, ChartItem } from 'chart.js/auto';
 import { AuthService } from 'src/app/services/auth.service';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 import { alertModal } from 'src/app/shared/alert/alert.component';
-import { title } from 'process';
 
 @Component({
   selector: 'app-inicio',

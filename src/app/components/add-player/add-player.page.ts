@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,7 +14,7 @@ export class AddPlayerPage implements OnInit {
 
   addPlayerForm: FormGroup;
   teams: any = []
-  squads: [] = []
+  allSquads: any = []
   captainList = [
     {
       id: 1,
@@ -27,11 +27,6 @@ export class AddPlayerPage implements OnInit {
   ]
 
   textPattern = /^[a-zA-ZñÑáÁéÉíÍóÓúÚ ]+$/;
-
-  validateText(event: KeyboardEvent) {
-    let regex = RegExp(this.textPattern);
-    return regex.test(event.key);
-  }
 
   constructor(
     public fb: FormBuilder,
@@ -117,6 +112,12 @@ export class AddPlayerPage implements OnInit {
 
   ngOnInit() {
     this.getAllTeams()
+    this.getAllSquad()
+  }
+
+  validateText(event: KeyboardEvent) {
+    let regex = RegExp(this.textPattern);
+    return regex.test(event.key);
   }
 
   validateMaxDigits(maxDigits: number) {
@@ -233,7 +234,7 @@ export class AddPlayerPage implements OnInit {
 
           this.loadingCtrl.dismiss();
 
-          this.getSquad(parseInt(this.addPlayerForm.controls['player'].value.id_team))
+          this.getAllSquad()
         } else if (response.status === 'ERROR') {
           console.log(response);
           this.loadingCtrl.dismiss();
@@ -260,13 +261,13 @@ export class AddPlayerPage implements OnInit {
     })
   }
   
-  async getSquad(teamID: any) {
+  async getAllSquad() {
     await loadingSpinner(this.loadingCtrl)
 
-    this.authService.call(null, `getSquad/${teamID}`, 'GET', true).subscribe({
+    this.authService.call(null, 'getAllSquad', 'GET', true).subscribe({
       next: (response) => {
         if (response.status === 'SUCCESS') {
-          this.squads = response.data
+          this.allSquads = response.data
           this.loadingCtrl.dismiss();
         } else {
           console.log(response)
