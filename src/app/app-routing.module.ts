@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { IngresadoGuard } from './guards/ingresado.guard';
 import { NoIngresadoGuard } from './guards/no-ingresado.guard';
-import { AdministradorGuard } from './guards/administrador.guard';
+import { LoginPage } from './components/login/login.page';
+import { authGuardFn } from './guards/auth-fn.guard';
 
 const routes: Routes = [
 
@@ -11,6 +12,24 @@ const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
+
+  {
+    path: 'admin',
+    canActivate:[authGuardFn],
+    component:LoginPage,
+
+    children:[
+      
+      {
+        path: 'add-team',
+        loadChildren: () => import('./components/add-team/add-team.module').then(m => m.AddTeamPageModule)
+        
+    },
+  ]
+
+  },
+
+
 
   {
     path: 'login',
@@ -33,16 +52,7 @@ const routes: Routes = [
   },
   {
     path: 'statistics',
-    canLoad:[AdministradorGuard],
-    data:{
-    allowedRoles:['manager']   
-    },
-
     loadChildren: () => import('./components/statistics/statistics.module').then(m => m.StatisticsPageModule)
-  },
-  {
-    path: 'add-team',
-    loadChildren: () => import('./components/add-team/add-team.module').then(m => m.AddTeamPageModule)
   },
   {
     path: 'users',

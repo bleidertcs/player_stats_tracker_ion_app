@@ -1,3 +1,5 @@
+/**********************************************************/
+
 .header{
   width: 100%;
   
@@ -40,8 +42,9 @@
           transition: all .5s ease;
 
           &--activo{
-              height:50vh;
+              height:15vh;
               pointer-events: auto;
+             
           }
       }
   }
@@ -50,6 +53,7 @@
       flex-flow: row nowrap;
       justify-content: flex-end;
       align-items: center;
+      margin-top:30px;
 
       @media screen and (max-width:480px){
           flex-direction:column;
@@ -62,6 +66,8 @@
       }
   }
 }
+
+/**********************************************************/
 
 .custom-card {
      /* Cambiar el color de fondo */

@@ -3,7 +3,41 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Agregar Equipo</ion-title>
+   
+<!---------------------------------------------------------------------------->
+
+<header class="header" color="primary">
+
+  <ion-title>Agregar Equipo</ion-title> 
+
+<h1 class="header__h1">
+  <a href="#" class="header__a"></a>
+</h1>
+
+<button 
+  (click)=" setActive() "
+  class="header__button">
+  <svg class="header__svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+  </svg>
+</button>
+
+<nav 
+  class="header__nav"
+  [ngClass]="{ 'header__nav--activo' : active }">
+
+  <ul class="header__ul">
+
+      <li class="header__li"><a href="/add-team"  class="header__a">Añadir equipo</a></li>
+      <li class="header__li"><a href="/statistics" class="header__a">Comparar estadisticas</a></li>
+      <li class="header__li"><a href="#" class="header__a"></a></li>
+      <li class="header__li"><a href="#" class="header__a"></a></li>
+      <li class="header__li"><a href="#" class="header__a"></a></li>
+  </ul>
+</nav>
+
+</header>
+<!---------------------------------------------------------------------------->
   </ion-toolbar>
 </ion-header>
 

@@ -72,4 +72,14 @@ export class AddTeamPage implements OnInit {
       }
     })
   }
+/***************************************************************************/
+  public active:boolean = false;
+  
+  setActive():void {
+  
+  this.active =!this.active  
+  }
+
+/***************************************************************************/
+
 }

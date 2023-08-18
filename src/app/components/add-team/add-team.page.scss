@@ -27,3 +27,73 @@ div {
     border-radius: 8px;
 }
 
+/**********************************************************/
+
+.header{
+  width: 100%;
+  
+  padding:1em;
+  
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  
+  color:white;
+  &__h1{}
+  &__a{}
+  
+  &__button{
+      display: none;
+      cursor: pointer;
+
+      @media screen and (max-width:480px){
+          display: flex;
+      }
+  }
+  &__svg{
+      width:2em;
+      height:2em;
+      fill:white;
+  }
+  &__nav{
+      @media screen and (max-width:480px){
+          width:100%;
+          height:0vh;
+          
+          display: flex;
+          flex-flow: column nowrap;
+          justify-content: center;
+          align-items: center;
+
+          overflow: hidden;
+          pointer-events: none;
+          transition: all .5s ease;
+
+          &--activo{
+              height:15vh;
+              pointer-events: auto;
+             
+          }
+      }
+  }
+  &__ul{
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top:30px;
+
+      @media screen and (max-width:480px){
+          flex-direction:column;
+      }
+  }
+  &__li{
+      margin: 0 .5em;
+      @media screen and (max-width:480px){
+          margin: .5em 0;
+      }
+  }
+}
+
+/**********************************************************/
