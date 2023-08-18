@@ -13,9 +13,9 @@ import { alertModal } from 'src/app/shared/alert/alert.component';
 export class RegistroPage implements OnInit {
 
   namePattern = /^[a-zA-ZñÑáÁéÉíÍóÓúÚ ]+$/;
-  passwordPattern = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{5,20}$/;
+  passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-]).{6,20}$/;
   // emailPattern = /^(([a-zA-Z0-9]([\.\-\_]){1})|([a-zA-Z0-9]))+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4}|[a-zA-Z]{1,3}\.[a-zA-Z]{1,3})$/;
-  emailPattern = /^(?=.*[a-zA-Z0-9@.])[a-zA-Z0-9@.]{6,}$/
+  emailPattern = /^(?=.*[a-zA-Z0-9@.])[a-zA-Z0-9@.]{6,15}$/
 
   formularioRegistro: FormGroup;
   passwordVisibility: boolean = true;
@@ -44,14 +44,14 @@ export class RegistroPage implements OnInit {
   }
 
   checkFirstName() {
-    if (this.formularioRegistro.controls['firstName'].value[0] === ' ') {
-      this.formularioRegistro.controls['firstName'].reset();
+    if (this.formularioRegistro.controls['firstname'].value[0] === ' ') {
+      this.formularioRegistro.controls['firstname'].reset();
     }
   }
 
   checkLastName() {
-    if (this.formularioRegistro.controls['lastName'].value[0] === ' ') {
-      this.formularioRegistro.controls['lastName'].reset();
+    if (this.formularioRegistro.controls['lastname'].value[0] === ' ') {
+      this.formularioRegistro.controls['lastname'].reset();
     }
   }
 
@@ -113,43 +113,45 @@ export class RegistroPage implements OnInit {
     await loadingSpinner(this.loadingCtrl);
 
     let data = {
-      firstname: registerForm.firstname,
-      lastname: registerForm.lastname,
+      firstname: registerForm.firstname.trim(),
+      lastname: registerForm.lastname.trim(),
       email: registerForm.email,
       password: registerForm.password,
       id_profile: 2
     }
+    console.log(data);
+    this.loadingCtrl.dismiss();
 
-    this.auth.call(data, 'register', 'POST', false).subscribe({
-      next: (response) => {
-        if (response.status === 'SUCCESS') {
-          console.log(response);
-          this.loadingCtrl.dismiss();
-          this.navCtrl.navigateRoot('login');
-        } else {
-          console.log(response);
-          this.loadingCtrl.dismiss();
+    // this.auth.call(data, 'register', 'POST', false).subscribe({
+    //   next: (response) => {
+    //     if (response.status === 'SUCCESS') {
+    //       console.log(response);
+    //       this.loadingCtrl.dismiss();
+    //       this.navCtrl.navigateRoot('login');
+    //     } else {
+    //       console.log(response);
+    //       this.loadingCtrl.dismiss();
 
-          alertModal({
-            title: response.status,
-            text: response.data,
-            button: ['Cerrar'],
-            alertController: this.alertController
-          })
-        }
-      },
-      error: (error) => {
-        console.log(error);
-        this.loadingCtrl.dismiss();
+    //       alertModal({
+    //         title: response.status,
+    //         text: response.data,
+    //         button: ['Cerrar'],
+    //         alertController: this.alertController
+    //       })
+    //     }
+    //   },
+    //   error: (error) => {
+    //     console.log(error);
+    //     this.loadingCtrl.dismiss();
 
-        alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
-          button: ['Cerrar'],
-          alertController: this.alertController
-        })
-      }
-    })
+    //     alertModal({
+    //       title: 'Error',
+    //       text: 'Falla en el servidor',
+    //       button: ['Cerrar'],
+    //       alertController: this.alertController
+    //     })
+    //   }
+    // })
   }
 
 }

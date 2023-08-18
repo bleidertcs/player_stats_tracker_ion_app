@@ -14,6 +14,12 @@
   margin-bottom: 10px;
 }
 
+.register-text {
+  text-align: center;
+  font-weight: bold;
+  color: black;
+}
+
 .card-subtitle {
   text-align: center;
 }
@@ -22,6 +28,21 @@
 //   font-family: 'segoeui';
 // }
 
+.ion-text-center {
+  font-size: 31px;
+}
+
+.card-subtitle {
+  font-size: 16px;
+}
+
+ion-popover {
+  --width: 80px;
+}
+
+ion-card {
+  margin-top: auto;
+}
 
 ion-card-title {
 
@@ -126,6 +147,10 @@ ul {
   list-style: none;
   padding-left: 10px;
   animation: cambiar 20s infinite;
+}
+
+li {
+  font-size: 20px;
 }
 
 ul,

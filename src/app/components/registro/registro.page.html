@@ -1,10 +1,10 @@
-<ion-header>
-  <ion-toolbar color="primary">
+<ion-header class="ion-no-border">
+  <ion-toolbar color="dark">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <div class="contenedor">
-      <p>Player Stats Tracker</p>
+      <p style="font-size: 20px;">Player Stats Tracker</p>
       <ul>
         <li>es sistema</li>
         <li>es información</li>
@@ -15,39 +15,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="light">
+<ion-content color="dark">
   <ion-card>
-
-
     <ion-card-header>
-      <ion-card-title class="ion-text-center" color="dark">Registrate</ion-card-title>
+      <ion-card-title class="ion-text-center" color="dark">Crear cuenta</ion-card-title>
       <ion-card-subtitle class="card-subtitle">Es rápido y sencillo</ion-card-subtitle>
     </ion-card-header>
 
-    <!-- <ion-card-header>
-
-
-      <ion-card-title class="ion-text-center">
-
-        <div class="data-container">
-          <h2 class="border three">REGISTRO</h2>
-
-          <h2 class="wave three">REGISTRO</h2>
-
-        </div>
-
-      </ion-card-title>
-
-    </ion-card-header> -->
-
-
     <ion-card-content>
-      <ion-img src="assets/icon/registro.jpg" alt="Register Picture"></ion-img>
-
+      <ion-img src="assets/icon/register.png"></ion-img>
       <form [formGroup]="formularioRegistro">
-
         <ion-list>
-          <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-item counter="true" fill="solid" class="registerForm">
             <ion-label position="floating">Nombre</ion-label>
             <ion-input (input)="checkFirstName()" (keypress)="validateName($event)" formControlName="firstname"
               maxlength="30"></ion-input>
@@ -58,7 +37,7 @@
             </ion-note>
           </ion-item>
 
-          <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-item counter="true" fill="solid" class="registerForm">
             <ion-label position="floating">Apellido</ion-label>
             <ion-input (input)="checkLastName()" (keypress)="validateName($event)" formControlName="lastname"
               maxlength="30"></ion-input>
@@ -69,21 +48,21 @@
             </ion-note>
           </ion-item>
 
-          <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-item counter="true" fill="solid" class="registerForm">
             <ion-label position="floating">Correo Electrónico o Usuario</ion-label>
             <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
-              maxlength="50"></ion-input>
+              maxlength="15"></ion-input>
             <ion-note *ngIf="formularioRegistro.controls['email'].hasError('pattern')" slot="error">
-              Correo Electrónico inválido
+              Correo Electrónico o Usuario inválido
             </ion-note>
             <ion-note
               *ngIf="formularioRegistro.controls['email'].hasError('required') && formularioRegistro.get('email')?.touched"
               slot="error">
-              Correo Electrónico es requerido
+              Correo Electrónico o Usuario es requerido
             </ion-note>
           </ion-item>
 
-          <ion-item counter="true" fill="outline" class="registerForm">
+          <ion-item counter="true" fill="solid" class="registerForm">
             <ion-label position="floating">Contraseña</ion-label>
             <ion-input (keypress)="validatePassword($event)" (input)="checkPassword()" formControlName="password"
               [type]="passwordVisibility ? 'password' : 'text'" maxlength="20">
@@ -92,8 +71,14 @@
               <ion-icon *ngIf="passwordVisibility === false" name="eye-outline" class="iconEye"></ion-icon>
               <ion-icon *ngIf="passwordVisibility === true" name="eye-off-outline" class="iconEye"></ion-icon>
             </ion-button>
-            <ion-note *ngIf="formularioRegistro.controls['password'].hasError('pattern')" slot="error">
-              Contraseña inválido
+            <ion-note style="display: flex; flex-direction: column; " *ngIf="formularioRegistro.controls['password'].hasError('pattern')" slot="error">
+              <p>El campo Contraseña debe cumplir con las siguientes especificaciones:</p>
+              <p>- Al menos una letra en mayúscula.</p>
+              <p>- Al menos una letra en minúscula.</p>
+              <p>- Al menos un valor numérico.</p>
+              <p>- Al menos un carácter especial.</p>
+              <p>- Mínimo: 6 caracteres."</p>
+              <p>- Máximo: 20 caracteres.</p>
             </ion-note>
             <ion-note
               *ngIf="formularioRegistro.controls['password'].hasError('required') && formularioRegistro.get('password')?.touched"
@@ -101,10 +86,14 @@
               Contraseña es requerido
             </ion-note>
           </ion-item>
+
+          <div class="register-text" [routerLink]="'/login'">¿Ya tienes una cuenta?</div>
         </ion-list>
 
+        
+
         <ion-button [disabled]="formularioRegistro.invalid" (click)="register(formularioRegistro.value)"
-          class="registerButton">Registrarte
+          class="registerButton" color="dark">Registrarte
         </ion-button>
         <!-- <ion-button (click)="test()">Test Registro</ion-button> -->
 

@@ -4,8 +4,8 @@
   </ion-toolbar>
 </ion-header> -->
 
-<ion-content>
-  <ion-slides pager="true">
+<ion-content color="dark">
+  <!-- <ion-slides pager="true">
     <ion-slide *ngFor="let slide of sliders">
       <img [src]="slide.img" />
       <h2>{{ slide.title }}</h2>
@@ -18,7 +18,24 @@
       <ion-button fill="clear" [routerLink]="'/home'">Continuar<ion-icon slot="end"
           name="arrow-forward"></ion-icon></ion-button>
     </ion-slide>
-  </ion-slides>
+  </ion-slides> -->
+
+  <ion-card style="height: 96%; border-radius: 20px; margin-top: 4%;">
+    <swiper-container [loop]="true" [pagination]="true">
+      <swiper-slide *ngFor="let slide of sliders">
+        <img [src]="slide.img" />
+        <h2 style="color: black;">{{ slide.title }}</h2>
+        <p>{{ slide.description }}</p>
+      </swiper-slide>
+      <swiper-slide>
+        <img [src]="'assets/icon/statistics.jpg'" />
+        <h2>Felicitaciones</h2>
+        <p>Hola mundo</p>
+        <ion-button fill="clear" [routerLink]="'/home'">Continuar<ion-icon slot="end"
+            name="arrow-forward"></ion-icon></ion-button>
+      </swiper-slide>
+    </swiper-container>
+  </ion-card>
 </ion-content>
 
 <!-- <ion-footer>

@@ -1,8 +1,8 @@
-<ion-header>
-  <ion-toolbar color="primary">
+<ion-header class="ion-no-border">
+  <ion-toolbar color="dark">
     <ion-title>
       <div class="contenedor">
-        <p>Player Stats Tracker</p>
+        <p style="color: white;">Player Stats Tracker</p>
         <ul>
           <li>es sistema</li>
           <li>es información</li>
@@ -13,24 +13,23 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="light">
-  <ion-card style="height: 98%;">
-    <ion-card-header>
-      <ion-card-title class="ion-text-center">
-        <div class="data-container">
-          Inicia Sesión
-        </div>
-      </ion-card-title>
-    </ion-card-header>
+<ion-content color="dark">
+  <ion-card color="light">
     <ion-card-content>
-      <ion-img src="assets/icon/login.jpg"></ion-img>
+      <ion-img src="assets/icon/login-1.png"></ion-img>
+      <div class="data-container">
+        Bienvenido
+      </div>
+      <div style="color: black; text-align: center; font-size: 15px;">
+        Inicia Sesión para continuar
+      </div>
       <form [formGroup]="formularioLogin">
-        <ion-list>
-          <ion-item fill="outline" class="loginForm">
+        <ion-list style="background-color: transparent;">
+          <ion-item fill="solid" class="loginForm">
             <ion-label position="floating">Correo Electrónico o Usuario</ion-label>
             <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
               maxlength="50"></ion-input>
-            <ion-icon name="mail-outline" slot="end" fill="clear"></ion-icon>
+            <ion-icon name="mail-outline" slot="end" fill="clear" color="dark"></ion-icon>
             <ion-note *ngIf="formularioLogin.controls['email'].hasError('pattern')" slot="error">
               Correo Electrónico inválido
             </ion-note>
@@ -41,14 +40,14 @@
             </ion-note>
           </ion-item>
 
-          <ion-item fill="outline" class="loginForm">
+          <ion-item fill="solid" class="loginForm">
             <ion-label position="floating">Contraseña</ion-label>
             <ion-input (keypress)="validatePassword($event)" (input)="checkPassword()" formControlName="password"
               [type]="passwordVisibility ? 'password' : 'text'" maxlength="20">
             </ion-input>
             <ion-button slot="end" fill="clear" (click)="showPassword()">
-              <ion-icon *ngIf="passwordVisibility === false" name="eye-outline" class="iconEye"></ion-icon>
-              <ion-icon *ngIf="passwordVisibility === true" name="eye-off-outline" class="iconEye"></ion-icon>
+              <ion-icon *ngIf="passwordVisibility === false" name="eye-outline" class="iconEye" color="dark"></ion-icon>
+              <ion-icon *ngIf="passwordVisibility === true" name="eye-off-outline" class="iconEye" color="dark"></ion-icon>
             </ion-button>
             <ion-note *ngIf="formularioLogin.controls['password'].hasError('pattern')" slot="error">
               Contraseña inválido
@@ -67,11 +66,11 @@
       </div>
 
       <ion-button [disabled]="formularioLogin.invalid" (click)="login(formularioLogin.value)"
-        class="loginButton">Iniciar Sesión
+        class="loginButton" color="dark">Iniciar Sesión
       </ion-button>
 
       <div class="register">
-        ¿No tienes una cuenta? <div style="font-weight: bold; color: black; margin-left: 5px;" [routerLink]="'/register'">Regístrate</div>
+        ¿No tienes una cuenta? <div class="register-text" [routerLink]="'/register'">Regístrate</div>
       </div>
 
     </ion-card-content>

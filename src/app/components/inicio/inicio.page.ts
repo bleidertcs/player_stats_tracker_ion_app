@@ -5,6 +5,8 @@ import { Chart, ChartItem } from 'chart.js/auto';
 import { AuthService } from 'src/app/services/auth.service';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 import { alertModal } from 'src/app/shared/alert/alert.component';
+import { register } from 'swiper/element/bundle';
+register();
 
 @Component({
   selector: 'app-inicio',
