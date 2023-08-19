@@ -4,7 +4,7 @@ import { AlertController, IonModal, LoadingController, ModalController, NavContr
 import { AuthService } from 'src/app/services/auth.service';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 import { alertModal } from 'src/app/shared/alert/alert.component';
-import { UserInformationPage } from '../../user-information/user-information.page';
+import { UserInformationPage } from '../user-information/user-information.page';
 
 interface Users {
   id: number,
@@ -12,7 +12,10 @@ interface Users {
   lastname: string,
   email: string,
   password: string,
-  idProfile: number
+  profile: {
+    id: number,
+    description: string
+  }
 }
 
 interface User {
@@ -21,7 +24,10 @@ interface User {
   lastname: string,
   email: string,
   password: string,
-  idProfile: number
+  profile: {
+    id: number,
+    description: string
+  }
 }
 
 @Component({
@@ -83,7 +89,10 @@ export class UsersPage implements OnInit {
               lastname: e.lastname,
               email: e.email,
               password: e.password,
-              idProfile: e.profile.id
+              profile: {
+                id: e.profile.id,
+                description: e.profile.description
+              }
             })
           })
           this.authService.setUsersList(this.users)
@@ -125,7 +134,7 @@ export class UsersPage implements OnInit {
             this.user = []
             response.data.map((e: {
               id: number;
-              profile: any; firstname: string; lastname: string; email: string; password: string;
+              profile: { id: number; description: string }; firstname: string; lastname: string; email: string; password: string;
             }) => {
               this.user.push({
                 id: e.id,
@@ -133,10 +142,16 @@ export class UsersPage implements OnInit {
                 lastname: e.lastname,
                 email: e.email,
                 password: e.password,
-                idProfile: e.profile.id
+                profile: {
+                  id: e.profile.id,
+                  description: e.profile.description
+                }
               })
             })
           }
+
+          console.log(this.user);
+
           resolve();
           this.loadingCtrl.dismiss()
         },

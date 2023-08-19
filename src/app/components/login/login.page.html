@@ -31,12 +31,12 @@
               maxlength="50"></ion-input>
             <ion-icon name="mail-outline" slot="end" fill="clear" color="dark"></ion-icon>
             <ion-note *ngIf="formularioLogin.controls['email'].hasError('pattern')" slot="error">
-              Correo Electrónico inválido
+              Correo Electrónico o Usuario inválido
             </ion-note>
             <ion-note
               *ngIf="formularioLogin.controls['email'].hasError('required') && formularioLogin.get('email')?.touched"
               slot="error">
-              Correo Electrónico es requerido
+              Correo Electrónico o Usuario es requerido
             </ion-note>
           </ion-item>
 
@@ -47,7 +47,8 @@
             </ion-input>
             <ion-button slot="end" fill="clear" (click)="showPassword()">
               <ion-icon *ngIf="passwordVisibility === false" name="eye-outline" class="iconEye" color="dark"></ion-icon>
-              <ion-icon *ngIf="passwordVisibility === true" name="eye-off-outline" class="iconEye" color="dark"></ion-icon>
+              <ion-icon *ngIf="passwordVisibility === true" name="eye-off-outline" class="iconEye"
+                color="dark"></ion-icon>
             </ion-button>
             <ion-note *ngIf="formularioLogin.controls['password'].hasError('pattern')" slot="error">
               Contraseña inválido
@@ -65,8 +66,8 @@
         ¿Olvidaste la contraseña?
       </div>
 
-      <ion-button [disabled]="formularioLogin.invalid" (click)="login(formularioLogin.value)"
-        class="loginButton" color="dark">Iniciar Sesión
+      <ion-button [disabled]="formularioLogin.invalid" (click)="login(formularioLogin.value)" class="loginButton"
+        color="dark">Iniciar Sesión
       </ion-button>
 
       <div class="register">

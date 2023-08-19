@@ -14,7 +14,7 @@ export class LoginPage implements OnInit {
 
   // emailPattern = /^(([a-zA-Z0-9]([\.\-\_]){1})|([a-zA-Z0-9]))+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4}|[a-zA-Z]{1,3}\.[a-zA-Z]{1,3})$/;
   emailPattern = /^(?=.*[a-zA-Z0-9@.])[a-zA-Z0-9@.]{6,}$/;
-  passwordPattern = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{5,20}$/;
+  passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-]).{6,20}$/;
 
   formularioLogin: FormGroup;
   passwordVisibility: boolean = true;
@@ -91,14 +91,14 @@ export class LoginPage implements OnInit {
           // this.authService.setEmail(response.email);
           this.authService.setModelSesionInSession(this.authService.modelSession);
           console.log(this.authService.getLogged());
-          
+
 
           if (this.authService.getLogged() === true) {
             this.navCtrl.navigateRoot('onboarding');
           } else {
             this.navCtrl.navigateRoot('home');
           }
-          
+
           this.loadingCtrl.dismiss();
         } else if (response.status === 'ERROR') {
           console.log(response);

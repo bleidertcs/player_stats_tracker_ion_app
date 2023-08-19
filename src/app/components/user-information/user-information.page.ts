@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, ModalController, NavController, NavParams } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-import { alertModal } from '../shared/alert/alert.component';
-import { loadingSpinner } from '../shared/loading/loading.component';
+import { alertModal } from '../../shared/alert/alert.component';
+import { loadingSpinner } from '../../shared/loading/loading.component';
 
 @Component({
   selector: 'app-user-information',
@@ -14,7 +14,7 @@ export class UserInformationPage implements OnInit {
 
   namePattern = /^[a-zA-ZñÑáÁéÉíÍóÓúÚ ]+$/;
   emailPattern = /^(?=.*[a-zA-Z0-9@.])[a-zA-Z0-9@.]{6,}$/;
-  passwordPattern = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{5,20}$/;
+  passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-]).{6,20}$/;
 
   updateUserForm: FormGroup;
   profiles: any = [];
@@ -29,10 +29,10 @@ export class UserInformationPage implements OnInit {
     private navParams: NavParams,
   ) {
     this.updateUserForm = this.form.group({
-      firstname: new FormControl('', Validators.pattern(this.namePattern)),
-      lastname: new FormControl('', Validators.pattern(this.namePattern)),
-      email: new FormControl('', Validators.pattern(this.emailPattern)),
-      password: new FormControl('', Validators.pattern(this.passwordPattern)),
+      firstname: new FormControl('', [Validators.required, Validators.pattern(this.namePattern)]),
+      lastname: new FormControl('', [Validators.required, Validators.pattern(this.namePattern)]),
+      email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
+      password: new FormControl('', [Validators.required, Validators.pattern(this.passwordPattern)]),
       idProfile: new FormControl(''),
     })
   }
@@ -46,7 +46,7 @@ export class UserInformationPage implements OnInit {
     this.updateUserForm.controls['firstname'].setValue(this.navParams.get('user')[0].firstname)
     this.updateUserForm.controls['lastname'].setValue(this.navParams.get('user')[0].lastname)
     this.updateUserForm.controls['email'].setValue(this.navParams.get('user')[0].email)
-    this.updateUserForm.controls['idProfile'].setValue(this.navParams.get('user')[0].idProfile)
+    this.updateUserForm.controls['idProfile'].setValue(this.navParams.get('user')[0].profile.id)
   }
 
   cancel() {
@@ -132,8 +132,8 @@ export class UserInformationPage implements OnInit {
     await loadingSpinner(this.loadingCtrl)
 
     let data = {
-      firstname: updateInformation.firstname,
-      lastname: updateInformation.lastname,
+      firstname: updateInformation.firstname.trim(),
+      lastname: updateInformation.lastname.trim(),
       email: updateInformation.email,
       password: updateInformation.password != '' ? updateInformation.password : this.navParams.get('user')[0].password,
       id_profile: updateInformation.idProfile

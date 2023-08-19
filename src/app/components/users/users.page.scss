@@ -1,0 +1,49 @@
+.user-card {
+  margin: 20px;
+
+  ion-card-content {
+    .user-row {
+      .user-info-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .user-fullname {
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: black;
+        }
+
+        .user-buttons-col {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          color: black;
+        }
+
+        .user-buttons {
+          display: flex;
+          gap: 10px;
+          /* Espacio entre los botones */
+        }
+      }
+
+      .user-email {
+        font-size: 1rem;
+        color: black;
+      }
+
+      .user-icon {
+        font-size: 4rem;
+        color: black;
+      }
+
+      .user-info {
+        display: flex;
+        flex-direction: column;
+        font-size: 1rem;
+        color: black;
+      }
+    }
+  }
+}

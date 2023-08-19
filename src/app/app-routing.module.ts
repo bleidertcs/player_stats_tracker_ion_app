@@ -46,7 +46,7 @@ const routes: Routes = [
   },
   {
     path: 'user-information',
-    loadChildren: () => import('./user-information/user-information.module').then(m => m.UserInformationPageModule),
+    loadChildren: () => import('./components/user-information/user-information.module').then(m => m.UserInformationPageModule),
     // canActivate: [RoutesGuard]
   },
   {
@@ -56,7 +56,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./components/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./components/home/home.module').then(m => m.HomePageModule)
   }
 
 ];
