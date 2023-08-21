@@ -12,6 +12,28 @@ import { alertModal } from 'src/app/shared/alert/alert.component';
 })
 export class AddTeamPage implements OnInit {
 
+  
+  // ngOnInit(): void {
+  // }
+
+  // addEquipoForm: FormGroup;
+  // equipos: any[] = [];
+
+  // constructor(private formBuilder: FormBuilder) {
+  //   this.addEquipoForm = this.formBuilder.group({
+  //     nombreEquipo: ['', Validators.required],
+  //     pais: ['', Validators.required],
+  //     anioFundacion: ['', Validators.required],
+  //     urlImagen: [''],
+  //   });
+  // }
+
+  // agregarEquipo() {
+  //   const nuevoEquipo = this.addEquipoForm.value;
+  //   this.equipos.push(nuevoEquipo);
+  //   this.addEquipoForm.reset();
+  // }
+
   addTeamForm: FormGroup;
   allTeams: any = [];
 

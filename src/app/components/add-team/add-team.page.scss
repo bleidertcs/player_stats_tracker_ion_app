@@ -1,36 +1,98 @@
-ion-card {
-  padding: 10px;
-  background-repeat: no-repeat;
+// ion-card {
+//   padding: 10px;
+//   background-repeat: no-repeat;
+//   color: white;
+// }
+
+// div {
+//   text-align: center;
+//   margin-top: 5px;
+//   margin-bottom: 5px;
+// }
+
+// ion-grid {
+//   --ion-grid-column-padding: 10px;
+//   border-collapse: collapse;
+//   border-style: hidden;
+
+//   ion-row:first-child {
+//     background-color: #2dd36f;
+//     font-weight: bold;
+//   }
+
+//   ion-col {
+//     border: 1px solid black;
+//     border-bottom: 0;
+//     border-right: 0;
+//   }
+
+//   ion-col:last-child {
+//     border-right: 1px solid black;
+//   }
+
+//   ion-row:last-child {
+//     border-bottom: 1px solid black;
+//   }
+// }
+
+.equipo-card {
   color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+
+  .equipo-icon {
+    font-size: 5rem;
+    color: white;
+  }
+
+  h2 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+
+  ion-item {
+    margin-bottom: 15px;
+  }
+
+  ion-button {
+    margin-top: 15px;
+  }
 }
 
-div {
-  text-align: center;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
+.equipos-list-card {
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
 
-ion-grid {
-  --ion-grid-column-padding: 10px;
-  border-collapse: collapse;
-  border-style: hidden;
-
-  ion-row:first-child {
-    background-color: #2dd36f;
-    font-weight: bold;
+  h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
   }
 
-  ion-col {
-    border: 1px solid black;
-    border-bottom: 0;
-    border-right: 0;
-  }
+  ion-list {
+    ion-item {
+      ion-avatar {
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+        }
+      }
 
-  ion-col:last-child {
-    border-right: 1px solid black;
-  }
+      ion-label {
+        h3 {
+          margin-top: 5px;
+          font-size: 1.2rem;
+        }
 
-  ion-row:last-child {
-    border-bottom: 1px solid black;
+        p {
+          font-size: 14px;
+          color: #999;
+        }
+      }
+    }
   }
 }

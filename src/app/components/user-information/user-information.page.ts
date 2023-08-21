@@ -32,7 +32,7 @@ export class UserInformationPage implements OnInit {
       firstname: new FormControl('', [Validators.required, Validators.pattern(this.namePattern)]),
       lastname: new FormControl('', [Validators.required, Validators.pattern(this.namePattern)]),
       email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
-      password: new FormControl('', [Validators.required, Validators.pattern(this.passwordPattern)]),
+      password: new FormControl('', [Validators.pattern(this.passwordPattern)]),
       idProfile: new FormControl(''),
     })
   }
