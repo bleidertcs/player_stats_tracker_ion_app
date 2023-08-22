@@ -1,23 +1,101 @@
-.form-row {
-  display: grid;
-  flex-direction: row;
-}
+// .form-row {
+//   display: grid;
+//   flex-direction: row;
+// }
 
-.form-column {
-  flex: 1;
-  margin-right: 5px;
-}
+// .form-column {
+//   flex: 1;
+//   margin-right: 5px;
+// }
 
-.full-width {
+// .full-width {
+//   width: 100%;
+//   margin-top: 10px;
+// }
+
+// .button {
+//   display: grid;
+//   grid-template-columns: 100%;
+// }
+
+// ion-note {
+//   margin: 10px;
+// }
+
+swiper-container {
   width: 100%;
-  margin-top: 10px;
+  height: 100%;
 }
 
-.button {
-  display: grid;
-  grid-template-columns: 100%;
+swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  // width: 100%;
+  // height: 100%;
+
+  // font-size: 18px;
+
+  // text-align: center;
+  // box-sizing: border-box;
 }
 
-ion-note {
-  margin: 10px;
+.jugador-card {
+  // background-color: black;
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  overflow-y: scroll;
+
+  .jugador-icon {
+    font-size: 5rem;
+    color: white;
+  }
+
+  h2 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+
+  ion-item {
+    margin-bottom: 15px;
+  }
+
+  ion-button {
+    margin-top: 15px;
+  }
+}
+
+.block {
+  width: 100%;
+  height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-modal {
+  --height: auto;
+}
+
+.jugador-list-card {
+  // background-color: black;
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+
+  ion-list-header {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  ion-item {
+    background-color: transparent;
+    border-bottom: 1px solid white;
+  }
 }

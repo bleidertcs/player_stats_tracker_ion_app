@@ -4,6 +4,7 @@ import { AlertController, LoadingController, NavController } from '@ionic/angula
 import { AuthService } from 'src/app/services/auth.service';
 import { alertModal } from 'src/app/shared/alert/alert.component';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-add-player',
@@ -11,7 +12,6 @@ import { loadingSpinner } from 'src/app/shared/loading/loading.component';
   styleUrls: ['./add-player.page.scss'],
 })
 export class AddPlayerPage implements OnInit {
-
   addPlayerForm: FormGroup;
   teams: any = []
   allSquads: any = []

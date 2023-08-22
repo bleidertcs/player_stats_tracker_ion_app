@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar color="dark">
     <ion-buttons slot="start">
       <ion-button color="medium" (click)="cancel()">
@@ -14,7 +14,6 @@
 <ion-content class="ion-padding">
   <form [formGroup]="updateUserForm">
     <ion-icon name="person-circle-outline" style="display: block; margin: 0 auto; font-size: 15rem;"></ion-icon>
-
     <ion-list>
       <ion-item counter="true" fill="solid" class="form">
         <ion-label position="floating">Nombre</ion-label>
