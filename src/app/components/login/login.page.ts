@@ -38,10 +38,10 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     if (this.authService.getLogged() === false) {
       this.authService.setLogged(false)
-      this.authService.setModelSesionInSession(this.authService.modelSession);
-    } else {
+      this.authService.setModelLog(this.authService.modelLog);
+    } else if (this.authService.getLogged() === true || this.authService.getLogged() === null) {
       this.authService.setLogged(true)
-      this.authService.setModelSesionInSession(this.authService.modelSession);
+      this.authService.setModelLog(this.authService.modelLog);
     }
   }
 

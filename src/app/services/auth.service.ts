@@ -6,6 +6,7 @@ import { ApiCalled } from '../models/api-called.models';
 import { FootballPlayers, FootballSquads, FootballTeams } from '../models/football.models';
 import { Session } from '../models/login.models';
 import { Users } from '../models/users.models';
+import { Log } from '../models/log.models';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,11 @@ export class AuthService {
     idUser: this.getIdUser(),
     profile: this.getProfile(),
     email: this.getEmail(),
-    logged: this.getLogged(),
   };
+
+  public modelLog: Log = {
+    logged: this.getLogged(),
+  }
 
   public modelUsers: Users = {
     userList: this.getUsersList(),
@@ -121,15 +125,18 @@ export class AuthService {
   setModelUsers(modelUsers: Users) {
     sessionStorage.setItem('modelUsers', JSON.stringify(modelUsers));
   }
-  setModelFootballTeams(modelFootballTeams: FootballTeams) {
-    sessionStorage.setItem('modelFootballTeams', JSON.stringify(modelFootballTeams))
+  setModelLog(modelLog: Log) {
+    localStorage.setItem('modelLog', JSON.stringify(modelLog));
   }
-  setModelFootballSquads(modelFootballSquads: FootballSquads) {
-    sessionStorage.setItem('modelFootballSquads', JSON.stringify(modelFootballSquads))
-  }
-  setModelFootballPlayers(modelFootballPlayers: FootballPlayers) {
-    sessionStorage.setItem('modelFootballPlayers', JSON.stringify(modelFootballPlayers))
-  }
+  // setModelFootballTeams(modelFootballTeams: FootballTeams) {
+  //   sessionStorage.setItem('modelFootballTeams', JSON.stringify(modelFootballTeams))
+  // }
+  // setModelFootballSquads(modelFootballSquads: FootballSquads) {
+  //   sessionStorage.setItem('modelFootballSquads', JSON.stringify(modelFootballSquads))
+  // }
+  // setModelFootballPlayers(modelFootballPlayers: FootballPlayers) {
+  //   sessionStorage.setItem('modelFootballPlayers', JSON.stringify(modelFootballPlayers))
+  // }
   setModelApiCalled(modelApiCalled: ApiCalled) {
     sessionStorage.setItem('modelApiCalled', JSON.stringify(modelApiCalled))
   }
@@ -139,18 +146,21 @@ export class AuthService {
   getModelSesion() {
     return sessionStorage.getItem('modelSession') === null ? null : JSON.parse(sessionStorage.getItem('modelSession') || '')
   }
+  getModelLog() {
+    return localStorage.getItem('modelLog') === null ? null : JSON.parse(localStorage.getItem('modelLog') || '') 
+  }
   getModelUsers() {
     return sessionStorage.getItem('modelUsers') === null ? null : JSON.parse(sessionStorage.getItem('modelUsers') || '')
   }
-  getModelFootballTeams() {
-    return sessionStorage.getItem('modelFootballTeams') === null ? null : JSON.parse(sessionStorage.getItem('modelFootballTeams') || '');
-  }
-  getModelFootballSquads() {
-    return sessionStorage.getItem('modelFootballSquads') === null ? null : JSON.parse(sessionStorage.getItem('modelFootballSquads') || '');
-  }
-  getModelFootballPlayers() {
-    return sessionStorage.getItem('modelFootballPlayers') === null ? null : JSON.parse(sessionStorage.getItem('modelFootballPlayers') || '');
-  }
+  // getModelFootballTeams() {
+  //   return sessionStorage.getItem('modelFootballTeams') === null ? null : JSON.parse(sessionStorage.getItem('modelFootballTeams') || '');
+  // }
+  // getModelFootballSquads() {
+  //   return sessionStorage.getItem('modelFootballSquads') === null ? null : JSON.parse(sessionStorage.getItem('modelFootballSquads') || '');
+  // }
+  // getModelFootballPlayers() {
+  //   return sessionStorage.getItem('modelFootballPlayers') === null ? null : JSON.parse(sessionStorage.getItem('modelFootballPlayers') || '');
+  // }
   getModelApiCalled() {
     return sessionStorage.getItem('modelApiCalled') === null ? null : JSON.parse(sessionStorage.getItem('modelApiCalled') || '');
   }
@@ -160,7 +170,7 @@ export class AuthService {
   setIdUser(idUser: number) { this.modelSession.idUser = idUser }
   setProfile(profile: any) { this.modelSession.profile = profile }
   setEmail(email: string) { this.modelSession.email = email }
-  setLogged(logged: boolean) { this.modelSession.logged = logged }
+  setLogged(logged: boolean) { this.modelLog.logged = logged }
   setUsersList(list: object[]) { this.modelUsers.userList = list }
   // setListFootballTeams1(list: object[]) { this.modelFootballTeams.team1 = list }
   // setListFootballTeams2(list: object[]) { this.modelFootballTeams.team2 = list }
@@ -174,7 +184,7 @@ export class AuthService {
   getIdUser() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().idUser }
   getProfile() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().profile }
   getEmail() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().email }
-  getLogged() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().logged  }
+  getLogged() { return this.getModelLog() === null || this.getModelLog() === undefined ? null : this.getModelLog().logged  }
   getUsersList() { return this.getModelUsers() === null || this.getModelUsers() === undefined ? null : this.getModelUsers().userList }
   // getListFootballTeams1() { return this.getModelFootballTeams() === null || this.getModelFootballTeams() === undefined ? null : this.getModelFootballTeams().teams1 }
   // getListFootballTeams2() { return this.getModelFootballTeams() === null || this.getModelFootballTeams() === undefined ? null : this.getModelFootballTeams().teams2 }

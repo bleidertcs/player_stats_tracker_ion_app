@@ -38,6 +38,7 @@ export class HomePage implements OnInit {
           this.authService.setToken(null);
           this.authService.setLogged(false)
           this.authService.setModelSesionInSession(this.authService.modelSession);
+          this.authService.setModelLog(this.authService.modelLog);
           this.navCtrl.navigateRoot('login');
           console.log(this.authService.getLogged());
           this.loadingCtrl.dismiss()

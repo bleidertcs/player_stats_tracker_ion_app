@@ -3,5 +3,4 @@ export interface Session {
   idUser: number;
   profile: any;
   email: string;
-  logged: boolean;
 }
