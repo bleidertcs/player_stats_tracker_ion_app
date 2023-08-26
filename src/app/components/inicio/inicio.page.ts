@@ -18,26 +18,32 @@ export class InicioPage implements OnInit {
   sliders = [
     {
       img: 'assets/icon/statistics.jpg',
-      title: 'Estadísticas',
-      description: 'The ionic conference app is a practical preview of the ionic framework in action, and a demonstration of proper code use.',
+      title: '¡Bienvenido!',
+      description: 'Aprende a aprovechar al máximo nuestra aplicación en este tutorial de introducción. Te guiaremos por las funciones clave para que te familiarices con la experiencia.',
       route: '/statistics',
     },
     {
       img: 'assets/icon/add.jpg',
-      title: 'Equipo',
-      description: 'Ionic Framework is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.',
+      title: 'Equipos y Visualización',
+      description: 'Aprende a agregar y ver equipos en esta diapositiva. Gestionar tus equipos es clave para aprovechar nuestra aplicación.',
       route: '/add-team',
     },
     {
       img: 'assets/icon/add.jpg',
-      title: 'Jugador',
-      description: 'Ionic Framework is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.',
+      title: 'Agregar Jugadores',
+      description: 'Descubre cómo añadir jugadores a tus equipos. Obtén un análisis completo de las estadísticas.',
       route: '/add-player',
     },
     {
+      img: 'assets/icon/statistics.jpg',
+      title: 'Comparación de Estadísticas',
+      description: 'Aprende a comparar estadísticas entre jugadores y jugadores. Obtén poderosos análisis en nuestra aplicación.',
+      route: '/statistics',
+    },
+    {
       img: 'assets/icon/user.jpg',
-      title: 'Usuario',
-      description: 'Ionic Framework is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.',
+      title: 'Gestión de Usuarios',
+      description: 'Explora cómo gestionar usuarios en esta diapositiva. Aprende a configurar cuentas y administrar permisos para una experiencia personalizada.',
       route: '/users',
     },
   ]
@@ -53,5 +59,11 @@ export class InicioPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  goHome() {
+    this.authService.setLogged(true)
+    this.authService.setModelLog(this.authService.modelLog);
+    this.navCtrl.navigateRoot('home');
   }
 }

@@ -29,9 +29,11 @@
       </swiper-slide>
       <swiper-slide>
         <img [src]="'assets/icon/statistics.jpg'" />
-        <h2>Felicitaciones</h2>
-        <p>Hola mundo</p>
-        <ion-button fill="clear" [routerLink]="'/home'">Continuar<ion-icon slot="end"
+        <h2 style="color: black;">¡Listo para Explorar!</h2>
+        <p>¡Felicidades por completar la introducción! Explora todas las funciones y disfruta del análisis completo de
+          estadísticas de jugadores.
+        </p>
+        <ion-button fill="clear" (click)="goHome()">Continuar<ion-icon slot="end"
             name="arrow-forward"></ion-icon></ion-button>
       </swiper-slide>
     </swiper-container>
