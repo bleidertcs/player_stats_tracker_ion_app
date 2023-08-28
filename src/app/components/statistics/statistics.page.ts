@@ -200,6 +200,8 @@ interface Players2 {
   styleUrls: ['./statistics.page.scss'],
 })
 export class StatisticsPage implements OnInit {
+  @ViewChild('chart1') chartCanvas1!: ElementRef;
+  @ViewChild('chart2') chartCanvas2!: ElementRef;
 
   teams1: selectTeam1[] = []
   teams2: selectTeam2[] = []
@@ -208,8 +210,8 @@ export class StatisticsPage implements OnInit {
   players1: Players1[] = []
   players2: Players2[] = []
   formTeams: FormGroup;
-  chart1!: Chart
-  chart2!: Chart
+  chart1!: any
+  chart2!: any
 
   constructor(
     private authService: AuthService,
@@ -230,6 +232,38 @@ export class StatisticsPage implements OnInit {
   ngOnInit() {
     this.footballTeams1();
     this.footballTeams2();
+  }
+
+  lineChart() {
+    if (this.chart1 && this.chart2 === undefined) {
+      this.chart1.destroy();
+      this.generateChartPlayer1('line')
+    } else if (this.chart2 && this.chart1 === undefined) {
+      this.chart2.destroy();
+      this.generateChartPlayer2('line')
+    } else {
+      this.chart1.destroy();
+      this.chart2.destroy();
+
+      this.generateChartPlayer1('line')
+      this.generateChartPlayer2('line')
+    }
+  }
+
+  pieChart() {
+    if (this.chart1 && this.chart2 === undefined) {
+      this.chart1.destroy();
+      this.generateChartPlayer1('pie')
+    } else if (this.chart2 && this.chart1 === undefined) {
+      this.chart2.destroy();
+      this.generateChartPlayer2('pie')
+    } else {
+      this.chart1.destroy();
+      this.chart2.destroy();
+
+      this.generateChartPlayer1('pie')
+      this.generateChartPlayer2('pie')
+    }
   }
 
   loadSquads1(control: AbstractControl) {
@@ -270,8 +304,8 @@ export class StatisticsPage implements OnInit {
     return null;
   }
 
-  generateChartPlayer1() {
-    const ctx = document.getElementById('chart1') as ChartItem;
+  generateChartPlayer1(type: any) {
+    const ctx = this.chartCanvas1.nativeElement.getContext('2d')
 
     let dataChart = [
       this.players1.map(e => e.shot.total === null ? 3 : e.shot.total)[0],
@@ -284,7 +318,7 @@ export class StatisticsPage implements OnInit {
     console.log(dataChart)
 
     this.chart1 = new Chart(ctx, {
-      type: 'line',
+      type: type,
       data: {
         labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
         datasets: [{
@@ -294,22 +328,10 @@ export class StatisticsPage implements OnInit {
         }]
       },
     });
-
-    // this.chart1 = new Chart(ctx, {
-    //   type: 'doughnut',
-    //   data: {
-    //     labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
-    //     datasets: [{
-    //       // label: '# of Votes',
-    //       data: dataChart,
-    //       borderWidth: 1
-    //     }]
-    //   },
-    // });
   }
 
-  generateChartPlayer2() {
-    const ctx = document.getElementById('chart2') as ChartItem;
+  generateChartPlayer2(type: any) {
+    const ctx = this.chartCanvas2.nativeElement.getContext('2d')
 
     let dataChart2 = [
       this.players2.map(e => e.shot.total === null ? 6 : e.shot.total)[0],
@@ -320,7 +342,7 @@ export class StatisticsPage implements OnInit {
     ]
 
     this.chart2 = new Chart(ctx, {
-      type: 'line',
+      type: type,
       data: {
         labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
         datasets: [{
@@ -330,18 +352,6 @@ export class StatisticsPage implements OnInit {
         }]
       },
     });
-
-    // this.chart2 = new Chart(ctx, {
-    //   type: 'doughnut',
-    //   data: {
-    //     labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
-    //     datasets: [{
-    //       // label: '# of Votes',
-    //       data: dataChart2,
-    //       borderWidth: 1
-    //     }]
-    //   },
-    // });
   }
 
   selectDisabled(list1: any, list2: any) {
@@ -662,7 +672,7 @@ export class StatisticsPage implements OnInit {
           )
           this.loadingCtrl.dismiss()
           this.ref.detectChanges()
-          this.generateChartPlayer1()
+          this.generateChartPlayer1('line')
         } else {
           console.log(response)
           this.loadingCtrl.dismiss()
@@ -784,7 +794,7 @@ export class StatisticsPage implements OnInit {
           })
           this.loadingCtrl.dismiss()
           this.ref.detectChanges()
-          this.generateChartPlayer2()
+          this.generateChartPlayer2('line')
         } else {
           console.log(response)
           this.loadingCtrl.dismiss()
