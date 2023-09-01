@@ -57,8 +57,11 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./components/home/home.module').then(m => m.HomePageModule)
+  },
+  {
+    path: 'chat-bot',
+    loadChildren: () => import('./components/chat-bot/chat-bot.module').then( m => m.ChatBotPageModule)
   }
-
 ];
 @NgModule({
   imports: [
