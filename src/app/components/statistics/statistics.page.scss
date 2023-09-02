@@ -14,6 +14,12 @@ ion-row {
   justify-content: space-between;
 }
 
+.chart {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
 // * {
 //     font-family: 'segoeui';
 //   }

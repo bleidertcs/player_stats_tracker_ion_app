@@ -270,8 +270,8 @@ export class StatisticsPage implements OnInit {
     return null;
   }
 
-  generateChartPlayer1() {
-    const ctx = document.getElementById('chart1') as ChartItem;
+  generateChartPlayer1(type: any) {
+    let ctx = document.getElementById('chart1') as ChartItem;
 
     let dataChart = [
       this.players1.map(e => e.shot.total === null ? 3 : e.shot.total)[0],
@@ -284,7 +284,7 @@ export class StatisticsPage implements OnInit {
     console.log(dataChart)
 
     this.chart1 = new Chart(ctx, {
-      type: 'line',
+      type: type,
       data: {
         labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
         datasets: [{
@@ -295,21 +295,11 @@ export class StatisticsPage implements OnInit {
       },
     });
 
-    // this.chart1 = new Chart(ctx, {
-    //   type: 'doughnut',
-    //   data: {
-    //     labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
-    //     datasets: [{
-    //       // label: '# of Votes',
-    //       data: dataChart,
-    //       borderWidth: 1
-    //     }]
-    //   },
-    // });
+    this.chart1.destroy()
   }
 
-  generateChartPlayer2() {
-    const ctx = document.getElementById('chart2') as ChartItem;
+  generateChartPlayer2(type: any) {
+    let ctx = document.getElementById('chart2') as ChartItem;
 
     let dataChart2 = [
       this.players2.map(e => e.shot.total === null ? 6 : e.shot.total)[0],
@@ -320,7 +310,7 @@ export class StatisticsPage implements OnInit {
     ]
 
     this.chart2 = new Chart(ctx, {
-      type: 'line',
+      type: type,
       data: {
         labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
         datasets: [{
@@ -330,18 +320,20 @@ export class StatisticsPage implements OnInit {
         }]
       },
     });
+  }
 
-    // this.chart2 = new Chart(ctx, {
-    //   type: 'doughnut',
-    //   data: {
-    //     labels: ['Tiros', 'Goles', 'Pases', 'Entradas', 'Regates'],
-    //     datasets: [{
-    //       // label: '# of Votes',
-    //       data: dataChart2,
-    //       borderWidth: 1
-    //     }]
-    //   },
-    // });
+  pieChart(type: any) {
+    this.chart1.destroy()
+    this.chart2.destroy()
+    this.generateChartPlayer1(type);
+    this.generateChartPlayer2(type);
+  }
+
+  lineChart(type: any) {
+    this.chart1.destroy()
+    this.chart2.destroy()
+    this.generateChartPlayer1(type);
+    this.generateChartPlayer2(type);
   }
 
   selectDisabled(list1: any, list2: any) {
@@ -662,7 +654,7 @@ export class StatisticsPage implements OnInit {
           )
           this.loadingCtrl.dismiss()
           this.ref.detectChanges()
-          this.generateChartPlayer1()
+          this.generateChartPlayer1('line')
         } else {
           console.log(response)
           this.loadingCtrl.dismiss()
@@ -784,7 +776,7 @@ export class StatisticsPage implements OnInit {
           })
           this.loadingCtrl.dismiss()
           this.ref.detectChanges()
-          this.generateChartPlayer2()
+          this.generateChartPlayer2('line')
         } else {
           console.log(response)
           this.loadingCtrl.dismiss()
