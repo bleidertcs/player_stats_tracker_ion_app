@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { RegistroPageRoutingModule } from './registro-routing.module';
 
 import { RegistroPage } from './registro.page';
+import { TranslateModule } from '@ngx-translate/core';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -15,7 +17,9 @@ import { RegistroPage } from './registro.page';
     ReactiveFormsModule,
     IonicModule,
     RegistroPageRoutingModule,
+    TranslateModule,
+    HttpClientModule,
   ],
   declarations: [RegistroPage]
 })
-export class RegistroPageModule {}
+export class RegistroPageModule { }

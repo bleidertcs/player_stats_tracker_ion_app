@@ -1,6 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="dark">
     <ion-buttons slot="end">
+      <ion-button [routerLink]="'/chat-bot'"><ion-icon name="chatbox-ellipses-outline"></ion-icon></ion-button>
       <ion-button (click)="logout()"><ion-icon name="log-out-outline" class="icon"></ion-icon></ion-button>
     </ion-buttons>
     <ion-title>Player Stats Tracker</ion-title>
@@ -14,13 +15,13 @@
     </ion-row>
     <ion-row class="row-container">
       <ion-col class="buttons-half">
-        <ion-button [routerLink]="'/statistics'" expand="block" color="dark" class="custom-button">
+        <ion-button [routerLink]="'/statistics'" expand="block" color="danger" class="custom-button">
           <div class="content-button">
             <ion-icon name="stats-chart-outline"></ion-icon>
             <span>Estadistícas</span>
           </div>
         </ion-button>
-        <ion-button [routerLink]="'/add-team'" expand="block" color="dark" class="custom-button">
+        <ion-button [routerLink]="'/add-team'" expand="block" color="success" class="custom-button">
           <div class="content-button">
             <ion-icon name="people-outline"></ion-icon>
             <span>Equipos</span>
@@ -28,13 +29,13 @@
         </ion-button>
       </ion-col>
       <ion-col class="buttons-half">
-        <ion-button [routerLink]="'/add-player'" expand="block" color="dark" class="custom-button">
+        <ion-button [routerLink]="'/add-player'" expand="block" color="primary" class="custom-button">
           <div class="content-button">
             <ion-icon name="person-add-outline"></ion-icon>
             <span>Jugador</span>
           </div>
         </ion-button>
-        <ion-button [routerLink]="'/users'" expand="block" color="dark" class="custom-button">
+        <ion-button [routerLink]="'/users'" expand="block" color="warning" class="custom-button">
           <div class="content-button">
             <ion-icon name="person-outline"></ion-icon>
             <span>Usuarios</span>

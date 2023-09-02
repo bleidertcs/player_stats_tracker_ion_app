@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { UserInformationPageRoutingModule } from './user-information-routing.module';
 
 import { UserInformationPage } from './user-information.page';
+import { TranslateModule } from '@ngx-translate/core';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -14,7 +16,9 @@ import { UserInformationPage } from './user-information.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    UserInformationPageRoutingModule
+    UserInformationPageRoutingModule,
+    TranslateModule,
+    HttpClientModule,
   ],
   declarations: [UserInformationPage]
 })

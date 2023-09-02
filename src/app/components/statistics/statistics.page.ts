@@ -200,6 +200,8 @@ interface Players2 {
   styleUrls: ['./statistics.page.scss'],
 })
 export class StatisticsPage implements OnInit {
+  @ViewChild('chart1') chartCanvas1!: ElementRef;
+  @ViewChild('chart2') chartCanvas2!: ElementRef;
 
   teams1: selectTeam1[] = []
   teams2: selectTeam2[] = []
@@ -208,8 +210,8 @@ export class StatisticsPage implements OnInit {
   players1: Players1[] = []
   players2: Players2[] = []
   formTeams: FormGroup;
-  chart1!: Chart
-  chart2!: Chart
+  chart1!: any
+  chart2!: any
 
   constructor(
     private authService: AuthService,
@@ -231,6 +233,38 @@ export class StatisticsPage implements OnInit {
     this.footballTeams1();
     this.footballTeams2();
   }
+
+  chart(type: any) {
+    if (this.chart1 && this.chart2 === undefined) {
+      this.chart1.destroy();
+      this.generateChartPlayer1(type)
+    } else if (this.chart2 && this.chart1 === undefined) {
+      this.chart2.destroy();
+      this.generateChartPlayer2(type)
+    } else {
+      this.chart1.destroy();
+      this.chart2.destroy();
+
+      this.generateChartPlayer1(type)
+      this.generateChartPlayer2(type)
+    }
+  }
+
+  // pieChart() {
+  //   if (this.chart1 && this.chart2 === undefined) {
+  //     this.chart1.destroy();
+  //     this.generateChartPlayer1('pie')
+  //   } else if (this.chart2 && this.chart1 === undefined) {
+  //     this.chart2.destroy();
+  //     this.generateChartPlayer2('pie')
+  //   } else {
+  //     this.chart1.destroy();
+  //     this.chart2.destroy();
+
+  //     this.generateChartPlayer1('pie')
+  //     this.generateChartPlayer2('pie')
+  //   }
+  // }
 
   loadSquads1(control: AbstractControl) {
     if (control.value !== '' && control.value !== null) {
@@ -271,7 +305,7 @@ export class StatisticsPage implements OnInit {
   }
 
   generateChartPlayer1(type: any) {
-    let ctx = document.getElementById('chart1') as ChartItem;
+    const ctx = this.chartCanvas1.nativeElement.getContext('2d')
 
     let dataChart = [
       this.players1.map(e => e.shot.total === null ? 3 : e.shot.total)[0],
@@ -294,12 +328,10 @@ export class StatisticsPage implements OnInit {
         }]
       },
     });
-
-    this.chart1.destroy()
   }
 
   generateChartPlayer2(type: any) {
-    let ctx = document.getElementById('chart2') as ChartItem;
+    const ctx = this.chartCanvas2.nativeElement.getContext('2d')
 
     let dataChart2 = [
       this.players2.map(e => e.shot.total === null ? 6 : e.shot.total)[0],
@@ -320,20 +352,6 @@ export class StatisticsPage implements OnInit {
         }]
       },
     });
-  }
-
-  pieChart(type: any) {
-    this.chart1.destroy()
-    this.chart2.destroy()
-    this.generateChartPlayer1(type);
-    this.generateChartPlayer2(type);
-  }
-
-  lineChart(type: any) {
-    this.chart1.destroy()
-    this.chart2.destroy()
-    this.generateChartPlayer1(type);
-    this.generateChartPlayer2(type);
   }
 
   selectDisabled(list1: any, list2: any) {
@@ -654,7 +672,7 @@ export class StatisticsPage implements OnInit {
           )
           this.loadingCtrl.dismiss()
           this.ref.detectChanges()
-          this.generateChartPlayer1('line')
+          this.generateChartPlayer1('bar')
         } else {
           console.log(response)
           this.loadingCtrl.dismiss()
@@ -776,7 +794,7 @@ export class StatisticsPage implements OnInit {
           })
           this.loadingCtrl.dismiss()
           this.ref.detectChanges()
-          this.generateChartPlayer2('line')
+          this.generateChartPlayer2('bar')
         } else {
           console.log(response)
           this.loadingCtrl.dismiss()

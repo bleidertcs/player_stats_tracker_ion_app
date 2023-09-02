@@ -1,0 +1,36 @@
+.message-list {
+  padding-top: 10px;
+  padding-bottom: 0;
+  /* Elimina el espacio en la parte inferior */
+}
+
+.message {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.message-sender {
+  margin-left: auto;
+  background-color: #dcf8c6;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+}
+
+.message-receiver {
+  background-color: #dcf8c6;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+}
+
+.message-input {
+  flex-grow: 1;
+  border-radius: 20px;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+ion-button {
+  border-radius: 50%;
+}

@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="dark">
+  <ion-toolbar color="danger">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -10,12 +10,12 @@
 <ion-content color="light">
   <div>
     <form [formGroup]="formTeams">
-      <ion-card color="dark" style="border-radius: 15px;">
+      <ion-card color="danger" style="border-radius: 15px;">
         <div>Equipo</div>
         <ion-row>
           <ion-col col-6>
             <ion-item fill="outline">
-              <ion-select placeholder="Seleccionar equipo" formControlName="idTeams1">
+              <ion-select interface="popover" placeholder="Seleccionar equipo" formControlName="idTeams1">
                 <ion-select-option *ngFor="let team of teams1" [value]="team.id">{{team.name}}</ion-select-option>
               </ion-select>
               <!-- <ion-note *ngIf="formTeams.controls['idTeams'].hasError('required') && formTeams.get('idTeams')?.touched"
@@ -27,7 +27,7 @@
 
           <ion-col col-6>
             <ion-item fill="outline">
-              <ion-select placeholder="Seleccionar equipo" formControlName="idTeams2">
+              <ion-select interface="popover" placeholder="Seleccionar equipo" formControlName="idTeams2">
                 <ion-select-option *ngFor="let team of teams2" [value]="team.id">{{team.name}}</ion-select-option>
               </ion-select>
               <!-- <ion-note *ngIf="formTeams.controls['idTeams'].hasError('required') && formTeams.get('idTeams')?.touched"
@@ -39,12 +39,12 @@
         </ion-row>
       </ion-card>
 
-      <ion-card color="dark" *ngIf="squads1.length !== 0 || squads2.length !== 0" style="border-radius: 15px;">
+      <ion-card color="danger" *ngIf="squads1.length !== 0 || squads2.length !== 0" style="border-radius: 15px;">
         <div>Jugador</div>
-        <ion-row *ngIf="squads1.length !== 0 || squads2.length !== 0">
-          <ion-col col-6>
+        <ion-row>
+          <ion-col col-6 *ngIf="squads1.length !== 0">
             <ion-item fill="outline">
-              <ion-select placeholder="Seleccionar jugador" formControlName="idSquad1">
+              <ion-select interface="popover" placeholder="Seleccionar jugador" formControlName="idSquad1">
                 <ion-select-option *ngFor="let squad of squads1" [value]="squad.id">{{squad.number}} {{
                   squad.name }}</ion-select-option>
               </ion-select>
@@ -55,9 +55,9 @@
             </ion-item>
           </ion-col>
 
-          <ion-col col-6>
+          <ion-col col-6 *ngIf="squads2.length !== 0">
             <ion-item fill="outline">
-              <ion-select placeholder="Seleccionar jugador" formControlName="idSquad2">
+              <ion-select interface="popover" placeholder="Seleccionar jugador" formControlName="idSquad2">
                 <ion-select-option *ngFor="let squad of squads2" [value]="squad.id">{{squad.number}}
                   {{squad.name}}</ion-select-option>
               </ion-select>
@@ -71,7 +71,7 @@
       </ion-card>
 
 
-      <ion-card *ngFor="let player of players1" color="dark" style="border-radius: 15px;">
+      <ion-card *ngFor="let player of players1" color="danger" style="border-radius: 15px;">
         <ion-card-header>
           <ion-row>
             <ion-card-subtitle *ngFor="let player of players1">{{ player.name }}</ion-card-subtitle>
@@ -192,27 +192,26 @@
         </ion-card-content>
       </ion-card>
 
-      <ion-card color="dark" style="border-radius: 15px;">
-        <ion-buttons class="chart">
-          <ion-button (click)="pieChart('pie')">
-            <ion-icon name="pie-chart-outline"></ion-icon>
-          </ion-button>
-          <ion-button (click)="lineChart('line')">
+      <ion-card color="danger" style="border-radius: 15px;" *ngIf="players1.length !== 0 || players2.length !== 0">
+        <ion-buttons color="light">
+          <ion-button (click)="chart('bar')">
             <ion-icon name="stats-chart-outline"></ion-icon>
+          </ion-button>
+          <ion-button (click)="chart('pie')">
+            <ion-icon name="pie-chart-outline"></ion-icon>
           </ion-button>
         </ion-buttons>
         <ion-card-content>
           <div *ngIf="players1.length !== 0" style="position: relative; margin: auto; height: 300;">
-            <canvas id="chart1"></canvas>
+            <canvas id="chart1" #chart1></canvas>
           </div>
 
           <div *ngIf="players2.length !== 0" style="position: relative; margin: auto; height: 300;">
-            <canvas id="chart2"></canvas>
+            <canvas id="chart2" #chart2></canvas>
           </div>
         </ion-card-content>
 
       </ion-card>
-
     </form>
 
   </div>

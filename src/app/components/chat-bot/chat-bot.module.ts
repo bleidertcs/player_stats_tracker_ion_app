@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomePageRoutingModule } from './home-routing.module';
+import { ChatBotPageRoutingModule } from './chat-bot-routing.module';
 
-import { HomePage } from './home.page';
+import { ChatBotPage } from './chat-bot.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
-    HomePageRoutingModule,
+    ChatBotPageRoutingModule,
+    ReactiveFormsModule,
   ],
-  declarations: [HomePage]
+  declarations: [ChatBotPage]
 })
-export class HomePageModule { }
+export class ChatBotPageModule {}

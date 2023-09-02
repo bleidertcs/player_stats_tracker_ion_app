@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="dark">
+  <ion-toolbar color="warning">
     <ion-buttons slot="start">
-      <ion-button color="medium" (click)="cancel()">
+      <ion-button color="medium" (click)="cancel()" color="dark">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -15,46 +15,48 @@
   <form [formGroup]="updateUserForm">
     <ion-icon name="person-circle-outline" style="display: block; margin: 0 auto; font-size: 15rem;"></ion-icon>
     <ion-list>
-      <ion-item counter="true" fill="solid" class="form">
+      <ion-item counter="true" fill="outline" class="form">
         <ion-label position="floating">Nombre</ion-label>
         <ion-input (input)="checkFirstName()" (keypress)="validateName($event)" formControlName="firstname"
           maxlength="30"></ion-input>
         <ion-note *ngIf="updateUserForm.controls['firstname'].hasError('pattern')" slot="error">
-          Nombre inválido
+          {{ 'CHARACTER_NOT_ALLOWED' | translate }}
         </ion-note>
-        <ion-note *ngIf="updateUserForm.controls['firstname'].hasError('required') && updateUserForm.get('firstname')?.touched"
+        <ion-note
+          *ngIf="updateUserForm.controls['firstname'].hasError('required') && updateUserForm.get('firstname')?.touched"
           slot="error">
-          Nombre es requerido
+          {{ 'REQUIRED' | translate }}
         </ion-note>
       </ion-item>
 
-      <ion-item counter="true" fill="solid" class="form">
+      <ion-item counter="true" fill="outline" class="form">
         <ion-label position="floating">Apellido</ion-label>
         <ion-input (input)="checkLastName()" (keypress)="validateName($event)" formControlName="lastname"
           maxlength="30"></ion-input>
         <ion-note *ngIf="updateUserForm.controls['lastname'].hasError('pattern')" slot="error">
-          Apellido inválido
+          {{ 'CHARACTER_NOT_ALLOWED' | translate }}
         </ion-note>
-        <ion-note *ngIf="updateUserForm.controls['lastname'].hasError('required') && updateUserForm.get('lastname')?.touched"
+        <ion-note
+          *ngIf="updateUserForm.controls['lastname'].hasError('required') && updateUserForm.get('lastname')?.touched"
           slot="error">
-          Apellido es requerido
+          {{ 'REQUIRED' | translate }}
         </ion-note>
       </ion-item>
 
-      <ion-item counter="true" fill="solid" class="form">
+      <ion-item counter="true" fill="outline" class="form">
         <ion-label position="floating">Correo Electrónico o Usuario</ion-label>
         <ion-input (keypress)="validateEmail($event)" (input)="checkEmail()" formControlName="email"
           maxlength="50"></ion-input>
         <ion-note *ngIf="updateUserForm.controls['email'].hasError('pattern')" slot="error">
-          Correo Electrónico o Usuario inválido
+          {{ 'CHARACTER_NOT_ALLOWED' | translate }}
         </ion-note>
         <ion-note *ngIf="updateUserForm.controls['email'].hasError('required') && updateUserForm.get('email')?.touched"
           slot="error">
-          Correo Electrónico o Usuario inválido
+          {{ 'REQUIRED' | translate }}
         </ion-note>
       </ion-item>
 
-      <ion-item counter="true" fill="solid" class="form">
+      <ion-item counter="true" fill="outline" class="form">
         <ion-label position="floating">Contraseña</ion-label>
         <ion-input (keypress)="validatePassword($event)" (input)="checkPassword()" formControlName="password"
           maxlength="20">
@@ -64,7 +66,7 @@
         </ion-note>
       </ion-item>
 
-      <ion-item counter="true" fill="solid" class="form">
+      <ion-item counter="true" fill="outline" class="form">
         <ion-select label="Perfiles" placeholder="Selecciona una opción" formControlName="idProfile">
           <ion-select-option *ngFor="let profile of profiles"
             [value]="profile.id">{{profile.description}}</ion-select-option>
@@ -72,7 +74,7 @@
       </ion-item>
     </ion-list>
 
-    <ion-button color="dark" [disabled]="updateUserForm.invalid" (click)="updateUser(updateUserForm.value)"
+    <ion-button color="warning" [disabled]="updateUserForm.invalid" (click)="updateUser(updateUserForm.value)"
       class="save-information">Guardar
     </ion-button>
   </form>
