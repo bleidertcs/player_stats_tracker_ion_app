@@ -17,13 +17,13 @@ export class InicioPage implements OnInit {
 
   sliders = [
     {
-      img: 'assets/icon/statistics.jpg',
+      img: 'assets/icon/welcome.jpg',
       title: '¡Bienvenido!',
       description: 'Aprende a aprovechar al máximo nuestra aplicación en este tutorial de introducción. Te guiaremos por las funciones clave para que te familiarices con la experiencia.',
       route: '/statistics',
     },
     {
-      img: 'assets/icon/add.jpg',
+      img: 'assets/icon/team.jpg',
       title: 'Equipos y Visualización',
       description: 'Aprende a agregar y ver equipos en esta diapositiva. Gestionar tus equipos es clave para aprovechar nuestra aplicación.',
       route: '/add-team',
@@ -44,6 +44,12 @@ export class InicioPage implements OnInit {
       img: 'assets/icon/user.jpg',
       title: 'Gestión de Usuarios',
       description: 'Explora cómo gestionar usuarios en esta diapositiva. Aprende a configurar cuentas y administrar permisos para una experiencia personalizada.',
+      route: '/users',
+    },
+    {
+      img: 'assets/icon/ia.jpg',
+      title: 'Inteligencia Artificial',
+      description: 'Utiliza la potencia de la inteligencia artificial para obtener información relacionada con el fútbol. ¡Habla con nuestro asistente virtual y obtén datos precisos y relevantes sobre tu deporte favorito!',
       route: '/users',
     },
   ]
