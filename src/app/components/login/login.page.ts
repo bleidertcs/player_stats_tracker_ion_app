@@ -43,6 +43,8 @@ export class LoginPage implements OnInit {
       this.authService.setLogged(true)
       this.authService.setModelLog(this.authService.modelLog);
     }
+
+    console.log(this.authService.getLogged());
   }
 
   validateEmail(event: KeyboardEvent) {
@@ -96,7 +98,11 @@ export class LoginPage implements OnInit {
           if (this.authService.getLogged() === true) {
             this.navCtrl.navigateRoot('onboarding');
           } else {
-            this.navCtrl.navigateRoot('home');
+            if (response.data.profile.id === 1) {
+              this.navCtrl.navigateRoot('home');
+            } else {
+              this.navCtrl.navigateRoot('statistics');
+            }
           }
 
           this.loadingCtrl.dismiss();

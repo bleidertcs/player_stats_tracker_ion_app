@@ -32,35 +32,37 @@ const routes: Routes = [
   {
     path: 'statistics',
     loadChildren: () => import('./components/statistics/statistics.module').then(m => m.StatisticsPageModule),
-    // canActivate: [RoutesGuard]
+    canActivate: [IngresadoGuard, RoutesGuard]
   },
   {
     path: 'add-team',
     loadChildren: () => import('./components/add-team/add-team.module').then(m => m.AddTeamPageModule),
-    // canActivate: [RoutesGuard]
+    canActivate: [IngresadoGuard, RoutesGuard]
   },
   {
     path: 'users',
     loadChildren: () => import('./components/users/users.module').then(m => m.UsersPageModule),
-    // canActivate: [RoutesGuard]
+    canActivate: [IngresadoGuard, RoutesGuard]
   },
   {
     path: 'user-information',
     loadChildren: () => import('./components/user-information/user-information.module').then(m => m.UserInformationPageModule),
-    // canActivate: [RoutesGuard]
+    canActivate: [IngresadoGuard, RoutesGuard]
   },
   {
     path: 'add-player',
     loadChildren: () => import('./components/add-player/add-player.module').then(m => m.AddPlayerPageModule),
-    // canActivate: [RoutesGuard]
+    canActivate: [IngresadoGuard, RoutesGuard]
   },
   {
     path: 'home',
-    loadChildren: () => import('./components/home/home.module').then(m => m.HomePageModule)
+    loadChildren: () => import('./components/home/home.module').then(m => m.HomePageModule),
+    canActivate: [IngresadoGuard, RoutesGuard]
   },
   {
     path: 'chat-bot',
-    loadChildren: () => import('./components/chat-bot/chat-bot.module').then( m => m.ChatBotPageModule)
+    loadChildren: () => import('./components/chat-bot/chat-bot.module').then( m => m.ChatBotPageModule),
+    canActivate: [IngresadoGuard, RoutesGuard]
   }
 ];
 @NgModule({

@@ -20,14 +20,13 @@ export class RoutesGuard implements CanActivate {
     let profile = this.authService.getProfile()
     console.log(profile);
     
-    if (profile === 1) {
-      this.navCtrl.navigateRoot('onboarding');
-      return false;
-    } else if (profile === 2) {
-      this.navCtrl.navigateRoot('statistics');
-      return false;
+    if ([1,2].includes(profile)) {
+      // this.navCtrl.navigateRoot('home');
+      return true; // Permite el acceso a la ruta
+    } else {
+      // Redirige a otra ruta si no se cumple la condición
+      return false; // No permite el acceso a la ruta
     }
-    return true
   }
   
 }
