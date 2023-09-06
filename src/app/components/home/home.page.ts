@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
+import { Chart, Colors } from 'chart.js';
 import { AuthService } from 'src/app/services/auth.service';
 import { alertModal } from 'src/app/shared/alert/alert.component';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
@@ -11,6 +12,9 @@ import { loadingSpinner } from 'src/app/shared/loading/loading.component';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  @ViewChild('chart') chartCanvas!: ElementRef;
+  chart!: any;
+  data = [];
 
   constructor(
     private authService: AuthService,
@@ -22,6 +26,79 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.player()
+  }
+
+  playerChart(type: any) {
+    if (this.chart) {
+      this.chart.destroy();
+      this.player()
+    } 
+  }
+
+  async player() {
+    await loadingSpinner(this.loadingCtrl);
+
+    const random = Math.floor(Math.random() * 10) + 1;
+
+    this.authService.call(null, `getPlayer/${random}`, 'GET', true).subscribe({
+      next: (response) => {
+        this.data = []
+        if (response.status === 'SUCCESS') {
+          this.data = response.data
+          this.loadingCtrl.dismiss()
+          this.ref.detectChanges()
+          this.generateChartPlayer('bar', this.data)
+        } else {
+          console.log(response)
+          this.loadingCtrl.dismiss()
+
+          alertModal({
+            title: '',
+            text: response.data,
+            button: ['Cerrar'],
+            alertController: this.alertController
+          })
+        }
+      },
+      error: (error) => {
+        console.log(error);
+        this.loadingCtrl.dismiss()
+
+        alertModal({
+          title: 'Error',
+          text: 'Falla en el servidor',
+          button: ['Cerrar'],
+          alertController: this.alertController
+        })
+      }
+    })
+  }
+
+  generateChartPlayer(type: any, data: any) {
+    const ctx = this.chartCanvas.nativeElement.getContext('2d')
+
+    let dataChart = [
+      data.statistics.map((e: { shot: { total: null; }; }) => e.shot.total === null ? 3 : e.shot.total)[0],
+      data.statistics.map((e: { goal: { total: null; }; }) => e.goal.total === null ? 1 : e.goal.total)[0],
+      data.statistics.map((e: { passe: { total: null; }; }) => e.passe.total === null ? 5 : e.passe.total)[0],
+      data.statistics.map((e: { tackle: { total: null; }; }) => e.tackle.total === null ? 4 : e.tackle.total)[0],
+      data.statistics.map((e: { dribble: { success: null; }; }) => e.dribble.success === null ? 2 : e.dribble.success)[0]
+    ]
+
+    this.chart = new Chart(ctx, {
+      type: type,
+      data: {
+        labels: ['Disparos', 'Goles', 'Pases', 'Entradas', 'Regates'],
+        datasets: [
+          {
+            label: data.player.firstname + ' ' + data.player.lastname,
+            data: dataChart,
+            // borderWidth: 1
+          }
+        ]
+      },
+    });
   }
 
   async logout() {
@@ -47,7 +124,7 @@ export class HomePage implements OnInit {
           this.loadingCtrl.dismiss()
 
           alertModal({
-            title: response.status,
+            title: '',
             text: response.data,
             button: ['Cerrar'],
             alertController: this.alertController

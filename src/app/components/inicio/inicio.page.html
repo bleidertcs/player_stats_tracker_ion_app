@@ -1,24 +1,4 @@
-<!-- <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Player Stats Tracker</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content color="dark">
-  <!-- <ion-slides pager="true">
-    <ion-slide *ngFor="let slide of sliders">
-      <img [src]="slide.img" />
-      <h2>{{ slide.title }}</h2>
-      <p>{{ slide.description }}</p>
-    </ion-slide>
-    <ion-slide>
-      <img [src]="'assets/icon/statistics.jpg'" />
-      <h2>Felicitaciones</h2>
-      <p>Hola mundo</p>
-      <ion-button fill="clear" [routerLink]="'/home'">Continuar<ion-icon slot="end"
-          name="arrow-forward"></ion-icon></ion-button>
-    </ion-slide>
-  </ion-slides> -->
 
   <ion-card style="height: 96%; border-radius: 20px; margin-top: 4%;">
     <swiper-container [loop]="true" [pagination]="true">
@@ -30,7 +10,7 @@
       <swiper-slide>
         <img [src]="'assets/icon/finish.jpg'" />
         <h2 style="color: black;">¡Listo para Explorar!</h2>
-        <p>¡Felicidades por completar la introducción! Explora todas las funciones y disfruta del análisis completo de
+        <p class="justify-text">¡Felicidades por completar la introducción! Explora todas las funciones y disfruta del análisis completo de
           estadísticas de jugadores.
         </p>
         <ion-button fill="clear" (click)="goHome()">Continuar<ion-icon slot="end"
@@ -39,11 +19,3 @@
     </swiper-container>
   </ion-card>
 </ion-content>
-
-<!-- <ion-footer>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="end">
-      <ion-button (click)="logout()">Cerrar Sesión</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer> -->

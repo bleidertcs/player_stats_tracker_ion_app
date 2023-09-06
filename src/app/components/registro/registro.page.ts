@@ -122,36 +122,36 @@ export class RegistroPage implements OnInit {
     console.log(data);
     this.loadingCtrl.dismiss();
 
-    // this.auth.call(data, 'register', 'POST', false).subscribe({
-    //   next: (response) => {
-    //     if (response.status === 'SUCCESS') {
-    //       console.log(response);
-    //       this.loadingCtrl.dismiss();
-    //       this.navCtrl.navigateRoot('login');
-    //     } else {
-    //       console.log(response);
-    //       this.loadingCtrl.dismiss();
+    this.auth.call(data, 'register', 'POST', false).subscribe({
+      next: (response) => {
+        if (response.status === 'SUCCESS') {
+          console.log(response);
+          this.loadingCtrl.dismiss();
+          this.navCtrl.navigateRoot('login');
+        } else {
+          console.log(response);
+          this.loadingCtrl.dismiss();
 
-    //       alertModal({
-    //         title: response.status,
-    //         text: response.data,
-    //         button: ['Cerrar'],
-    //         alertController: this.alertController
-    //       })
-    //     }
-    //   },
-    //   error: (error) => {
-    //     console.log(error);
-    //     this.loadingCtrl.dismiss();
+          alertModal({
+            title: response.status,
+            text: response.data,
+            button: ['Cerrar'],
+            alertController: this.alertController
+          })
+        }
+      },
+      error: (error) => {
+        console.log(error);
+        this.loadingCtrl.dismiss();
 
-    //     alertModal({
-    //       title: 'Error',
-    //       text: 'Falla en el servidor',
-    //       button: ['Cerrar'],
-    //       alertController: this.alertController
-    //     })
-    //   }
-    // })
+        alertModal({
+          title: 'Error',
+          text: 'Falla en el servidor',
+          button: ['Cerrar'],
+          alertController: this.alertController
+        })
+      }
+    })
   }
 
 }
