@@ -14,7 +14,7 @@ import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 export class HomePage implements OnInit {
   @ViewChild('chart') chartCanvas!: ElementRef;
   chart!: any;
-  data = [];
+  datas: any[] = [];
 
   constructor(
     private authService: AuthService,
@@ -43,12 +43,14 @@ export class HomePage implements OnInit {
 
     this.authService.call(null, `getPlayer/${random}`, 'GET', true).subscribe({
       next: (response) => {
-        this.data = []
+        this.datas = []
         if (response.status === 'SUCCESS') {
-          this.data = response.data
+          this.datas.push(response.data)
+          console.log(this.datas);
+          
           this.loadingCtrl.dismiss()
           this.ref.detectChanges()
-          this.generateChartPlayer('bar', this.data)
+          this.generateChartPlayer('bar', this.datas)
         } else {
           console.log(response)
           this.loadingCtrl.dismiss()
@@ -77,13 +79,13 @@ export class HomePage implements OnInit {
 
   generateChartPlayer(type: any, data: any) {
     const ctx = this.chartCanvas.nativeElement.getContext('2d')
-
+    
     let dataChart = [
-      data.statistics.map((e: { shot: { total: null; }; }) => e.shot.total === null ? 3 : e.shot.total)[0],
-      data.statistics.map((e: { goal: { total: null; }; }) => e.goal.total === null ? 1 : e.goal.total)[0],
-      data.statistics.map((e: { passe: { total: null; }; }) => e.passe.total === null ? 5 : e.passe.total)[0],
-      data.statistics.map((e: { tackle: { total: null; }; }) => e.tackle.total === null ? 4 : e.tackle.total)[0],
-      data.statistics.map((e: { dribble: { success: null; }; }) => e.dribble.success === null ? 2 : e.dribble.success)[0]
+      data[0].statistics.map((e: { shot: { total: null; }; }) => e.shot.total === null ? 3 : e.shot.total)[0],
+      data[0].statistics.map((e: { goal: { total: null; }; }) => e.goal.total === null ? 1 : e.goal.total)[0],
+      data[0].statistics.map((e: { passe: { total: null; }; }) => e.passe.total === null ? 5 : e.passe.total)[0],
+      data[0].statistics.map((e: { tackle: { total: null; }; }) => e.tackle.total === null ? 4 : e.tackle.total)[0],
+      data[0].statistics.map((e: { dribble: { success: null; }; }) => e.dribble.success === null ? 2 : e.dribble.success)[0]
     ]
 
     this.chart = new Chart(ctx, {
@@ -92,12 +94,24 @@ export class HomePage implements OnInit {
         labels: ['Disparos', 'Goles', 'Pases', 'Entradas', 'Regates'],
         datasets: [
           {
-            label: data.player.firstname + ' ' + data.player.lastname,
+            label: data[0].player.firstname + ' ' + data[0].player.lastname,
             data: dataChart,
             // borderWidth: 1
-          }
+          },
+          // {
+          //   label: 'leyenda',
+          //   data: dataChart,
+          //   // borderWidth: 1
+          // },
         ]
       },
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
     });
   }
 

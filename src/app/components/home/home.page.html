@@ -19,8 +19,28 @@
             </ion-button>
           </ion-buttons>
           <ion-card-content>
+            <div *ngFor="let data of datas" style="text-align: center; font-size: 17px;">
+              {{ data.player.firstname }} {{ data.player.lastname }}
+            </div>
             <div style="position: relative; margin: auto; height: 300;">
               <canvas id="chart" #chart></canvas>
+            </div>
+            <div *ngFor="let data of datas">
+              <div style="display: flex; justify-content: space-between; flex-direction: row;">
+                <div> Disparos: {{ data.statistics[0].shot.total === null ? 0 : data.statistics[0].shot.total }} </div>
+                <div> Goles: {{ data.statistics[0].goal.total === null ? 0 : data.statistics[0].goal.total }} </div>
+              </div>
+            </div>
+            <div *ngFor="let data of datas">
+              <div style="display: flex; justify-content: space-between; flex-direction: row;">
+                <div> Pases: {{ data.statistics[0].passe.total === null ? 0 : data.statistics[0].passe.total }} </div>
+                <div> Entradas: {{ data.statistics[0].tackle.total === null ? 0 : data.statistics[0].tackle.total }} </div>
+              </div>
+            </div>
+            <div *ngFor="let data of datas">
+              <div style="display: flex; justify-content: space-between; flex-direction: row;">
+                <div> Pases: {{ data.statistics[0].dribble.success === null ? 0 : data.statistics[0].dribble.success }} </div>
+              </div>
             </div>
           </ion-card-content>
         
