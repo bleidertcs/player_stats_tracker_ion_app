@@ -62,14 +62,14 @@
         </ion-list>
       </form>
 
-      <div class="forgot-password">
+      <div class="forgot-password" [routerLink]="'/forgot-password'">
         ¿Olvidaste la contraseña?
       </div>
 
       <ion-button [disabled]="formularioLogin.invalid" (click)="login(formularioLogin.value)" class="loginButton"
         color="primary">Iniciar Sesión
       </ion-button>
-      
+
       <div class="register">
         ¿No tienes una cuenta? <div class="register-text" [routerLink]="'/register'">Regístrate</div>
       </div>
@@ -77,11 +77,3 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
-
-<!-- <ion-footer>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="end">
-      <ion-button [routerLink]="['/register']">Regístrate</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer> -->

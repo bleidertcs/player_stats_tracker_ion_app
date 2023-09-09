@@ -32,7 +32,7 @@ export class UserInformationPage implements OnInit {
       firstname: new FormControl('', [Validators.required, Validators.pattern(this.namePattern)]),
       lastname: new FormControl('', [Validators.required, Validators.pattern(this.namePattern)]),
       email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
-      password: new FormControl('', [Validators.pattern(this.passwordPattern)]),
+      // password: new FormControl('', [Validators.pattern(this.passwordPattern)]),
       idProfile: new FormControl(''),
     })
   }
@@ -135,7 +135,7 @@ export class UserInformationPage implements OnInit {
       firstname: updateInformation.firstname.trim(),
       lastname: updateInformation.lastname.trim(),
       email: updateInformation.email,
-      password: updateInformation.password != '' ? updateInformation.password : this.navParams.get('user')[0].password,
+      // password: updateInformation.password != '' ? updateInformation.password : this.navParams.get('user')[0].password,
       id_profile: updateInformation.idProfile
     }
 

@@ -61,9 +61,13 @@ const routes: Routes = [
   },
   {
     path: 'chat-bot',
-    loadChildren: () => import('./components/chat-bot/chat-bot.module').then( m => m.ChatBotPageModule),
+    loadChildren: () => import('./components/chat-bot/chat-bot.module').then(m => m.ChatBotPageModule),
     canActivate: [IngresadoGuard, RoutesGuard]
+  },  {
+    path: 'forgot-password',
+    loadChildren: () => import('./components/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   }
+
 ];
 @NgModule({
   imports: [

@@ -127,6 +127,13 @@ export class RegistroPage implements OnInit {
         if (response.status === 'SUCCESS') {
           console.log(response);
           this.loadingCtrl.dismiss();
+          alertModal({
+            title: response.status,
+            text: 'Usuario registrado exitosamente',
+            button: ['Cerrar'],
+            alertController: this.alertController
+          })
+
           this.navCtrl.navigateRoot('login');
         } else {
           console.log(response);

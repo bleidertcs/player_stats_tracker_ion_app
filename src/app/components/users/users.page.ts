@@ -177,17 +177,24 @@ export class UsersPage implements OnInit {
       next: (response) => {
         // this.users.pop()
         this.loadingCtrl.dismiss();
-        // if (response.status === 'SUCCESS') {
+        if (response.status === 'SUCCESS') {
+          alertModal({
+            title: response.status,
+            text: 'Usuario eliminado exitosamente',
+            button: ['Cerrar'],
+            alertController: this.alertController
+          })
 
-        // } else {
-        //   this.loadingCtrl.dismiss();
-        //   alert({
-        //     title: 'Error',
-        //     text: response.data,
-        //     button: ['Cerrar'],
-        //     alertController: this.alertController
-        //   })
-        // }
+          this.getUsers()
+        } else {
+          this.loadingCtrl.dismiss();
+          alertModal({
+            title: response.status,
+            text: response.data,
+            button: ['Cerrar'],
+            alertController: this.alertController
+          })
+        }
       },
       error: (error) => {
         console.log(error)

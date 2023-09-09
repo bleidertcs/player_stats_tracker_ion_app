@@ -109,9 +109,9 @@ export class AuthService {
       case 'DELETE':
         if (status === true) {
           this.headers = this.headers.set('auth-token', this.modelSession.token);
-          return this.httpClient.get(environment.apiUrl + route, { headers: this.headers });
+          return this.httpClient.delete(environment.apiUrl + route, { headers: this.headers });
         } else {
-          return this.httpClient.get(environment.apiUrl + route, { headers: this.headers });
+          return this.httpClient.delete(environment.apiUrl + route, { headers: this.headers });
         }
 
     }
@@ -147,7 +147,7 @@ export class AuthService {
     return sessionStorage.getItem('modelSession') === null ? null : JSON.parse(sessionStorage.getItem('modelSession') || '')
   }
   getModelLog() {
-    return localStorage.getItem('modelLog') === null ? null : JSON.parse(localStorage.getItem('modelLog') || '') 
+    return localStorage.getItem('modelLog') === null ? null : JSON.parse(localStorage.getItem('modelLog') || '')
   }
   getModelUsers() {
     return sessionStorage.getItem('modelUsers') === null ? null : JSON.parse(sessionStorage.getItem('modelUsers') || '')
@@ -184,7 +184,7 @@ export class AuthService {
   getIdUser() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().idUser }
   getProfile() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().profile }
   getEmail() { return this.getModelSesion() === null || this.getModelSesion() === undefined ? null : this.getModelSesion().email }
-  getLogged() { return this.getModelLog() === null || this.getModelLog() === undefined ? null : this.getModelLog().logged  }
+  getLogged() { return this.getModelLog() === null || this.getModelLog() === undefined ? null : this.getModelLog().logged }
   getUsersList() { return this.getModelUsers() === null || this.getModelUsers() === undefined ? null : this.getModelUsers().userList }
   // getListFootballTeams1() { return this.getModelFootballTeams() === null || this.getModelFootballTeams() === undefined ? null : this.getModelFootballTeams().teams1 }
   // getListFootballTeams2() { return this.getModelFootballTeams() === null || this.getModelFootballTeams() === undefined ? null : this.getModelFootballTeams().teams2 }
