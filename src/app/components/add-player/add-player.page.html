@@ -86,23 +86,17 @@
               </ion-note>
             </ion-item>
 
-            <ion-item>
-              Fecha de Nacimiento
-              <ion-input fill="outline" formControlName="birth" readonly>
+            <ion-item counter="true" class="full-width">
+              <ion-label position="floating">Fecha de Nacimiento</ion-label>
+              <ion-input mask="00/00/0000" placeholder="Ej: 01-05-2013" type="number" maxlength="8" fill="outline" formControlName="birth">
               </ion-input>
-              <ion-button style="padding-bottom: 10px;" id="open-picker" fill="clear" slot="end"><ion-icon
-                  name="calendar-outline"></ion-icon></ion-button>
-
-              <ion-modal trigger="open-picker" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
-                <ng-template>
-                  <div class="block">
-                    <ion-datetime locale="es-ES" formControlName="birth"></ion-datetime>
-                  </div>
-                </ng-template>
-              </ion-modal>
               <ion-note slot="error" style="color: white;"
                 *ngIf="addPlayerForm.get('player.birth')?.hasError('required') && addPlayerForm.get('player.birth')?.touched">
                 {{ 'REQUIRED' | translate }}
+              </ion-note>
+              <ion-note slot="error" style="color: white;"
+                *ngIf="addPlayerForm.get('player.birth')?.hasError('maxDigitsExceeded')">
+                Fecha no debe exceder los 8 caracteres.
               </ion-note>
             </ion-item>
 
