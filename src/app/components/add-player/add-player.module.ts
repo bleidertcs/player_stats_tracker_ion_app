@@ -9,6 +9,7 @@ import { AddPlayerPageRoutingModule } from './add-player-routing.module';
 import { AddPlayerPage } from './add-player.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
+import { MaskitoModule } from '@maskito/angular';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     AddPlayerPageRoutingModule,
     TranslateModule,
     HttpClientModule,
+    MaskitoModule
   ],
   declarations: [AddPlayerPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

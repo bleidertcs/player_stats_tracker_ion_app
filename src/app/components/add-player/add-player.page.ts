@@ -4,7 +4,7 @@ import { AlertController, LoadingController, NavController } from '@ionic/angula
 import { AuthService } from 'src/app/services/auth.service';
 import { alertModal } from 'src/app/shared/alert/alert.component';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
-import Swiper from 'swiper';
+import { MaskitoOptions, MaskitoElementPredicateAsync } from '@maskito/core';
 
 @Component({
   selector: 'app-add-player',
@@ -27,6 +27,13 @@ export class AddPlayerPage implements OnInit {
   ]
 
   textPattern = /^[a-zA-ZñÑáÁéÉíÍóÓúÚ ]+$/;
+  birthPattern = /^(0[1-9]|[12][0-9]|3[01])[-/](0[1-9]|1[0-2])[-/]\d{4}$/;
+
+  readonly maskitoOptions: MaskitoOptions = {
+    mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
+  };
+
+  readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
 
   constructor(
     public fb: FormBuilder,
@@ -41,7 +48,7 @@ export class AddPlayerPage implements OnInit {
         firstname: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(this.textPattern)]),
         lastname: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern(this.textPattern)]),
         age: new FormControl('', [Validators.required, this.validateMaxDigits(2)]),
-        birth: new FormControl('', [Validators.required, this.validateMaxDigits(8)]),
+        birth: new FormControl('', [Validators.required, this.validateMaxDigits(10), Validators.pattern(this.birthPattern)]),
         nationality: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(this.textPattern)]),
         height: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
         weight: new FormControl('', [Validators.required, this.validateMaxDigits(3)]),
@@ -220,7 +227,7 @@ export class AddPlayerPage implements OnInit {
     }
 
     console.log(data);
-    
+
     // this.loadingCtrl.dismiss();
     this.authService.call(data, 'addPlayer', 'POST', true).subscribe({
       next: async (response) => {
@@ -260,7 +267,7 @@ export class AddPlayerPage implements OnInit {
       }
     })
   }
-  
+
   async getAllSquad() {
     await loadingSpinner(this.loadingCtrl)
 
