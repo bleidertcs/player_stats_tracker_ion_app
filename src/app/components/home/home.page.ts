@@ -16,6 +16,29 @@ export class HomePage implements OnInit {
   chart!: any;
   datas: any[] = [];
 
+  routes = [
+    {
+      title: 'Estadísticas',
+      route: '/statistics',
+    },
+    {
+      title: 'Agregar Equipo',
+      route: '/add-team',
+    },
+    {
+      title: 'Agregar Jugador',
+      route: '/add-player',
+    },
+    {
+      title: 'Ver Usuarios',
+      route: '/users',
+    },
+    {
+      title: 'Ver Jugadores',
+      route: '/users',
+    },
+  ]
+
   constructor(
     private authService: AuthService,
     public loadingCtrl: LoadingController,
@@ -33,7 +56,7 @@ export class HomePage implements OnInit {
     if (this.chart) {
       this.chart.destroy();
       this.player()
-    } 
+    }
   }
 
   async player() {
@@ -47,7 +70,7 @@ export class HomePage implements OnInit {
         if (response.status === 'SUCCESS') {
           this.datas.push(response.data)
           console.log(this.datas);
-          
+
           this.loadingCtrl.dismiss()
           this.ref.detectChanges()
           this.generateChartPlayer('bar', this.datas)
@@ -79,7 +102,7 @@ export class HomePage implements OnInit {
 
   generateChartPlayer(type: any, data: any) {
     const ctx = this.chartCanvas.nativeElement.getContext('2d')
-    
+
     let dataChart = [
       data[0].statistics.map((e: { shot: { total: null; }; }) => e.shot.total === null ? 3 : e.shot.total)[0],
       data[0].statistics.map((e: { goal: { total: null; }; }) => e.goal.total === null ? 1 : e.goal.total)[0],

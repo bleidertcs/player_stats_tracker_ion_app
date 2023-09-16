@@ -51,7 +51,7 @@ export class AddPlayerPage implements OnInit {
         birth: new FormControl('', [Validators.required, this.validateMaxDigits(10), Validators.pattern(this.birthPattern)]),
         nationality: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(this.textPattern)]),
         height: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
-        weight: new FormControl('', [Validators.required, this.validateMaxDigits(3)]),
+        weight: new FormControl('', [Validators.required, this.validateMaxDigits(4)]),
         photo: new FormControl(''),
         id_team: new FormControl('', [Validators.required]),
       }),

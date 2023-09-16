@@ -12,7 +12,7 @@
     <ion-icon name="football" class="equipo-icon"></ion-icon>
     <h2>Agregar Equipo</h2>
     <form [formGroup]="addTeamForm">
-      <ion-item fill="solid">
+      <ion-item>
         <ion-label position="floating">Nombre del Equipo</ion-label>
         <ion-input formControlName="teamName" maxlength="50"></ion-input>
         <ion-note *ngIf="addTeamForm.controls['teamName'].hasError('required') && addTeamForm.get('teamName')?.touched"
@@ -20,25 +20,33 @@
           {{ 'REQUIRED' | translate }}
         </ion-note>
       </ion-item>
-      <ion-item fill="solid">
-        <ion-label position="floating">País</ion-label>
-        <ion-input formControlName="teamCountry" maxlength="25"></ion-input>
-        <ion-note
-          *ngIf="addTeamForm.controls['teamCountry'].hasError('required') && addTeamForm.get('teamCountry')?.touched"
-          slot="error" style="color: white;">
-          {{ 'REQUIRED' | translate }}
-        </ion-note>
-      </ion-item>
-      <ion-item fill="solid">
-        <ion-label position="floating">Año de Fundación</ion-label>
-        <ion-input formControlName="teamFounded" maxlength="4"></ion-input>
-        <ion-note
-          *ngIf=" addTeamForm.controls['teamFounded'].hasError('required') && addTeamForm.get('teamFounded')?.touched"
-          slot="error" style="color: white;">
-          {{ 'REQUIRED' | translate }}
-        </ion-note>
-      </ion-item>
-      <ion-item fill="solid">
+
+      <ion-row style="margin: 0 -5px;">
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">País</ion-label>
+            <ion-input formControlName="teamCountry" maxlength="25"></ion-input>
+            <ion-note
+              *ngIf="addTeamForm.controls['teamCountry'].hasError('required') && addTeamForm.get('teamCountry')?.touched"
+              slot="error" style="color: white;">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Año de Fundación</ion-label>
+            <ion-input formControlName="teamFounded" maxlength="4"></ion-input>
+            <ion-note
+              *ngIf=" addTeamForm.controls['teamFounded'].hasError('required') && addTeamForm.get('teamFounded')?.touched"
+              slot="error" style="color: white;">
+              {{ 'REQUIRED' | translate }}
+            </ion-note>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-item>
         <ion-label position="floating">Logo URL</ion-label>
         <ion-input formControlName="teamLogoUrl" maxlength="100"></ion-input>
       </ion-item>

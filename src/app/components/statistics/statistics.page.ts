@@ -212,6 +212,7 @@ export class StatisticsPage implements OnInit {
   formTeams: FormGroup;
   chart1!: any
   chart2!: any
+  profile = this.authService.getProfile()
 
   constructor(
     private authService: AuthService,
