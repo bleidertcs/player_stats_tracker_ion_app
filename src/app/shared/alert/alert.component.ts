@@ -23,6 +23,7 @@ interface AlertOptions {
 
 export async function alertModal(options: AlertOptions) {
   const alert = await options.alertController.create({
+    cssClass: 'my-alert',
     header: options.title,
     message: options.text,
     buttons: options.button,

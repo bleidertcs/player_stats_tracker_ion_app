@@ -131,4 +131,29 @@ export class LoginPage implements OnInit {
       }
     })
   }
+
+  test() {
+    alertModal({
+      title: 'TEST',
+      text: 'TEST',
+      button: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'alert-button-cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            console.log('Buy clicked');
+          }
+        }
+      ],
+      alertController: this.alertController
+    })
+  }
 }
