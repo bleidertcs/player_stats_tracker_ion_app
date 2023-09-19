@@ -4,6 +4,7 @@ import { AlertController, LoadingController, NavController } from '@ionic/angula
 import { loadingSpinner } from '../../shared/loading/loading.component';
 import { AuthService } from '../../services/auth.service';
 import { alertModal } from 'src/app/shared/alert/alert.component';
+import { Constant } from 'src/app/shared/constant/constant.component';
 
 @Component({
   selector: 'app-registro',
@@ -124,17 +125,32 @@ export class RegistroPage implements OnInit {
 
     this.auth.call(data, 'register', 'POST', false).subscribe({
       next: (response) => {
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           console.log(response);
           this.loadingCtrl.dismiss();
           alertModal({
             title: response.status,
-            text: 'Usuario registrado exitosamente',
-            button: ['Cerrar'],
+            text: 'Usuario registrado exitosamente. ¿Deseas iniciar sesión?',
+            button: [
+              {
+                text: 'Cerrar',
+                role: 'cancel',
+                cssClass: 'alert-button-cancel',
+                handler: () => {
+                  console.log('Cancel clicked');
+                }
+              },
+              {
+                text: 'Aceptar',
+                cssClass: 'alert-button-confirm',
+                handler: () => {
+                  this.navCtrl.navigateRoot('login');
+                }
+              }
+            ],
             alertController: this.alertController
           })
 
-          this.navCtrl.navigateRoot('login');
         } else {
           console.log(response);
           this.loadingCtrl.dismiss();
@@ -142,7 +158,12 @@ export class RegistroPage implements OnInit {
           alertModal({
             title: response.status,
             text: response.data,
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
             alertController: this.alertController
           })
         }
@@ -154,7 +175,12 @@ export class RegistroPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }

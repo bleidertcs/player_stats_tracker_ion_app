@@ -4,6 +4,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 import { alertModal } from 'src/app/shared/alert/alert.component';
+import { Constant } from 'src/app/shared/constant/constant.component';
 
 @Component({
   selector: 'app-add-team',
@@ -68,23 +69,33 @@ export class AddTeamPage implements OnInit {
 
     this.authService.call(data, 'addTeam', 'POST', true).subscribe({
       next: async (response) => {
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           this.loadingCtrl.dismiss();
           this.getAllTeams()
           alertModal({
             title: response.status,
             text: 'Equipo agregado exitosamente',
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-confirm',
+                text: 'Aceptar',
+              }
+            ],
             alertController: this.alertController
           })
-        } else if (response.status === 'ERROR') {
+        } else {
           console.log(response);
           this.loadingCtrl.dismiss();
 
           alertModal({
             title: response.status,
             text: response.data,
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
             alertController: this.alertController
           })
         }
@@ -96,7 +107,12 @@ export class AddTeamPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }
@@ -108,18 +124,23 @@ export class AddTeamPage implements OnInit {
 
     this.authService.call(null, 'getAllTeams', 'GET', true).subscribe({
       next: async (response) => {
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           this.loadingCtrl.dismiss();
 
           this.allTeams = response.data
-        } else if (response.status === 'ERROR') {
+        } else {
           console.log(response);
           this.loadingCtrl.dismiss();
 
           alertModal({
             title: response.status,
             text: response.data,
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
             alertController: this.alertController
           })
         }
@@ -131,7 +152,12 @@ export class AddTeamPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }

@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 import { alertModal } from 'src/app/shared/alert/alert.component';
 import { UserInformationPage } from '../user-information/user-information.page';
+import { Constant } from 'src/app/shared/constant/constant.component';
 
 interface Users {
   id: number,
@@ -79,7 +80,7 @@ export class UsersPage implements OnInit {
     this.authService.call(null, 'getUsers', 'GET', false).subscribe({
       next: (response) => {
         this.users = []
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           response.data.map((e: {
             profile: any; id: any; firstname: any; lastname: any; email: any; password: any
           }) => {
@@ -106,7 +107,12 @@ export class UsersPage implements OnInit {
           alertModal({
             title: response.status,
             text: response.data,
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
             alertController: this.alertController
           })
         }
@@ -118,7 +124,12 @@ export class UsersPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }
@@ -130,7 +141,7 @@ export class UsersPage implements OnInit {
     return new Promise<void>((resolve, reject) => {
       this.authService.call(null, `getUser/${id}`, 'GET', false).subscribe({
         next: (response) => {
-          if (response.status === 'SUCCESS') {
+          if (response.status === Constant.SUCCESS) {
             this.user = []
             response.data.map((e: {
               id: number;
@@ -162,7 +173,12 @@ export class UsersPage implements OnInit {
           alertModal({
             title: 'Error',
             text: 'Falla en el servidor',
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
             alertController: this.alertController
           })
         },
@@ -177,11 +193,16 @@ export class UsersPage implements OnInit {
       next: (response) => {
         // this.users.pop()
         this.loadingCtrl.dismiss();
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           alertModal({
             title: response.status,
             text: 'Usuario eliminado exitosamente',
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-confirm',
+                text: 'Aceptar',
+              }
+            ],
             alertController: this.alertController
           })
 
@@ -191,7 +212,12 @@ export class UsersPage implements OnInit {
           alertModal({
             title: response.status,
             text: response.data,
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
             alertController: this.alertController
           })
         }
@@ -203,7 +229,12 @@ export class UsersPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }

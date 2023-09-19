@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { alertModal } from 'src/app/shared/alert/alert.component';
+import { Constant } from 'src/app/shared/constant/constant.component';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 
 @Component({
@@ -69,23 +70,36 @@ export class ForgotPasswordPage implements OnInit {
 
     this.authService.call(form, 'forgotPassword', 'POST', false).subscribe({
       next: async (response) => {
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           alertModal({
             title: response.status,
             text: response.data,
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+                handler: () => {
+                  this.navCtrl.navigateRoot('login');
+                }
+              }
+            ],
             alertController: this.alertController
           })
 
           this.loadingCtrl.dismiss();
-        } else if (response.status === 'ERROR') {
+        } else {
           console.log(response);
           this.loadingCtrl.dismiss();
 
           alertModal({
             title: response.status,
             text: response.data,
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
             alertController: this.alertController
           })
         }
@@ -97,7 +111,12 @@ export class ForgotPasswordPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }

@@ -4,6 +4,7 @@ import { AlertController, LoadingController, ModalController, NavController, Nav
 import { AuthService } from 'src/app/services/auth.service';
 import { alertModal } from '../../shared/alert/alert.component';
 import { loadingSpinner } from '../../shared/loading/loading.component';
+import { Constant } from 'src/app/shared/constant/constant.component';
 
 @Component({
   selector: 'app-user-information',
@@ -99,7 +100,7 @@ export class UserInformationPage implements OnInit {
 
     this.authService.call(null, 'getProfile', 'GET', true).subscribe({
       next: (response) => {
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           this.profiles = response.data
           this.loadingCtrl.dismiss()
         } else {
@@ -109,7 +110,12 @@ export class UserInformationPage implements OnInit {
           alert({
             title: response.status,
             text: response.data,
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
             alertController: this.alertController
           })
         }
@@ -121,7 +127,12 @@ export class UserInformationPage implements OnInit {
         alert({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }
@@ -139,26 +150,33 @@ export class UserInformationPage implements OnInit {
       id_profile: updateInformation.idProfile
     }
 
-    console.log(data);
-
-
     this.authService.call(data, `updateUser/${this.navParams.get('user')[0].id}`, 'PATCH', true).subscribe({
       next: (response) => {
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           this.loadingCtrl.dismiss()
 
           alertModal({
             title: 'Succes',
             text: 'Usuario actualizado exitosamente',
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-confirm',
+                text: 'Aceptar',
+              }
+            ],
             alertController: this.alertController
           })
         } else {
           this.loadingCtrl.dismiss()
           alertModal({
             title: 'Error',
-            text: 'No se pudo actualizar',
-            button: ['Cerrar'],
+            text: response.data,
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
             alertController: this.alertController
           })
         }
@@ -170,7 +188,12 @@ export class UserInformationPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }

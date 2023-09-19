@@ -4,6 +4,7 @@ import { AlertController, LoadingController, NavController } from '@ionic/angula
 import { loadingSpinner } from '../../shared/loading/loading.component';
 import { AuthService } from '../../services/auth.service';
 import { alertModal } from 'src/app/shared/alert/alert.component';
+import { Constant } from 'src/app/shared/constant/constant.component';
 
 @Component({
   selector: 'app-login',
@@ -85,7 +86,7 @@ export class LoginPage implements OnInit {
 
     this.authService.call(data, 'login', 'POST', false).subscribe({
       next: async (response) => {
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           console.log(response);
           this.authService.setToken(response.data.token);
           this.authService.setIdUser(response.data.id);
@@ -106,14 +107,19 @@ export class LoginPage implements OnInit {
           }
 
           this.loadingCtrl.dismiss();
-        } else if (response.status === 'ERROR') {
+        } else {
           console.log(response);
           this.loadingCtrl.dismiss();
 
           alertModal({
             title: response.status,
             text: response.data,
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
             alertController: this.alertController
           })
         }
@@ -125,7 +131,12 @@ export class LoginPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }

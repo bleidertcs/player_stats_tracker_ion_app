@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { alertModal } from 'src/app/shared/alert/alert.component';
+import { Constant } from 'src/app/shared/constant/constant.component';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 
 @Component({
@@ -57,7 +58,7 @@ export class ChatBotPage implements OnInit {
       this.authService.call(data, 'assistant', 'POST', true).subscribe({
         next: (response) => {
           console.log(response)
-          if (response.status === 'SUCCESS') {
+          if (response.status === Constant.SUCCESS) {
             setTimeout(() => {
               this.messages.push({
                 text: response.data.content,
@@ -73,7 +74,12 @@ export class ChatBotPage implements OnInit {
             alertModal({
               title: response.status,
               text: response.data,
-              button: ['Cerrar'],
+              button: [
+                {
+                  cssClass: 'alert-button-cancel',
+                  text: 'Cerrar',
+                }
+              ],
               alertController: this.alertController
             })
           }
@@ -85,7 +91,12 @@ export class ChatBotPage implements OnInit {
           alertModal({
             title: 'Error',
             text: 'Falla en el servidor',
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
             alertController: this.alertController
           })
         }

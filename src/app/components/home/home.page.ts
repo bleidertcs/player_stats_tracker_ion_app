@@ -4,6 +4,7 @@ import { AlertController, LoadingController, NavController } from '@ionic/angula
 import { Chart, Colors } from 'chart.js';
 import { AuthService } from 'src/app/services/auth.service';
 import { alertModal } from 'src/app/shared/alert/alert.component';
+import { Constant } from 'src/app/shared/constant/constant.component';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 
 @Component({
@@ -67,7 +68,7 @@ export class HomePage implements OnInit {
     this.authService.call(null, `getPlayer/${random}`, 'GET', true).subscribe({
       next: (response) => {
         this.datas = []
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           this.datas.push(response.data)
           console.log(this.datas);
 
@@ -81,7 +82,12 @@ export class HomePage implements OnInit {
           alertModal({
             title: '',
             text: response.data,
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
             alertController: this.alertController
           })
         }
@@ -93,7 +99,12 @@ export class HomePage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }
@@ -148,7 +159,7 @@ export class HomePage implements OnInit {
     this.authService.call(data, 'logout', 'POST', true).subscribe({
       next: (response) => {
         console.log(response)
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           this.authService.setToken(null);
           this.authService.setLogged(false)
           this.authService.setModelSesionInSession(this.authService.modelSession);
@@ -163,7 +174,12 @@ export class HomePage implements OnInit {
           alertModal({
             title: '',
             text: response.data,
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
             alertController: this.alertController
           })
         }
@@ -175,7 +191,12 @@ export class HomePage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }

@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { alertModal } from 'src/app/shared/alert/alert.component';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 import { MaskitoOptions, MaskitoElementPredicateAsync } from '@maskito/core';
+import { Constant } from 'src/app/shared/constant/constant.component';
 
 @Component({
   selector: 'app-add-player',
@@ -140,7 +141,7 @@ export class AddPlayerPage implements OnInit {
   getAllTeams() {
     this.authService.call(null, 'getAllTeams', 'GET', true).subscribe({
       next: (response) => {
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           response.data.map((e: {
             id: any; name: any;
             country: string;
@@ -158,6 +159,17 @@ export class AddPlayerPage implements OnInit {
           this.teams.sort((a: { name: string; }, b: { name: string; }) => (a.name < b.name) ? -1 : 1)
         } else {
           console.log(response)
+          alertModal({
+            title: 'Error',
+            text: response.data,
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
+            alertController: this.alertController
+          })
         }
       },
       error: (error) => {
@@ -166,7 +178,12 @@ export class AddPlayerPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }
@@ -231,11 +248,16 @@ export class AddPlayerPage implements OnInit {
     // this.loadingCtrl.dismiss();
     this.authService.call(data, 'addPlayer', 'POST', true).subscribe({
       next: async (response) => {
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           alertModal({
             title: response.status,
             text: response.data,
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-confirm',
+                text: 'Aceptar',
+              }
+            ],
             alertController: this.alertController
           })
 
@@ -249,7 +271,12 @@ export class AddPlayerPage implements OnInit {
           alertModal({
             title: response.status,
             text: response.data,
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
             alertController: this.alertController
           })
         }
@@ -261,7 +288,12 @@ export class AddPlayerPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }
@@ -273,12 +305,24 @@ export class AddPlayerPage implements OnInit {
 
     this.authService.call(null, 'getAllSquad', 'GET', true).subscribe({
       next: (response) => {
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           this.allSquads = response.data
           this.loadingCtrl.dismiss();
         } else {
           console.log(response)
           this.loadingCtrl.dismiss();
+
+          alertModal({
+            title: 'Error',
+            text: response.data,
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
+            alertController: this.alertController
+          })
         }
       },
       error: (error) => {
@@ -288,7 +332,12 @@ export class AddPlayerPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }

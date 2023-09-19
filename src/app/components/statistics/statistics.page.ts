@@ -5,6 +5,7 @@ import { Chart, ChartItem } from 'chart.js/auto';
 import { AuthService } from 'src/app/services/auth.service';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 import { alertModal } from 'src/app/shared/alert/alert.component';
+import { Constant } from 'src/app/shared/constant/constant.component';
 
 interface selectTeam1 {
   id: number;
@@ -381,7 +382,7 @@ export class StatisticsPage implements OnInit {
     this.authService.call(data, 'logout', 'POST', true).subscribe({
       next: (response) => {
         console.log(response)
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           this.authService.setToken(null);
           this.authService.setLogged(false)
           this.authService.setModelSesionInSession(this.authService.modelSession);
@@ -396,7 +397,12 @@ export class StatisticsPage implements OnInit {
           alertModal({
             title: response.status,
             text: response.data,
-            button: ['Cerrar'],
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
             alertController: this.alertController
           })
         }
@@ -408,7 +414,12 @@ export class StatisticsPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }
@@ -418,7 +429,7 @@ export class StatisticsPage implements OnInit {
   footballTeams1() {
     this.authService.call(null, 'getAllTeams', 'GET', true).subscribe({
       next: (response) => {
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           response.data.map((e: {
             id: any; name: any;
             country: string;
@@ -436,6 +447,17 @@ export class StatisticsPage implements OnInit {
           this.teams1.sort((a, b) => (a.name < b.name) ? -1 : 1)
         } else {
           console.log(response)
+          alertModal({
+            title: 'Error',
+            text: response.data,
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
+            alertController: this.alertController
+          })
         }
       },
       error: (error) => {
@@ -444,7 +466,12 @@ export class StatisticsPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }
@@ -454,7 +481,7 @@ export class StatisticsPage implements OnInit {
   footballTeams2() {
     this.authService.call(null, 'getAllTeams', 'GET', true).subscribe({
       next: (response) => {
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           response.data.map((e: {
             id: any; name: any;
             country: string;
@@ -472,6 +499,18 @@ export class StatisticsPage implements OnInit {
           this.teams2.sort((a, b) => (a.name < b.name) ? -1 : 1)
         } else {
           console.log(response)
+
+          alertModal({
+            title: 'Error',
+            text: response.data,
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
+            alertController: this.alertController
+          })
         }
       },
       error: (error) => {
@@ -480,7 +519,12 @@ export class StatisticsPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }
@@ -492,7 +536,7 @@ export class StatisticsPage implements OnInit {
 
     this.authService.call(null, `getSquad/${teamID}`, 'GET', true).subscribe({
       next: (response) => {
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           response.data.map((e: {
             age: number;
             photo: string;
@@ -514,6 +558,18 @@ export class StatisticsPage implements OnInit {
         } else {
           console.log(response)
           this.loadingCtrl.dismiss();
+
+          alertModal({
+            title: 'Error',
+            text: response.data,
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
+            alertController: this.alertController
+          })
         }
       },
       error: (error) => {
@@ -523,7 +579,12 @@ export class StatisticsPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }
@@ -535,7 +596,7 @@ export class StatisticsPage implements OnInit {
 
     this.authService.call(null, `getSquad/${teamID}`, 'GET', true).subscribe({
       next: (response) => {
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           response.data.map((e: {
             age: number;
             photo: string;
@@ -557,6 +618,18 @@ export class StatisticsPage implements OnInit {
         } else {
           console.log(response)
           this.loadingCtrl.dismiss();
+
+          alertModal({
+            title: 'Error',
+            text: response.data,
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
+            alertController: this.alertController
+          })
         }
       },
       error: (error) => {
@@ -566,7 +639,12 @@ export class StatisticsPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }
@@ -579,7 +657,7 @@ export class StatisticsPage implements OnInit {
     this.authService.call(null, `getPlayer/${playerId}`, 'GET', true).subscribe({
       next: (response) => {
         console.log(response)
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           response.data.statistics.map((
             e: {
               league: { country: any; logo: any; season: any; name: any; };
@@ -680,6 +758,18 @@ export class StatisticsPage implements OnInit {
         } else {
           console.log(response)
           this.loadingCtrl.dismiss()
+
+          alertModal({
+            title: 'Error',
+            text: response.data,
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
+            alertController: this.alertController
+          })
         }
       },
       error: (error) => {
@@ -689,7 +779,12 @@ export class StatisticsPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }
@@ -702,7 +797,7 @@ export class StatisticsPage implements OnInit {
     this.authService.call(null, `getPlayer/${playerId}`, 'GET', true).subscribe({
       next: (response) => {
         console.log(response)
-        if (response.status === 'SUCCESS') {
+        if (response.status === Constant.SUCCESS) {
           response.data.statistics?.map((
             e: {
               league: { country: string; logo: string; season: number; name: any; };
@@ -802,6 +897,18 @@ export class StatisticsPage implements OnInit {
         } else {
           console.log(response)
           this.loadingCtrl.dismiss()
+
+          alertModal({
+            title: 'Error',
+            text: response.data,
+            button: [
+              {
+                cssClass: 'alert-button-cancel',
+                text: 'Cerrar',
+              }
+            ],
+            alertController: this.alertController
+          })
         }
       },
       error: (error) => {
@@ -811,7 +918,12 @@ export class StatisticsPage implements OnInit {
         alertModal({
           title: 'Error',
           text: 'Falla en el servidor',
-          button: ['Cerrar'],
+          button: [
+            {
+              cssClass: 'alert-button-cancel',
+              text: 'Cerrar',
+            }
+          ],
           alertController: this.alertController
         })
       }

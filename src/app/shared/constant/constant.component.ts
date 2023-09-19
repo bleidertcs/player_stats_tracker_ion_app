@@ -9,4 +9,7 @@ export class Constant {
       Password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_\-.,#])[A-Za-z\d_\-.,#]{6,12}$/,
     },
   };
+
+  public static SUCCESS = 'SUCCESS';
+  public static ERROR = 'ERROR';
 }
