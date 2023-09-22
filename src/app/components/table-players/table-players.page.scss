@@ -1,0 +1,24 @@
+/* player-list.component.scss */
+
+.player-list {
+  .header {
+    font-weight: bold;
+    background-color: #f2f2f2;
+
+    ion-label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .player-item {
+    border-bottom: 1px solid #ccc;
+
+    ion-label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

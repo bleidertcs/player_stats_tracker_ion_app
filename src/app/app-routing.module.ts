@@ -66,6 +66,14 @@ const routes: Routes = [
   },  {
     path: 'forgot-password',
     loadChildren: () => import('./components/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+  },
+  {
+    path: 'table-players',
+    loadChildren: () => import('./components/table-players/table-players.module').then( m => m.TablePlayersPageModule)
+  },
+  {
+    path: 'player-details',
+    loadChildren: () => import('./components/player-details/player-details.module').then( m => m.PlayerDetailsPageModule)
   }
 
 ];

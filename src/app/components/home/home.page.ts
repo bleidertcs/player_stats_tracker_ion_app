@@ -36,7 +36,7 @@ export class HomePage implements OnInit {
     },
     {
       title: 'Ver Jugadores',
-      route: '/users',
+      route: '/table-players',
     },
   ]
 
