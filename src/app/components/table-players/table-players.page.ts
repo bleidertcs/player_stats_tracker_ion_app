@@ -7,7 +7,91 @@ import { Constant } from 'src/app/shared/constant/constant.component';
 import { loadingSpinner } from 'src/app/shared/loading/loading.component';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { PlayerDetailsPage } from '../player-details/player-details.page';
-import { Player } from 'src/app/models/player.models';
+// import { Player } from 'src/app/models/player.models';
+interface Player {
+  id: number;
+  name: string;
+  firstname: string;
+  lastname: string;
+  age: number,
+  birth: string;
+  nationality: string;
+  height: any,
+  weight: any,
+  photo: string,
+  team: {
+    id: number,
+    name: string,
+    country: string,
+    founded: number,
+    logo: string,
+  },
+  league: {
+    name: string;
+    country: string;
+    logo: string;
+    season: number;
+  }
+  game: {
+    appearences: number,
+    lineups: number,
+    minutes: number,
+    number: number,
+    position: string,
+    rating: string,
+    captain: boolean
+  },
+  substitute: {
+    in: any,
+    out: any,
+    bench: any
+  },
+  shot: {
+    total: any,
+    on: any
+  },
+  goal: {
+    total: any,
+    conceded: any,
+    assists: any,
+    saves: any
+  },
+  passe: {
+    total: any,
+    key: any,
+    accuracy: any
+  },
+  tackle: {
+    total: any,
+    blocks: any,
+    interceptions: any
+  },
+  duel: {
+    total: any,
+    won: any
+  },
+  dribble: {
+    attempts: any,
+    success: any,
+    past: any
+  },
+  foul: {
+    drawn: any,
+    committed: any
+  },
+  card: {
+    yellow: any,
+    yellowred: any,
+    red: any
+  },
+  penalty: {
+    won: any,
+    committed: any,
+    scored: any,
+    missed: any,
+    saved: any
+  }
+}
 
 @Component({
   selector: 'app-table-players',
@@ -32,10 +116,12 @@ export class TablePlayersPage implements OnInit {
   }
 
   async openModal(id: any) {
-    this.player1(id)
+    await this.player1(id)
+    console.log(this.detailsPlayer);
+
     const modal = await this.modalCtrl.create({
       component: PlayerDetailsPage,
-      componentProps: { 
+      componentProps: {
         detailsPlayer: this.detailsPlayer
       }
     });
@@ -44,6 +130,7 @@ export class TablePlayersPage implements OnInit {
     const { data, role } = await modal.onWillDismiss();
 
     if (role) {
+      this.getAllSquad()
     }
   }
 
@@ -52,11 +139,11 @@ export class TablePlayersPage implements OnInit {
 
     this.authService.call(null, `getPlayer/${playerId}`, 'GET', true).subscribe({
       next: (response) => {
-        console.log(response)
         this.detailsPlayer = [];
         if (response.status === Constant.SUCCESS) {
           response.data.statistics.map((
             e: {
+              team: { id: any; name: any; country: any; founded: any; logo: any; };
               league: { country: any; logo: any; season: any; name: any; };
               game: { appearences: any, lineups: any, minutes: any, number: any, position: any, rating: any, captain: any };
               substitute: { in: any, out: any, bench: any },
@@ -81,6 +168,13 @@ export class TablePlayersPage implements OnInit {
               height: response.data.player.height,
               weight: response.data.player.weight,
               photo: response.data.player.photo,
+              team: {
+                id: e.team.id,
+                name: e.team.name,
+                country: e.team.country,
+                founded: e.team.founded,
+                logo: e.team.logo,
+              },
               league: {
                 name: e.league.name,
                 country: e.league.country,

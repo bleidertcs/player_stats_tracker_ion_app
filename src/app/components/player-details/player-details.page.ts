@@ -136,7 +136,8 @@ export class PlayerDetailsPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.navParams.get('detailsPlayer'));
+    this.getAllTeams()
+    this.setValueForm()
   }
 
   cancel() {
@@ -148,10 +149,63 @@ export class PlayerDetailsPage implements OnInit {
   }
 
   setValueForm() {
-    this.form.controls['firstname'].setValue(this.navParams.get('user')[0].firstname)
-    this.form.controls['lastname'].setValue(this.navParams.get('user')[0].lastname)
-    this.form.controls['email'].setValue(this.navParams.get('user')[0].email)
-    this.form.controls['idProfile'].setValue(this.navParams.get('user')[0].profile.id)
+    this.form.get('player.firstname')!.setValue(this.navParams.get('detailsPlayer')[0].firstname)
+    this.form.get('player.lastname')!.setValue(this.navParams.get('detailsPlayer')[0].lastname)
+    this.form.get('player.name')!.setValue(this.navParams.get('detailsPlayer')[0].name)
+    this.form.get('player.age')!.setValue(this.navParams.get('detailsPlayer')[0].age)
+    this.form.get('player.birth')!.setValue(this.navParams.get('detailsPlayer')[0].birth)
+    this.form.get('player.nationality')!.setValue(this.navParams.get('detailsPlayer')[0].nationality)
+    this.form.get('player.height')!.setValue(this.navParams.get('detailsPlayer')[0].height)
+    this.form.get('player.weight')!.setValue(this.navParams.get('detailsPlayer')[0].weight)
+    this.form.get('player.id_team')!.setValue(this.navParams.get('detailsPlayer')[0].team.id)
+
+    this.form.get('game.appearences')!.setValue(this.navParams.get('detailsPlayer')[0].game.appearences)
+    this.form.get('game.minutes')!.setValue(this.navParams.get('detailsPlayer')[0].game.minutes)
+    this.form.get('game.lineups')!.setValue(this.navParams.get('detailsPlayer')[0].game.lineups)
+    this.form.get('game.captain')!.setValue(this.navParams.get('detailsPlayer')[0].game.captain === false ? 0 : 1)
+    this.form.get('game.number')!.setValue(this.navParams.get('detailsPlayer')[0].game.number)
+    this.form.get('game.position')!.setValue(this.navParams.get('detailsPlayer')[0].game.position)
+    this.form.get('game.rating')!.setValue(this.navParams.get('detailsPlayer')[0].game.rating)
+
+    this.form.get('substitute.in')!.setValue(this.navParams.get('detailsPlayer')[0].substitute.in)
+    this.form.get('substitute.out')!.setValue(this.navParams.get('detailsPlayer')[0].substitute.out)
+    this.form.get('substitute.bench')!.setValue(this.navParams.get('detailsPlayer')[0].substitute.bench)
+
+    this.form.get('shot.total')!.setValue(this.navParams.get('detailsPlayer')[0].shot.total)
+    this.form.get('shot.on')!.setValue(this.navParams.get('detailsPlayer')[0].shot.on)
+
+    this.form.get('goal.total')!.setValue(this.navParams.get('detailsPlayer')[0].goal.total)
+    this.form.get('goal.assists')!.setValue(this.navParams.get('detailsPlayer')[0].goal.assists)
+    this.form.get('goal.conceded')!.setValue(this.navParams.get('detailsPlayer')[0].goal.conceded)
+    this.form.get('goal.saves')!.setValue(this.navParams.get('detailsPlayer')[0].goal.saves)
+
+    this.form.get('passe.total')!.setValue(this.navParams.get('detailsPlayer')[0].passe.total)
+    this.form.get('passe.key')!.setValue(this.navParams.get('detailsPlayer')[0].passe.key)
+    this.form.get('passe.accuracy')!.setValue(this.navParams.get('detailsPlayer')[0].passe.accuracy)
+
+    this.form.get('tackle.total')!.setValue(this.navParams.get('detailsPlayer')[0].tackle.total)
+    this.form.get('tackle.blocks')!.setValue(this.navParams.get('detailsPlayer')[0].tackle.blocks)
+    this.form.get('tackle.interceptions')!.setValue(this.navParams.get('detailsPlayer')[0].tackle.interceptions)
+
+    this.form.get('duel.total')!.setValue(this.navParams.get('detailsPlayer')[0].duel.total)
+    this.form.get('duel.won')!.setValue(this.navParams.get('detailsPlayer')[0].duel.won)
+
+    this.form.get('dribble.attempts')!.setValue(this.navParams.get('detailsPlayer')[0].dribble.attempts)
+    this.form.get('dribble.success')!.setValue(this.navParams.get('detailsPlayer')[0].dribble.success)
+    this.form.get('dribble.past')!.setValue(this.navParams.get('detailsPlayer')[0].dribble.past)
+
+    this.form.get('foul.drawn')!.setValue(this.navParams.get('detailsPlayer')[0].foul.drawn)
+    this.form.get('foul.committed')!.setValue(this.navParams.get('detailsPlayer')[0].foul.committed)
+
+    this.form.get('card.yellow')!.setValue(this.navParams.get('detailsPlayer')[0].card.yellow)
+    this.form.get('card.yellowred')!.setValue(this.navParams.get('detailsPlayer')[0].card.yellowred)
+    this.form.get('card.red')!.setValue(this.navParams.get('detailsPlayer')[0].card.red)
+
+    this.form.get('penalty.won')!.setValue(this.navParams.get('detailsPlayer')[0].penalty.won)
+    this.form.get('penalty.missed')!.setValue(this.navParams.get('detailsPlayer')[0].penalty.missed)
+    this.form.get('penalty.committed')!.setValue(this.navParams.get('detailsPlayer')[0].penalty.committed)
+    this.form.get('penalty.saved')!.setValue(this.navParams.get('detailsPlayer')[0].penalty.saved)
+    this.form.get('penalty.scored')!.setValue(this.navParams.get('detailsPlayer')[0].penalty.scored)
   }
 
   getAllTeams() {

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -22,6 +22,7 @@ import { MaskitoModule } from '@maskito/angular';
     HttpClientModule,
     MaskitoModule
   ],
+  providers: [{ provide: LOCALE_ID, useValue: 'es' }],
   declarations: [PlayerDetailsPage]
 })
-export class PlayerDetailsPageModule {}
+export class PlayerDetailsPageModule { }
