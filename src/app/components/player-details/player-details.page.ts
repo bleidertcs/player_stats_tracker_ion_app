@@ -264,59 +264,59 @@ export class PlayerDetailsPage implements OnInit {
     await loadingSpinner(this.loadingCtrl)
 
     let data = {
-      appearences: parseInt(form.appearences),
-      lineups: parseInt(form.lineups),
-      minutes: parseInt(form.minutes),
-      number: parseInt(form.number),
-      position: form.position,
-      rating: parseInt(form.rating),
-      captain: parseInt(form.captain),
-      in: parseInt(form.in),
-      out: parseInt(form.out),
-      bench: parseInt(form.bench),
-      shotTotal: parseInt(form.total),
-      shotOn: parseInt(form.on),
-      goalTotal: parseInt(form.total),
-      conceded: parseInt(form.conceded),
-      assists: parseInt(form.assists),
-      saves: parseInt(form.saves),
-      passeTotal: parseInt(form.total),
-      key: parseInt(form.key),
-      accuracy: parseInt(form.accuracy),
-      tackleTotal: parseInt(form.total),
-      blocks: parseInt(form.blocks),
-      interceptions: parseInt(form.interceptions),
-      duelTotal: parseInt(form.total),
-      duelWon: parseInt(form.won),
-      attempts: parseInt(form.attempts),
-      success: parseInt(form.success),
-      past: parseInt(form.past),
-      drawn: parseInt(form.drawn),
-      foulCommitted: parseInt(form.committed),
-      yellow: parseInt(form.yellow),
-      yellowred: parseInt(form.yellowred),
-      red: parseInt(form.red),
-      penaltyWon: parseInt(form.won),
-      penaltyCommitted: parseInt(form.committed),
-      scored: parseInt(form.scored),
-      missed: parseInt(form.missed),
-      saved: parseInt(form.saved),
-      name: form.name,
-      firstname: form.firstname,
-      lastname: form.lastname,
-      age: parseInt(form.age),
-      birth: new Date(form.birth),
-      nationality: form.nationality,
-      height: form.height,
-      weight: form.weight,
-      photo: form.photo,
-      id_team: parseInt(form.id_team)
+      appearences: parseInt(form.game.appearences),
+      lineups: parseInt(form.game.lineups),
+      minutes: parseInt(form.game.minutes),
+      number: parseInt(form.game.number),
+      position: form.game.position,
+      rating: parseInt(form.game.rating),
+      captain: parseInt(form.game.captain),
+      in: parseInt(form.substitute.in),
+      out: parseInt(form.substitute.out),
+      bench: parseInt(form.substitute.bench),
+      shotTotal: parseInt(form.shot.total),
+      shotOn: parseInt(form.shot.on),
+      goalTotal: parseInt(form.goal.total),
+      conceded: parseInt(form.goal.conceded),
+      assists: parseInt(form.goal.assists),
+      saves: parseInt(form.goal.saves),
+      passeTotal: parseInt(form.passe.total),
+      key: parseInt(form.passe.key),
+      accuracy: parseInt(form.passe.accuracy),
+      tackleTotal: parseInt(form.tackle.total),
+      blocks: parseInt(form.tackle.blocks),
+      interceptions: parseInt(form.tackle.interceptions),
+      duelTotal: parseInt(form.duel.total),
+      duelWon: parseInt(form.duel.won),
+      attempts: parseInt(form.dribble.attempts),
+      success: parseInt(form.dribble.success),
+      past: parseInt(form.dribble.past),
+      drawn: parseInt(form.foul.drawn),
+      foulCommitted: parseInt(form.foul.committed),
+      yellow: parseInt(form.card.yellow),
+      yellowred: parseInt(form.card.yellowred),
+      red: parseInt(form.card.red),
+      penaltyWon: parseInt(form.penalty.won),
+      penaltyCommitted: parseInt(form.penalty.committed),
+      scored: parseInt(form.penalty.scored),
+      missed: parseInt(form.penalty.missed),
+      saved: parseInt(form.penalty.saved),
+      name: form.player.name,
+      firstname: form.player.firstname,
+      lastname: form.player.lastname,
+      age: parseInt(form.player.age),
+      birth: new Date(form.player.birth),
+      nationality: form.player.nationality,
+      height: form.player.height,
+      weight: form.player.weight,
+      photo: form.player.photo,
+      id_team: parseInt(form.player.id_team)
     }
 
     console.log(data);
 
     // this.loadingCtrl.dismiss();
-    this.authService.call(data, 'addPlayer', 'POST', true).subscribe({
+    this.authService.call(data, `updatePlayer/${this.navParams.get('detailsPlayer')[0].id}`, 'PATCH', true).subscribe({
       next: async (response) => {
         if (response.status === Constant.SUCCESS) {
           alertModal({
@@ -367,5 +367,13 @@ export class PlayerDetailsPage implements OnInit {
         })
       }
     })
+  }
+
+  test() {
+    console.log(this.form.value.player.birth);
+    console.log(this.navParams.get('detailsPlayer')[0].birth);
+    
+    console.log(new Date(this.form.value.player.birth));
+    console.log(new Date(this.navParams.get('detailsPlayer')[0].birth));    
   }
 }

@@ -137,120 +137,139 @@ export class TablePlayersPage implements OnInit {
   async player1(playerId: any) {
     await loadingSpinner(this.loadingCtrl);
 
-    this.authService.call(null, `getPlayer/${playerId}`, 'GET', true).subscribe({
-      next: (response) => {
-        this.detailsPlayer = [];
-        if (response.status === Constant.SUCCESS) {
-          response.data.statistics.map((
-            e: {
-              team: { id: any; name: any; country: any; founded: any; logo: any; };
-              league: { country: any; logo: any; season: any; name: any; };
-              game: { appearences: any, lineups: any, minutes: any, number: any, position: any, rating: any, captain: any };
-              substitute: { in: any, out: any, bench: any },
-              shot: { total: any, on: any },
-              goal: { total: any, conceded: any, assists: any, saves: any };
-              passe: { total: any; key: any; accuracy: any; };
-              tackle: { total: any; blocks: any; interceptions: any; };
-              duel: { total: any, won: any },
-              dribble: { attempts: any; success: any; past: any };
-              foul: { drawn: any; committed: any; };
-              card: { yellow: any, yellowred: any; red: any; };
-              penalty: { won: any, committed: any, scored: any, missed: any, saved: any }
-            }) => {
-            this.detailsPlayer.push({
-              id: response.data.player.id,
-              name: response.data.player.name,
-              firstname: response.data.player.firstname,
-              lastname: response.data.player.lastname,
-              age: response.data.player.age,
-              birth: response.data.player.birth,
-              nationality: response.data.player.nationality,
-              height: response.data.player.height,
-              weight: response.data.player.weight,
-              photo: response.data.player.photo,
-              team: {
-                id: e.team.id,
-                name: e.team.name,
-                country: e.team.country,
-                founded: e.team.founded,
-                logo: e.team.logo,
-              },
-              league: {
-                name: e.league.name,
-                country: e.league.country,
-                logo: e.league.logo,
-                season: e.league.season
-              },
-              game: {
-                appearences: e.game.appearences,
-                lineups: e.game.lineups,
-                minutes: e.game.minutes,
-                number: e.game.number,
-                position: e.game.position,
-                rating: e.game.rating,
-                captain: e.game.captain
-              },
-              substitute: {
-                in: e.substitute.in,
-                out: e.substitute.out,
-                bench: e.substitute.bench
-              },
-              shot: {
-                total: e.shot.total,
-                on: e.shot.on
-              },
-              goal: {
-                total: e.goal.total,
-                conceded: e.goal.conceded,
-                assists: e.goal.assists,
-                saves: e.goal.saves
-              },
-              passe: {
-                total: e.passe.total,
-                key: e.passe.key,
-                accuracy: e.passe.accuracy
-              },
-              tackle: {
-                total: e.tackle.total,
-                blocks: e.tackle.blocks,
-                interceptions: e.tackle.interceptions
-              },
-              duel: {
-                total: e.duel.total,
-                won: e.duel.won
-              },
-              dribble: {
-                attempts: e.dribble.attempts,
-                success: e.dribble.success,
-                past: e.dribble.past
-              },
-              foul: {
-                drawn: e.foul.drawn,
-                committed: e.foul.committed,
-              },
-              card: {
-                yellow: e.card.yellow,
-                yellowred: e.card.yellowred,
-                red: e.card.red
-              },
-              penalty: {
-                won: e.penalty.won,
-                committed: e.penalty.committed,
-                scored: e.penalty.scored,
-                missed: e.penalty.missed,
-                saved: e.penalty.saved
-              }
+    return new Promise<void>((resolve, reject) => {
+      this.authService.call(null, `getPlayer/${playerId}`, 'GET', true).subscribe({
+        next: (response) => {
+          this.detailsPlayer = [];
+          if (response.status === Constant.SUCCESS) {
+            response.data.statistics.map((
+              e: {
+                team: { id: any; name: any; country: any; founded: any; logo: any; };
+                league: { country: any; logo: any; season: any; name: any; };
+                game: { appearences: any, lineups: any, minutes: any, number: any, position: any, rating: any, captain: any };
+                substitute: { in: any, out: any, bench: any },
+                shot: { total: any, on: any },
+                goal: { total: any, conceded: any, assists: any, saves: any };
+                passe: { total: any; key: any; accuracy: any; };
+                tackle: { total: any; blocks: any; interceptions: any; };
+                duel: { total: any, won: any },
+                dribble: { attempts: any; success: any; past: any };
+                foul: { drawn: any; committed: any; };
+                card: { yellow: any, yellowred: any; red: any; };
+                penalty: { won: any, committed: any, scored: any, missed: any, saved: any }
+              }) => {
+              this.detailsPlayer.push({
+                id: response.data.player.id,
+                name: response.data.player.name,
+                firstname: response.data.player.firstname,
+                lastname: response.data.player.lastname,
+                age: response.data.player.age,
+                birth: response.data.player.birth,
+                nationality: response.data.player.nationality,
+                height: response.data.player.height,
+                weight: response.data.player.weight,
+                photo: response.data.player.photo,
+                team: {
+                  id: e.team.id,
+                  name: e.team.name,
+                  country: e.team.country,
+                  founded: e.team.founded,
+                  logo: e.team.logo,
+                },
+                league: {
+                  name: e.league.name,
+                  country: e.league.country,
+                  logo: e.league.logo,
+                  season: e.league.season
+                },
+                game: {
+                  appearences: e.game.appearences,
+                  lineups: e.game.lineups,
+                  minutes: e.game.minutes,
+                  number: e.game.number,
+                  position: e.game.position,
+                  rating: e.game.rating,
+                  captain: e.game.captain
+                },
+                substitute: {
+                  in: e.substitute.in,
+                  out: e.substitute.out,
+                  bench: e.substitute.bench
+                },
+                shot: {
+                  total: e.shot.total,
+                  on: e.shot.on
+                },
+                goal: {
+                  total: e.goal.total,
+                  conceded: e.goal.conceded,
+                  assists: e.goal.assists,
+                  saves: e.goal.saves
+                },
+                passe: {
+                  total: e.passe.total,
+                  key: e.passe.key,
+                  accuracy: e.passe.accuracy
+                },
+                tackle: {
+                  total: e.tackle.total,
+                  blocks: e.tackle.blocks,
+                  interceptions: e.tackle.interceptions
+                },
+                duel: {
+                  total: e.duel.total,
+                  won: e.duel.won
+                },
+                dribble: {
+                  attempts: e.dribble.attempts,
+                  success: e.dribble.success,
+                  past: e.dribble.past
+                },
+                foul: {
+                  drawn: e.foul.drawn,
+                  committed: e.foul.committed,
+                },
+                card: {
+                  yellow: e.card.yellow,
+                  yellowred: e.card.yellowred,
+                  red: e.card.red
+                },
+                penalty: {
+                  won: e.penalty.won,
+                  committed: e.penalty.committed,
+                  scored: e.penalty.scored,
+                  missed: e.penalty.missed,
+                  saved: e.penalty.saved
+                }
+              })
+            },
+            )
+            resolve();
+            this.loadingCtrl.dismiss()
+          } else {
+            console.log(response)
+            this.loadingCtrl.dismiss()
+
+            alertModal({
+              title: 'Error',
+              text: response.data,
+              button: [
+                {
+                  cssClass: 'alert-button-cancel',
+                  text: 'Cerrar',
+                }
+              ],
+              alertController: this.alertController
             })
-          },
-          )
-          this.loadingCtrl.dismiss()
-        } else {
-          console.log(response)
+          }
+        },
+        error: (error) => {
+          console.log(error);
           this.loadingCtrl.dismiss()
 
           alertModal({
             title: 'Error',
-            text: response.data,
+            text: 'Falla en el servidor',
             button: [
               {
                 cssClass: 'alert-button-cancel',
@@ -260,23 +279,7 @@ export class TablePlayersPage implements OnInit {
             alertController: this.alertController
           })
         }
-      },
-      error: (error) => {
-        console.log(error);
-        this.loadingCtrl.dismiss()
-
-        alertModal({
-          title: 'Error',
-          text: 'Falla en el servidor',
-          button: [
-            {
-              cssClass: 'alert-button-cancel',
-              text: 'Cerrar',
-            }
-          ],
-          alertController: this.alertController
-        })
-      }
+      })
     })
   }
 
