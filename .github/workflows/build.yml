@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 13.x
+          node-version: 18.x
 
       - name: Install Ionic
         run: npm install -g @ionic/cli
@@ -47,3 +47,11 @@ jobs:
         with:
           name: app-dev
           path: apk/app-debug.apk
+
+
+      - name: Save release bundle as artifact
+        uses: actions/upload-artifact@83fd05a356d7e2593de66fc9913b3002723633cb # tag=v3
+        with:
+          name: app-release
+          path: |
+            ${{ github.workspace }}/packages/app/android/app/build/outputs/apk/release/*.apk
