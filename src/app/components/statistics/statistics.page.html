@@ -75,7 +75,7 @@
       </ion-card>
 
 
-      <ion-card *ngFor="let player of players1" color="danger" style="border-radius: 15px;">
+      <ion-card *ngIf="players1.length !== 0 || players2.length !== 0" color="danger" style="border-radius: 15px;">
         <ion-card-header>
           <ion-row>
             <ion-card-title *ngFor="let player of players1">{{ player.name }}</ion-card-title>
