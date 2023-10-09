@@ -67,7 +67,8 @@
       </ion-item> -->
 
       <ion-item counter="true" fill="outline" class="form">
-        <ion-select label="Perfiles" placeholder="Selecciona una opción" formControlName="idProfile">
+        <ion-select interface="popover" label="Perfiles" placeholder="Selecciona una opción"
+          formControlName="idProfile">
           <ion-select-option *ngFor="let profile of profiles"
             [value]="profile.id">{{profile.description}}</ion-select-option>
         </ion-select>

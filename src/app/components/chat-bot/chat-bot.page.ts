@@ -33,7 +33,7 @@ export class ChatBotPage implements OnInit {
   messages: { text: string; isSender: boolean }[] = [];
   newMessage: string = '';
 
-   async assistant() {
+  async assistant() {
     // if (this.newMessage.trim() !== '') {
     //   this.messages.push({ text: this.newMessage, isSender: true });
     //   this.newMessage = '';

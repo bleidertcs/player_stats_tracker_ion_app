@@ -52,23 +52,23 @@
               </div>
               <div *ngFor="let data of datas">
                 <div style="display: flex; justify-content: space-between; flex-direction: row;">
-                  <div> Disparos: {{ data.statistics[0].shot.total === null ? 0 : data.statistics[0].shot.total }}
-                  </div>
-                  <div> Goles: {{ data.statistics[0].goal.total === null ? 0 : data.statistics[0].goal.total }} </div>
+                  <h2> Disparos: {{ data.statistics[0].shot.total === null ? 0 : data.statistics[0].shot.total }}
+                  </h2>
+                  <h2> Goles: {{ data.statistics[0].goal.total === null ? 0 : data.statistics[0].goal.total }} </h2>
                 </div>
               </div>
               <div *ngFor="let data of datas">
                 <div style="display: flex; justify-content: space-between; flex-direction: row;">
-                  <div> Pases: {{ data.statistics[0].passe.total === null ? 0 : data.statistics[0].passe.total }} </div>
-                  <div> Entradas: {{ data.statistics[0].tackle.total === null ? 0 : data.statistics[0].tackle.total }}
-                  </div>
+                  <h2> Pases: {{ data.statistics[0].passe.total === null ? 0 : data.statistics[0].passe.total }} </h2>
+                  <h2> Entradas: {{ data.statistics[0].tackle.total === null ? 0 : data.statistics[0].tackle.total }}
+                  </h2>
                 </div>
               </div>
               <div *ngFor="let data of datas">
                 <div style="display: flex; justify-content: space-between; flex-direction: row;">
-                  <div> Pases: {{ data.statistics[0].dribble.success === null ? 0 : data.statistics[0].dribble.success
+                  <h2> Pases: {{ data.statistics[0].dribble.success === null ? 0 : data.statistics[0].dribble.success
                     }}
-                  </div>
+                  </h2>
                 </div>
               </div>
             </ion-card-content>
