@@ -54,25 +54,22 @@
             </ion-buttons>
             <ion-card-content>
               <div *ngFor="let data of datas" style="text-align: center; font-size: 17px;">
-                {{ data.player.firstname }} {{ data.player.lastname }}
+                <h2><strong>Nombre:</strong> {{ data.player.firstname }} {{ data.player.lastname }}</h2>
+                <h2><strong>Equipo:</strong> {{ data.statistics[0].team.name }}</h2>
+                <h2><strong>Posición:</strong> {{ data.statistics[0].game.position }}</h2>
+                <h2><strong>Liga:</strong> {{ data.statistics[0].league.name }}</h2>
+                <h2><strong>Nacionalidad:</strong> {{ data.player.nationality }}</h2>
+                <h2><strong>Pases:</strong> {{ data.statistics[0].dribble.success === null ? 0 :
+                  data.statistics[0].dribble.success }}</h2>
               </div>
               <div style="position: relative; margin: auto; height: 300;">
                 <canvas id="chart" #chart></canvas>
               </div>
-              <div *ngFor="let data of datas">
-                <h2> Equipo: {{ data.statistics[0].team.name }} </h2>
-                <h2> Posición: {{ data.statistics[0].game.position }} </h2>
-                <h2> Liga: {{ data.statistics[0].league.name }} </h2>
-                <h2> Nacionalidad: {{ data.player.nationality }} </h2>
-                <h2> Pases: {{ data.statistics[0].dribble.success === null ? 0 : data.statistics[0].dribble.success
-                  }}
-                </h2>
-              </div>
             </ion-card-content>
-
           </ion-card>
         </ion-col>
       </ion-row>
+
 
       <!-- ADMINISTRATOR -->
       <ion-row *ngIf="profile === 1" class="row-container">
