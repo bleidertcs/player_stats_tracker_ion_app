@@ -76,9 +76,6 @@ jobs:
       - name: Build Ionic App
         run: ionic build
 
-      - name: Copy Android
-        run: ionic capacitor copy android
-
       - name: Build Android Dev APK
         run: ionic capacitor build android
 
