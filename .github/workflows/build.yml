@@ -80,7 +80,7 @@ jobs:
         run: ionic capacitor build android
 
       - name: Generate the Android App Bundle
-        working-directory: ./android/
+        working-directory: /android
         run: chmod +x ./gradlew assembleDebug
 
       - name: Upload dev APK
