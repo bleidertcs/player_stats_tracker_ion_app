@@ -9,7 +9,7 @@ on:
 jobs:
   version:
     name: Create version number
-    runs-on: windows-latest
+    runs-on: macos-latest
     permissions:
       contents: write
       pull-requests: write
@@ -39,7 +39,7 @@ jobs:
     name: Build APK and Create release
 
     needs: [version]
-    runs-on: windows-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v1
       - name: Get version.txt
