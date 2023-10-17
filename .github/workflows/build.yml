@@ -84,17 +84,9 @@ jobs:
       run: |
         ls -la
 
-    - name: Change wrapper permissions
-      run: chmod +x ./gradlew
-
-    - name: Init gradle wrapper
-      run: gradle wrapper
-
-    - name: Change wrapper permissions
-      run: chmod +x ./gradlew
-
-    - name: Build with Gradle wrapper
-      run: ./gradlew build
+    - name: Generate the Android App Bundle
+      working-directory: android/
+      run: chmod +x gradle assembleDebug
 
     - name: Upload dev APK
       uses: actions/upload-artifact@v1
