@@ -81,8 +81,8 @@ jobs:
 
       - name: Open Android Directory
         working-directory: android/
-          run: |
-            ls -la
+        run: |
+          ls -la
 
       - name: Generate the Android App Bundle
         working-directory: android/
