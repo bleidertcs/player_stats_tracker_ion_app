@@ -83,11 +83,11 @@ jobs:
         arguments: build
         build-root-directory: android/
 
-    - name: Generate the Android Apk
-      run: |
-        gradle -v
-        ls -la
-        cd android && chmod +x ./gradlew build
+#    - name: Generate the Android Apk
+#      run: |
+#        gradle -v
+#        ls -la
+#        cd android && chmod +x ./gradlew build
 
     - name: Upload dev APK
       uses: actions/upload-artifact@v1
