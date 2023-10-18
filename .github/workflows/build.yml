@@ -81,6 +81,8 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
         with:
+          gradle-version: current ### This version will be installed and added to PATH, so used for cache-cleanup
+          gradle-home-cache-cleanup: true
           arguments: build
 
       - name: runOnGitHub
