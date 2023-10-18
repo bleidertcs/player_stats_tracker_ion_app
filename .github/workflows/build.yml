@@ -78,7 +78,7 @@ jobs:
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
       with:
-        gradle-version: 7.5 ### This version will be installed and added to PATH, so used for cache-cleanup
+        gradle-version: 8.0 ### This version will be installed and added to PATH, so used for cache-cleanup
         gradle-home-cache-cleanup: true
         arguments: build
         build-root-directory: android/
