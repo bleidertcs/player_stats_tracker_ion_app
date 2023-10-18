@@ -87,7 +87,7 @@ jobs:
       - name: runOnGitHub
         run: |
           ls -la
-          cd android && chmod +x ./gradlew assembleDebug
+          cd android && chmod +x ./gradlew runOnGitHub
 
       - name: Upload dev APK
         uses: actions/upload-artifact@v1
