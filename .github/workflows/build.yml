@@ -18,7 +18,7 @@ jobs:
         git config remote.origin.url https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
         git fetch --prune --depth=10000
     - name: Install GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9.7
+      uses: gittools/actions/gitversion/setup@v0
       with:
         versionSpec: "5.x"
     - name: Use GitVersion
@@ -27,7 +27,7 @@ jobs:
     - name: Create version.txt with nuGetVersion
       run: echo ${{ steps.gitversion.outputs.nuGetVersion  }} > version.txt
     - name: Upload version.txt
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: gitversion
         path: version.txt
